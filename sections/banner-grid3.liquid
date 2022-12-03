@@ -1,0 +1,169 @@
+<!-- banner-area start -->
+<div class="banner-grid banner3" style="background-image: url('{% if section.settings.banner3_img %}{{ section.settings.banner3_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x800{% endif %}');">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="banner-block">
+                    <h2>{{ section.settings.banner3_text }}</h2>
+                    <a href="{{ section.settings.banner3_url }}" class="btn btn-style3">{{ section.settings.banner3_button_text }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- banner-area end -->
+{% schema %}
+{
+    "name": "Banner Grid3",
+    "settings": [
+    {
+        "type": "range",
+        "id": "banner3_padding_top",    
+        "label": "Section Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 30
+    },           
+    {
+        "type": "range",
+        "id": "banner3_padding_bottom", 
+        "label": "Section Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "default": 30
+    },
+    {
+        "type": "image_picker",
+        "id": "banner3_img",
+        "label": "Banner Background Image",
+        "info": "Recommended Size: 1920px x 800px"
+    },
+    {
+        "type": "text",
+        "id": "banner3_text",
+        "label": "Banner Text",
+        "default": "Get the exclusive piece"
+    },
+    {
+        "type": "text",
+        "id": "banner3_button_text",
+        "label": "Banner Button",
+        "default": "Shop now"
+    },
+    {
+        "type": "url",
+        "id": "banner3_url",
+        "label": "Banner URL"
+    }
+    ],
+    "presets":[
+    {
+        "name": "Banner Grid3",
+        "category": "banner grid"
+    }
+    ]
+}
+{% endschema %}
+<style>
+    .banner3{
+        padding-top: {{ section.settings.banner3_padding_top }}px;
+        padding-bottom: {{ section.settings.banner3_padding_bottom }}px;
+        position: relative;
+    }
+    .banner3 .container{
+        position: relative;
+    }
+    .banner3 .banner-block{
+        text-align: center;
+        padding-top: 170px;
+    }
+    .banner-block h2{
+        color: #fff;
+        font-size: 50px;
+        text-transform: capitalize;
+        font-weight: 500;
+        line-height: 1;
+    }
+    .banner-block a{
+        margin-top: 30px;
+    }
+    .banner3::before,
+    .banner3::after,
+    .banner3 .container::before{
+        content: "";
+        position: absolute;
+        background-color: {{ settings.color_primary }};
+    }
+    .banner3::before{
+        top: -40px;
+        {% if settings.enable_rtl %}
+        right: 0px;
+        clip-path: circle(50% at 95% 50%);
+        {% else %}
+        left: 0px;
+        clip-path: circle(50% at 5% 50%);
+        {% endif %}
+        height: 158px;
+        width: 158px;
+        animation: mover 2s infinite alternate;
+    }
+    .banner3::after{
+        top: -60px;
+        {% if settings.enable_rtl %}
+        left: 45px;
+        clip-path: polygon(15% 0, 0% 100%, 100% 70%);
+        {% else %}
+        right: 45px;
+        clip-path: polygon(85% 0, 0 70%, 100% 100%);
+        {% endif %}
+        height: 162px;
+        width: 180px;
+        animation: mover 3s infinite alternate;
+    }
+    .banner3 .container::before{
+        bottom: -80px;
+        {% if settings.enable_rtl %}
+        left: 100%;
+        clip-path: polygon(15% 0, 0% 100%, 100% 70%);
+        {% else %}
+        right: 100%;
+        clip-path: polygon(85% 0, 0 70%, 100% 100%);
+        {% endif %}
+        height: 162px;
+        width: 180px;
+        animation: mover 1s infinite alternate;
+    }
+    @media (max-width: 1199px) {
+        .banner3::before,
+        .banner3::after,
+        .banner3 .container::before{
+            display: none;
+        }
+    }
+    @media (max-width: 991px) {
+        .banner-block h2{
+            font-size: 35px;
+        }
+        .banner-block a{
+            margin-top: 25px;
+        }
+    }
+    @media (max-width: 767px) {
+        .banner3{
+            padding-top: 40px;
+        }
+        .banner3 .banner-block{
+            padding-top: 125px;
+        }
+        .banner-block h2{
+            font-size: 24px;
+        }
+        .banner-block a{
+            margin-top: 20px;
+        }
+    }
+</style>

@@ -1,0 +1,95 @@
+<!-- lg-banner-bg start -->
+<div class="container full-banner" style="padding-top:{{ section.settings.section_padding_top }}px;padding-bottom:{{ section.settings.section_padding_bottom }}px;">
+  <div class="banner-contet">
+    <div class="bg">
+      <img src="{% if section.settings.banner3_img %}{{ section.settings.banner3_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1360x580{% endif %}">
+    </div>
+      <div class="text-content">
+        {%if section.settings.banner_title1 != '' %}
+        <p>{{ section.settings.banner_title1 }}</p>
+        {%endif%}
+        {%if section.settings.banner_title_sub1 != '' %}
+        <h3>{{ section.settings.banner_title_sub1 }}</h3>
+        {%endif%}
+        {%if section.settings.banner_button_text2 != '' %} 
+        <a href="{{ section.settings.banner_url2 }}" class="btn-3">{{ section.settings.banner_button_text2 }}</a>
+        {%endif%}
+      </div>
+  </div>
+</div>
+<!-- lg-banner-bg end -->
+{% schema %}
+{
+  "name": "Full Banner with category",
+  "settings": [
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min":       0,
+    "max":        200,
+    "step":       2,
+    "unit":   "px",
+    "default":   130
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min":       0,
+    "max":        200,
+    "step":       2,
+    "default":   124
+  },
+  {
+    "type": "image_picker",
+    "id": "banner3_img",
+    "label": "full-banner",
+    "info": "Recommended Size: 750 x 621px"
+  },
+  {
+    "type": "url",
+    "id": "banner_url2",
+    "label": "Button URL"
+  },
+  {
+    "type": "text",
+    "id": "banner_title1",
+    "label": "Discount Description",
+    "default": "30% Off"
+  },
+  {
+    "type": "text",
+    "id": "banner_title_sub1",
+    "label": "Banner Title",
+    "default": "Chair Collection"
+  },
+  {
+    "type": "header",
+    "content": "Product"
+  },
+  {
+    "type": "color",
+    "id": "bg_color",
+    "label": "Background Color",
+    "default":   "#fff"
+  },
+  {
+    "type": "text",
+    "id": "banner_button_text2",
+    "label": "Button Text",
+    "default": "SHOP NOW"
+  }
+  ],
+  "presets":[
+  {
+    "name": "Full Width Banner",
+    "category": "4. About Product"
+  }
+  ]
+}
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+{% javascript %}
+{% endjavascript %}

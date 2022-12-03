@@ -1,0 +1,132 @@
+<section class="customer-page section-ptb my-account-page">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="page-title">
+          <h2>Welcome {{ customer.first_name | capitalize }}</h2>
+        </div>
+        <div class="account-history">
+          <ul>
+            <li>
+              <div class="acc-info-wrap">
+                <h6>{{ 'customer.account.title' | t }}</h6>
+                <span class="acc-info-link">
+                  <a href="/pages/wishlist">Wishlist(<span class="wishlist-counter">{{ wishlist.count }}</span>)</a>
+                  <a href="/account/addresses">{{ 'customer.account.view_addresses' | t }}<span class="address-counter">({{ customer.addresses_count }})</span></a>
+                  {% if shop.metafields.verisart.nft_customer_dashboard_active %}
+                   <a href="/apps/verisart" style="align-items: center; display: inline-flex;">
+
+                     {{ 'customer.manage_nfts' | t }}
+                	</a>
+                  {% endif %}
+                  <a href="/account/logout">{{ settings.customer_logout_title }}</a>
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="acc-info-wrap">
+                <h6>{{ 'customer.account.details' | t }}</h6>
+                <span>{{ customer.name }}</span>
+                <span>{{ customer.email }}</span>
+                <span>{{ customer.phone }}</span>
+
+                {% if customer.default_address != 0 %}
+                <span>{{ customer.default_address.address1 }}</span>
+
+                {% if customer.default_address.address2 != "" %}
+                <span>{{ customer.default_address.address2 }}</span>
+                {% endif %}
+
+                {% if customer.default_address.city != "" %}
+                <span>{{ customer.default_address.city }}</span>
+                {% endif %}
+
+                {% if customer.default_address.province_code != "" %}
+                <span>{{ customer.default_address.province_code | upcase }}</span>
+                {% endif %}
+
+                {% if customer.default_address.zip != "" %}
+                <span>{{ customer.default_address.zip }}</span>
+                {% endif %}
+
+                {% if customer.default_address.country != "" %}
+                <span>{{ customer.default_address.country }}</span>
+                {% endif %}
+
+                {% if customer.default_address.phone != "" %}
+                <span>{{ customer.default_address.phone }}</span>
+                {% endif %}
+
+                {% endif %}
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="order-history-wrap">
+          <h6>{{ 'customer.orders.title' | t }}</h6>
+          {% paginate customer.orders by 5 %}
+          {% if customer.orders.size != 0 %}
+          <div class="order-wrap">
+            <ul>
+              {% for order in customer.orders %}
+              <li>
+                {% if order.cancelled %}
+                <div class="errors">
+                  {% assign cancelled_at = order.cancelled_at | date: "%B %d, %Y %I:%M%p" %}
+                  <p>{{ 'customer.order.cancelled' | t: date: cancelled_at }}</p>
+                </div>
+                {% endif %}
+                <label>
+                  <span>{{ 'customer.orders.order_number' | t }}</span>
+                  <span>{{ order.name | link_to: order.customer_url }}</span>
+                </label>
+                <div class="order-info-wrap">
+                  <div class="order-detail order-info">
+                    <div class="order-info-check order-date">
+                      <span>{{ 'customer.orders.date' | t }}</span>
+                      <span>{{ order.created_at | date: format: 'month_day_year' }}</span>
+                    </div>
+                    <div class="order-info-check order-total">
+                      <span>{{ 'customer.orders.total' | t }}</span>
+                      <span>{{ order.total_price | money }}</span>
+                    </div>
+                  </div>
+                  <div class="order-detail order-status">
+                    <div class="order-info-check order-payment">
+                      <span>{{ 'customer.orders.payment_status' | t }}</span>
+                      <span>{{ order.financial_status_label }}</span>
+                    </div>
+                    <div class="order-info-check order-fulfill">
+                      <span>{{ 'customer.orders.fulfillment_status' | t }}</span>
+                      <span>{{ order.fulfillment_status_label }}</span>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          {% else %}
+          <div class="order-wrap">
+            <div class="order-info-wrap">
+              <p>{{ 'customer.orders.none' | t }}</p>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if paginate.pages > 1 %}
+          <div class="paginatoin-area">
+            <ul class="paginate">
+              <li class="page-numerous">
+                {%- include 'pagination' -%}
+              </li>
+            </ul>
+          </div>
+          {% endif %}
+          {% endpaginate %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

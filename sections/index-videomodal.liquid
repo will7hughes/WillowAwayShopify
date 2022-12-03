@@ -1,0 +1,194 @@
+<!-- Video Area -->
+<div class="video-area" id="section-{{ section.id }}">
+  <div class="video_pattern">
+    <div class="container">
+      <div class="row video-main-cont">
+        <div class="promo_about-us col-xl-6 col-lg-6 col-md-5 col-12">
+          <div class="video-text-content">
+            {% comment %}{%if section.settings.video_title1 != '' %}
+            <p class="small-title">{{ section.settings.video_title1 }}</p>
+            {%endif%}{% endcomment %}
+            {%if section.settings.video_title_sub1 != '' %}
+            <h3>{{ section.settings.video_title_sub1 }}</h3>
+            {%endif%}
+            {%if section.settings.video_description != '' %}
+            <p class="video-desc">{{ section.settings.video_description }}</p>
+            {%endif%}
+            {%if section.settings.view_button != '' %} 
+            <a href="{{ section.settings.banner_url2 }}" class="btn btn-style">{{ section.settings.view_button }}</a>
+            {%endif%}
+          </div>
+        </div>
+        <div class="promo_video col-xl-6 col-lg-6 col-md-7 col-12">
+          <div class="static_video">
+            <img class="img_static" src="{% if section.settings.video_thumbnail_image %}{{ section.settings.video_thumbnail_image | img_url: '1170x567', crop: 'center' }}{% else %}https://via.placeholder.com/1170x500{% endif %}" alt="image" />
+            {%if section.settings.video_btn != '' %}
+            <div class="video-icon" id="cms_play"></div>
+            {%endif%}
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Our Video Area -->
+{% schema %}
+{
+  "name": "Video modal",
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "checkbox",
+      "id": "bg_img_enable",
+      "label": "Show Background Image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_img",
+      "label": "Background Image",
+      "info": "Recommended Size: 1910 x 500px"
+    },
+    {
+      "type" : "checkbox",
+      "id" : "pettern_check",
+      "label" : "Show Backgorund Color",
+      "default" : true
+    },
+    {
+      "type" : "color",
+      "id" : "pettern_bgcolor",
+      "label" : "Background Color",
+      "default" : "#fff"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_thumbnail_image",
+      "label": "Image",
+      "info": "Main image"
+    },
+    {
+      "type": "image_picker",
+      "id": "imageicon",
+      "label": "Icon image",
+      "info": "Png video icon. Size 80x80px"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video URL",
+      "accept": ["youtube", "vimeo"],
+      "info": "Example: https://www.youtube.com/watch?v=UhjWuirzasg",
+      "default": "https://www.youtube.com/watch?v=8uFEVF6aTR4"
+    },
+    {
+    "type": "text",
+    "id": "video_title1",
+    "label": "Video Title1",
+    "default": "The Care of Your Garden"
+    },
+    {
+      "type": "text",
+      "id": "video_title_sub1",
+      "label": "Video Title",
+      "default": "Finest Garden Tool"
+    },
+    {
+      "type": "text",
+      "id": "video_description",
+      "label": "Video Description",
+      "default": "Lorem is a long established fact that a reader will be dis reader willistractLorem is a lreade"
+    },
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default":   "#fff"
+    },
+    {
+      "type": "text",
+      "id": "view_button",
+      "label": "Button Text",
+      "default": "View More"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video modal",
+      "category": "Simple Section",
+      "settings": {
+      }
+    }
+  ]
+}
+{% endschema %}
+<script>
+  function getId(url) {
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[2].length == 11) {
+      return match[2];
+    } else {
+      return 'error';
+    }
+  }
+  var videoId = getId('{{ section.settings.video_url }}');
+  var video_frame_w= $(".img_static").outerWidth();
+  var video_frame_h= $(".img_static").outerHeight();
+  $('#cms_play').click(function(){
+    $(this).hide('fast');
+    $(".img_static").fadeOut('fast');
+    $('.static_video').append('<iframe class="added_video" width="'+video_frame_w+'px" height="'+video_frame_h+'px" src="https://www.youtube.com/embed/'+videoId+'?rel=0&autoplay=1" frameborder="0"></iframe>');
+  });
+</script>
+<style>
+  .video-area{
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    {% if section.settings.bg_img_enable %}
+    background-image: url('{% if section.settings.bg_img %}{{ section.settings.bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x500{% endif %}');
+    {% endif %}
+  }
+  .video-icon:before {
+    background-image: url('{% if section.settings.imageicon %}{{ section.settings.imageicon | img_url: '80x80', crop: 'center' }}{% else %}https://via.placeholder.com/1170x500{% endif %}');
+  }
+  @media (max-width: 1199px){
+  }
+  @media (max-width: 767px){
+    .video-area{
+      padding-top: 40px;
+    }
+  }
+  
+
+</style>

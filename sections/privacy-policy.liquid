@@ -1,0 +1,35 @@
+<section class="section-ptb other-page">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="content-main-title">
+          {% if section.settings.privacy_policy_title != '' %}
+          <h2>{{ section.settings.privacy_policy_title }}</h2>
+          {% endif %}
+        </div>
+        <div class="rule-wrap">
+          <ul>
+            {{ page.content }}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Privacy Policy",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Page Title"
+  },
+  {
+    "type": "text",
+    "id": "privacy_policy_title",
+    "label": "Title",
+    "default": "Privacy Policy"
+  }
+  ]
+}
+{% endschema %}

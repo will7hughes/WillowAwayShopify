@@ -1,0 +1,189 @@
+<section class="footer-top-area" {% if section.settings.footer_bg_img_enable %}style="background-image: url('{% if section.settings.footer_bg_img %}{{ section.settings.footer_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x450{% endif %}');"{% endif %}>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="footer-list-wrap">
+          <ul class="footer-list">
+            <li class="ftlink-li">
+              <div class="footer-info">
+                <div class="logo">
+                  {%- include 'company-logo-footer' -%}
+                  <p>{{ settings.company_details }}</p>
+                </div>
+              </div>
+              <div class="footer-social">
+                {%- include 'social-midea' -%}
+              </div>
+            </li>
+            {% for block in section.blocks %}
+            <li class="ftlink-li">
+              <h2 class="ft-title">{{ block.settings.footer_menu_title }}</h2>
+              <a data-toggle="collapse" href="#collapse-{{ block.settings.footer_menu_title | replace: ' ' , '-' | remove: '&' }}" class="ft-title">
+                <span>{{ block.settings.footer_menu_title }}</span>
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class="footer-sublist collapse" id="collapse-{{ block.settings.footer_menu_title | replace: ' ' , '-' | remove: '&' }}">
+                {% assign footer_menu = block.settings.footer_menu_handle %}
+                {% for link in linklists[footer_menu].links %}
+                {% if linklists[footer_menu].links != '' %}
+                <li class="ftsublink-li">
+                  <a href="{{ link.url }}" class="ft-sublink">{{ link.title }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ul>
+            </li>
+            {% endfor %}
+            <li class="ftlink-li">
+              <h2 class="ft-title">{{ section.settings.footer_contact_title }}</h2>
+              <a data-toggle="collapse" href="#collapse-{{ section.settings.footer_contact_title | replace: ' ' , '-' | remove: '&' }}" class="ft-title">
+                <span>{{ section.settings.footer_contact_title }}</span>
+                <i class="fa fa-angle-down"></i>
+              </a>
+              <ul class="footer-sublist collapse" id="collapse-{{ section.settings.footer_contact_title | replace: ' ' , '-' | remove: '&' }}">
+                {%- include 'company-address' -%}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "foot_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 80
+  },
+  {
+    "type": "range",
+    "id": "foot_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 80
+  },
+  {
+    "type": "image_picker",
+    "id": "footer_bg_img",
+    "label": "Image",
+    "info": "Recommended Size: 1920 x 450px"
+  },
+  {
+    "type": "checkbox",
+    "id": "footer_bg_img_enable",
+    "label": "Show Background Image",
+    "default": false
+  },
+  {
+    "type": "color",
+    "id": "footer_bg_color",
+    "label": "Background Color",
+    "default": "#fff"
+  },
+  {
+    "type": "text",
+    "id": "footer_contact_title",
+    "label": "Address Title",
+    "default": "Contact us"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "footer_menu",
+    "name": "Menu",
+    "limit": 2,
+    "settings": [
+    {
+      "type": "text",
+      "id": "footer_menu_title",
+      "label": "Menu Title",
+      "default": "Menu Title"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_handle",
+      "label": "Select Menu"
+    }
+    ]
+  }
+  ]
+}
+{% endschema %}
+<style>
+  .footer-top-area{
+    padding-top: {{ section.settings.foot_padding_top }}px;
+    padding-bottom: {{ section.settings.foot_padding_bottom }}px;
+
+    {% if section.settings.footer_bg_img_enable %}
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    {% else %}
+    background-color: {{ section.settings.footer_bg_color }};
+    {% endif %}
+    position: relative;
+    z-index: 1;
+  }
+  .footer-top-area::before,
+  .footer-top-area::after{
+    content: "";
+    position: absolute;
+    background-color: {{ settings.color_primary }};
+    z-index: -1;
+  }
+  .footer-top-area::before{
+    bottom: -55px;
+    {% if settings.enable_rtl %}
+    right: 100px;
+    clip-path: circle(50% at 50% 50%);
+    {% else %}
+    left: 100px;
+    clip-path: circle(50% at 50% 50%);
+    {% endif %}
+    height: 158px;
+    width: 158px;
+  }
+  {% if page.title != 'Wishlist' %}
+  .footer-top-area::after{
+    top: -110px;
+    {% if settings.enable_rtl %}
+    left: 50px;
+    clip-path: polygon(15% 0, 0% 100%, 100% 70%);
+    {% else %}
+    right: 50px;
+    clip-path: polygon(85% 0, 0 70%, 100% 100%);
+    {% endif %}
+    height: 162px;
+    width: 180px;
+    transform: rotate(-55deg);
+  }
+  {% endif %}
+  @media (max-width : 1199px){
+    .footer-top-area::before,
+    .footer-top-area::after{
+      display: none;
+    }
+  }
+  @media (max-width : 767px){
+    .footer-top-area{
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }    
+  }
+</style>

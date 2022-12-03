@@ -1,0 +1,32 @@
+{% case media.media_type %}
+  {% when 'image' %}
+    <div class="product_img_top">
+      <button class="full-view">
+        <i class="ion-android-expand"></i>
+      </button>
+  
+      <!-- <img id="zoom_mw" class="product-zoom img-fluid lazyload" src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20360%20459%22%3E%3C/svg%3E" data-src="{{ featured_image | img_url: '750x810' }}" alt="{{ featured_image.alt | escape }}" data-zoom-image="{{ featured_image | img_url: '750x810' }}"> -->
+      <img id="zoom_mw" class="product-zoom img-fluid lazyload" src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20360%20459%22%3E%3C/svg%3E" 
+        data-src="{{ featured_image | img_url: '750x810' }}" 
+        alt="{{ featured_image.alt | escape }}" 
+        data-zoom-image="{{ featured_image | img_url: '750x810' }}">
+    </div>
+  {% when 'external_video' %}
+    <div class="product-single__media" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100}}%;" data-media-id="{{ media.id }}">
+      {{ media | external_video_tag }}
+    </div>
+  
+  {% when 'video' %}
+    <div class="product_img_top d-flex flex-wrap justify-content-center" data-media-id="{{ media.id }}">
+        {{ media | video_tag: width: 472, height: 472, controls: false, autoplay: true, outline: false, loop: true, controlsList: nofullscreen  }}
+    </div>
+  {% when 'model' %}
+    <div class="product-single__media" style="padding-top: 100%" data-media-id="{{ media.id }}">
+      {{ media | model_viewer_tag }}
+    </div>
+      
+  {% else %}
+    <div class="product-single__media" style="padding-top: 100%;" data-media-id="{{ media.id }}">
+      {{ media | media_tag }}
+    </div>
+{% endcase %}

@@ -1,0 +1,19 @@
+{% if customer %}
+<div class="account">
+	<a class="header-account-btn" href="/account" title="account">
+	  <span class="account-icon"><i class="ti-user"></i></span>
+	</a>	
+</div>
+{% else %}
+<div class="account">
+	<a class="header-account-btn" href="/account/login" title="account">
+	  <span class="account-icon"><i class="ti-user"></i></span>
+	</a>
+</div>
+{% endif %}
+<style>
+	.account a{
+		display: flex;
+		align-items: center;
+	}
+</style>

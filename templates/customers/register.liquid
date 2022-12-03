@@ -1,0 +1,81 @@
+<section class="customer-page section-ptb">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="log-acc-page">
+          <div class="acc-page">
+            <div class="registers">
+              {% form 'create_customer' %}
+              {{ form.errors | default_errors }}
+              <div class="login-form-container">
+                <div class="title-text">
+                  <h2>{{ 'customer.register.title' | t }}</h2>
+                  {% if settings.register_sub_text != '' %}
+                  <p>{{ settings.register_sub_text }}</p>
+                  {% endif %}
+                </div>
+                <ul class="fill-form">
+                  <li class="fname">
+                    <label for="FirstName" class="hidden-label">{{ 'customer.register.first_name' | t }}</label>
+                    <input type="text" name="customer[first_name]" id="FirstName" class="input-full" placeholder="{{ 'customer.register.first_name' | t }}" {% if form.first_name %}value="{{ form.first_name }}"{% endif %} autocapitalize="words" autofocus>
+                  </li>
+
+                  <li class="lname">
+                    <label for="LastName" class="hidden-label">{{ 'customer.register.last_name' | t }}</label>
+                    <input type="text" name="customer[last_name]" id="LastName" class="input-full" placeholder="{{ 'customer.register.last_name' | t }}" {% if form.last_name %}value="{{ form.last_name }}"{% endif %} autocapitalize="words">
+                  </li>
+
+                  <li class="log-email">
+                    <label for="Email" class="hidden-label">{{ 'customer.register.email' | t }}</label>
+                    <input type="email" name="customer[email]" id="Email" class="input-full{% if form.errors contains 'email' %} error{% endif %}" placeholder="{{ 'customer.register.email' | t }}" {% if form.email %} value="{{ form.email }}"{% endif %} autocorrect="off" autocapitalize="off">
+                  </li>
+
+                  <li class="log-pwd">
+                    <label for="CreatePassword" class="hidden-label">{{ 'customer.register.password' | t }}</label>
+                    <input type="password" name="customer[password]" id="CreatePassword" class="input-full{% if form.errors contains 'password' %} error{% endif %}" placeholder="{{ 'customer.register.password' | t }}">
+                  </li>
+
+                  <li class="form-toggle-btn">
+                    <div class="form-action-button">
+                      <button class="btn btn-style" type="submit">{{ 'customer.register.submit' | t }}</button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              {% endform %}
+            </div>
+          </div>
+          <div class="acc-page">
+            <div class="side-form-wrap">
+              <div class="acc-title">
+                <h6>{{ settings.alredy_acc_title }}</h6>
+                <div class="account-optional-action">
+                  {{ 'layout.customer.log_in' | t | customer_login_link }}
+                  {% comment %}<a href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>{% endcomment %}
+                </div>
+              </div>
+              <div class="term-privacy">
+                <p class="term-con">
+                  <span><sup>{{ settings.log_term_con_syn }}</sup></span>
+                  <a href="{{ settings.log_term_con_url }}" target="_blank">{{ settings.log_term_con_text }}</a>
+                </p>
+                <p class="pri-pol">
+                  <span>{{ settings.log_pri_pol_desc }}<a href="{{ settings.log_pri_pol_url }}" target="_blank">{{ settings.log_pri_pol_text }}</a></span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .customer-page .log-acc-page .acc-page .side-form-wrap .acc-title a::after{
+    content: "";
+  }
+  .customer-page .log-acc-page .acc-page .side-form-wrap .acc-title a:hover::after{
+    opacity: {{ settings.acc_opacity }};
+  }
+</style>

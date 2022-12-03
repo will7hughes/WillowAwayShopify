@@ -1,0 +1,110 @@
+<section class="about-vision">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="our-vision">
+                    <div class="text-content">
+                        <img src="{% if section.settings.img1 %}{{ section.settings.img1 | img_url: '90x90' }}{% else %}https://via.placeholder.com/90x90{% endif %}">
+                        <h3>{{ section.settings.title1 }}</h3>
+                        <p>{{ section.settings.text1 }}</p>
+                    </div>
+                    <div class="text-content">
+                        <img src="{% if section.settings.img2 %}{{ section.settings.img2 | img_url: '90x90' }}{% else %}https://via.placeholder.com/90x90{% endif %}">
+                        <h3>{{ section.settings.title2 }}</h3>
+                        <p>{{ section.settings.text2 }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}    
+{
+    "name": "Our vision",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "abt_vision_padding_top",  
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },           
+    {
+      "type": "range",
+      "id": "abt_vision_padding_bottom", 
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+        "type": "header",
+        "content": "Content"
+    },
+    {
+        "type": "image_picker",
+        "id": "img1",
+        "label": "Image 1",
+        "info": "Recommended Size: 90 x 90px"
+    },
+    {
+        "type": "text",
+        "id": "title1",
+        "label": "Title",
+        "default": "OUR MISSION"
+    },
+    {
+        "type": "text",
+        "id": "text1",
+        "label": "Text",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit., rutrum massa quis, porttitor lorem. Aliquam non est a ipsum facilisis scelerisque eu sed lectus."
+    },
+    {
+        "type": "image_picker",
+        "id": "img2",
+        "label": "Image 2",
+        "info": "Recommended Size: 90 x 90px"
+    },
+    {
+        "type": "text",
+        "id": "title2",
+        "label": "Title",
+        "default": "OUR MISSION"
+    },
+    {
+        "type": "text",
+        "id": "text2",
+        "label": "Text",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit., rutrum massa quis, porttitor lorem. Aliquam non est a ipsum facilisis scelerisque eu sed lectus."
+    }
+    ],
+    "presets":[
+    {
+        "name": "Our vision",
+        "category": "2. About us"
+    }
+    ]
+}
+{% endschema %}
+<style>
+  .about-vision{
+    padding-top: {{ section.settings.abt_vision_padding_top }}px;
+    padding-bottom: {{ section.settings.abt_vision_padding_bottom }}px;
+  }
+  @media (max-width: 767px){
+    .about-vision{
+      padding-top: 40px;
+    }
+  }
+  
+</style>

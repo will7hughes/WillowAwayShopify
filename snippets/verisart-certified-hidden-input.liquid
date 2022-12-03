@@ -1,0 +1,12 @@
+{% assign certificate_enabled_values = "TRUE,CERTIFICATE,NFT" | split: "," %}
+{% assign computed_certified_enabled = false %}
+{% for collection in product.collections %}
+	{% if certificate_enabled_values contains collection.metafields.verisart._certificate_enabled %}
+		{% assign computed_certified_enabled = true %}
+		{% break %}
+	{% endif %}
+{% endfor %}
+
+{% if shop.metafields.verisart.enabled == 'TRUE' and certificate_enabled_values contains collection.metafields.verisart._certificate_enabled or computed_certified_enabled %}
+  <input type="hidden" name="properties[Verisart Certificate of Authenticity]" value="Included" />
+{% endif %}

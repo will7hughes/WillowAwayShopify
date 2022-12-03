@@ -1,0 +1,46 @@
+<ul class="social-icon">
+  {% if settings.social_icon_1_name != blank %}
+  <li class="facebook">
+    <a href="{{ settings.social_icon_1_link }}">
+      <i class="{{ settings.social_icon_1_name }}"></i>
+      <span>{{ settings.social_1_name }}</span>
+    </a>
+  </li>        
+  {% endif %}
+
+  {% if settings.social_icon_2_name != blank %}
+  <li class="twitter">
+    <a href="{{ settings.social_icon_2_link }}">
+      <i class="{{ settings.social_icon_2_name }}"></i>
+      <span>{{ settings.social_2_name }}</span>
+    </a>
+  </li>        
+  {% endif %}
+
+  {% if settings.social_icon_4_name != blank %}
+  <li class="gplus">
+    <a href="{{ settings.social_icon_4_link }}">
+      <i class="{{ settings.social_icon_4_name }}"></i>
+      <span>{{ settings.social_4_name }}</span>
+    </a>
+  </li>        
+  {% endif %}
+
+  {% if settings.social_icon_5_name != blank %}
+  <li class="pinterest">
+    <a href="{{ settings.social_icon_5_link }}">
+      <i class="{{ settings.social_icon_5_name }}"></i>
+      <span>{{ settings.social_5_name }}</span>
+    </a>
+  </li>        
+  {% endif %}
+
+  {% if settings.social_icon_6_name != blank %}
+  <li class="insta">
+    <a href="{{ settings.social_icon_6_link }}">
+      <i class="{{ settings.social_icon_6_name }}"></i>
+      <span>{{ settings.social_6_name }}</span>
+    </a>
+  </li>        
+  {% endif %}
+</ul>

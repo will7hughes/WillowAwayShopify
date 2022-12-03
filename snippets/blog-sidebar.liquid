@@ -1,0 +1,179 @@
+<!-- shop-sidebar-wrap start -->
+<div class="blog-sidebar-wrap">
+  {% if section.settings.blog_search_bar_enable %}
+  <div class="blog-sidebar blog-search">
+    {% if settings.archive_title != '' %}
+    <h3 class="blog-sidebar-title">{{ settings.search_title }}</h3>
+    {% endif %}
+    <div class="search-post">
+      <form action="/search" method="get" role="search">
+        <input type="hidden" name="type" value="article">
+        <input type="hidden" name="options[prefix]" value="last">
+        <input id="search" type="search" name="q" class="input-text" value="{{ search.terms | escape }}" placeholder="{{ settings.blog_search_placeholder }}">
+        <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if section.settings.archive_enable %}
+  <div class="blog-sidebar blog-archive">
+    {% if settings.archive_title != '' %}
+    <h3 class="blog-sidebar-title">{{ settings.archive_title }}</h3>
+    {% endif %}
+
+    {% capture ddmm %}{{ 'now' | date: "%B %Y" }}{% endcapture %}
+    {% capture month %}{{ 'now' | date: "%B" }}{% endcapture %}
+    {% capture year %}{{ 'now' | date: "%Y" }}{% endcapture %}
+    {% case month %}
+    {% when 'January' %}{% assign k = 1 %}
+    {% when 'February' %}{% assign k = 2 %}
+    {% when 'March' %}{% assign k = 3 %}
+    {% when 'April' %}{% assign k = 4 %}
+    {% when 'June' %}{% assign k = 5 %}
+    {% when 'July' %}{% assign k = 6 %}
+    {% when 'August' %}{% assign k = 7 %}
+    {% when 'September' %}{% assign k = 8 %}
+    {% when 'October' %}{% assign k = 9 %}
+    {% when 'November' %}{% assign k = 10 %}
+    {% when 'December' %}{% assign k = 11 %}
+    {% endcase %}
+
+    <ul class="archive-sidebar">
+      {% for i in (1..k) %}
+        {% case month %}
+        {% when 'January' %}{% assign previous_month = 'December' %}
+        {% when 'February' %}{% assign previous_month = 'January' %}
+        {% when 'March' %}{% assign previous_month = 'February' %}
+        {% when 'April' %}{% assign previous_month = 'March' %}
+        {% when 'May' %}{% assign previous_month = 'April' %}
+        {% when 'June' %}{% assign previous_month = 'May' %}
+        {% when 'July' %}{% assign previous_month = 'June' %}
+        {% when 'August' %}{% assign previous_month = 'July' %}
+        {% when 'September' %}{% assign previous_month = 'August' %}
+        {% when 'October' %}{% assign previous_month = 'September' %}
+        {% when 'November' %}{% assign previous_month = 'October' %}
+        {% when 'December' %}{% assign previous_month = 'November' %}
+        {% endcase %}
+
+        
+          {% assign blogPresent = 0 %}
+          {% for article in blogs[blog.handle].articles limit: 10 %}
+          {% capture date %}
+          {{ article.published_at | date: "%B %Y" }}
+          {% endcapture %}
+          {% assign checkDate = month | append: ' ' | append: year %}
+          {% if date contains checkDate %}
+          {% assign blogPresent = 1 %}
+          {% endif %}
+          {% endfor %}
+          
+            {%- if blogPresent == 1 -%}
+            <h6>{{ month }} {{ year }}</h6>
+            {%- else -%}
+            {%- endif -%}
+
+        {% for article in blogs[blog.handle].articles limit: 10 %}
+        {% capture date %}
+        {{ article.published_at | date: "%B %Y" }}
+        {% endcapture %}
+        {% assign checkDate = month | append: ' ' | append: year %}
+        {% if date contains checkDate %}
+        <li>{{ article.title | link_to: article.url }}</li>
+        {% endif %}
+        {% endfor %}
+      
+
+        {% assign month = previous_month %}
+      {% endfor %}
+    </ul>
+
+    {% comment %}
+    {% assign prevYearsMonths = 'December' %}
+    {% assign year = year | minus: 1 %}
+    <ul class="archive-sidebar">
+      {% for y in (1..15) %}
+      {% for i in (1..12) %}
+      {% case prevYearsMonths %}
+      {% when 'January' %}{% assign previous_month = 'December' %}
+      {% when 'February' %}{% assign previous_month = 'January' %}
+      {% when 'March' %}{% assign previous_month = 'February' %}
+      {% when 'April' %}{% assign previous_month = 'March' %}
+      {% when 'May' %}{% assign previous_month = 'April' %}
+      {% when 'June' %}{% assign previous_month = 'May' %}
+      {% when 'July' %}{% assign previous_month = 'June' %}
+      {% when 'August' %}{% assign previous_month = 'July' %}
+      {% when 'September' %}{% assign previous_month = 'August' %}
+      {% when 'October' %}{% assign previous_month = 'September' %}
+      {% when 'November' %}{% assign previous_month = 'October' %}
+      {% when 'December' %}{% assign previous_month = 'November' %}
+      {% endcase %}
+
+        {% assign test = prevYearsMonths | append: ' ' | append: year %}
+        {% assign blogPresent = 0 %}
+        {% for article in blogs[blog.handle].articles limit: 10 %}
+        {% capture date %}
+        {{ article.published_at | date: "%B %Y" }}
+        {% endcapture %}
+        {% assign checkDate = prevYearsMonths | append: ' ' | append: year %}
+        {% if date contains checkDate %}
+        {% assign blogPresent = 1 %}
+        {% endif %}
+        {% endfor %}
+        {% if blogPresent == 1 %}
+        {{ prevYearsMonths }} {{year}}
+        {% else %}
+        {% endif %}
+        
+        {% for article in blogs[blog.handle].articles limit: 10 %}
+        {% capture date %}
+        {{ article.published_at | date: "%B %Y" }}
+        {% endcapture %}
+        {% if date contains test %}
+        <li>{{ article.title | link_to: article.url }}</li>
+        {% endif %}
+        {% endfor %}
+      {% assign prevYearsMonths = previous_month %}
+      {% endfor %}
+      {% assign year = year | minus: 1 %}
+      {% endfor %}
+    </ul>
+    {% endcomment %}
+  </div>
+  {% endif %}
+
+  {% if section.settings.recent_post_enable %}
+  <div class="blog-sidebar blog-sidebar-recent-post">
+    <h3 class="blog-sidebar-title">{{ settings.recent_title }}</h3>
+    {% assign recent_post_limit = settings.recent_post_limit_handle %}
+    {% for article in blogs[blog.handle].articles limit: recent_post_limit %}
+    <div class="sidbar-inner">
+      <div class="post-image">
+        <a href="{{ article.url }}"><img class="lazyload" src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20360%20459%22%3E%3C/svg%3E" data-src="{{ article | img_url: '200x200' }}" data-src="{{ article | img_url: '200x200' }}" alt="Recent Post"></a>
+      </div>
+      <div class="recent-blog-content">
+        <div class="post-box">
+          <span>{{ article.published_at | date: "%b %d, %Y" }}</span>
+        </div>
+        <h2>
+          <a href="{{ article.url }}">{{ article.title | truncate: 16 }}</a>
+        </h2>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if section.settings.tags_enable and blog.all_tags.size > 0 %}
+  <div class="blog-sidebar blog-tags">
+    <h3 class="blog-sidebar-title">{{ settings.blog_tags_title }}</h3>
+    <div class="sidebar-tag">
+      {% assign tags_list_limit = settings.tag_limit_handle %}
+      {% for tag in blog.all_tags limit: tags_list_limit %}
+      <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+<!-- shop-sidebar-wrap end -->

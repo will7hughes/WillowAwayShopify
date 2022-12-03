@@ -1,0 +1,70 @@
+{% assign itemStyle = '' %}{% if cart.item_count == 0 %}{% assign itemStyle = ' style="display:none;"' %}{% endif %}
+{% assign itemEmpty = '' %}{% if cart.item_count == 0 %}{% assign itemEmpty = ' style="display:block;"' %}{% endif %}
+<div class="shopping-widget">
+  <div class="shopping-cart">
+    <a class="cart-count" data-toggle="collapse" href="#cart">
+      <span class="cart-icon-wrap">
+        <span class="cart-icon"><i class="ti-bag"></i></span>
+        <span id="cart-total" class="bigcounter">{{ cart.item_count }}</span>
+      </span>
+      <!-- <span class="cart-title">My cart</span> -->
+    </a>
+    <div class="mini-cart collapse" id="cart">
+<!--       <a href="javascript:void(0)" class="shopping-cart-close">
+        <i class="ion-close-round"></i>
+      </a> -->
+      <div class="cart-tempty-title" {{ itemEmpty }}>
+        <i class="ti-bag"></i>
+        <p>{{ settings.empty_cart }}</p>
+      </div>
+      <div class="cart-item-title" {{ itemStyle }}>
+        <p>
+          <span class="cart-count-desc">{{ settings.cart_desc1 }}</span>
+          <span id="cart-total" class="cart-count-item bigcounter">{{ cart.item_count }}</span>
+          <span class="cart-count-desc">{{ settings.cart_desc2 }}</span>
+        </p>
+      </div>
+      <ul class="cart-item-loop" {{ itemStyle }}>
+        {% for item in cart.items %}
+        <li class="cart-item">
+          <div class="cart-image">
+            <a href="{{ item.url }}">
+              <img src="{{ item | img_url: '100x120' }}" alt="" class="img-fluid">
+            </a>
+          </div>
+          <div class="cart-title">
+            <h6>
+              <a href="{{ item.url }}" title="{{ item.product.title }}">{{ item.product.title | truncate: 40 }}</a>
+            </h6>
+            <div class="cart-pro-info">
+              <div class="cart-qty-price">
+                <span class="quantity">{{ item.quantity }} × </span>
+                <span class="price-box">
+                  <span class="new-price">{{ item.price | money }}</span>
+                </span>
+              </div>
+              <div class="delete-item-cart">
+                <a class="remove_from_cart" href="javascript:void(0);" onclick="Shopify.removeItem({{ item.variant.id }})"><i class="fa fa-trash-o"></i></a>
+              </div>
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      <ul class="subtotal-title-area" {{ itemStyle }}>
+        <li class="subtotal-titles">
+          <div class="subtotal-titles">
+            <h3>{{ settings.cart_sub_total }}</h3>
+            <span id="cart-total" class="subtotal-price">{{ cart.total_price | money }}</span>
+          </div>
+        </li>
+        <li class="mini-cart-btns">
+          <div class="cart-btns">
+            <a href="/cart" class="btn btn-style2">{{ settings.cart_view }}</a>
+            <a href="/checkout" class="btn btn-style2">{{ settings.cart_checkout }}</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

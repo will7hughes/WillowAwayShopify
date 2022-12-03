@@ -1,0 +1,47 @@
+{%- if settings.topbar_notification_enable -%}
+<div class="top-notification-bar">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <ul class="notification-entry">
+          <li class="notify-wrap">
+            <p>{{ settings.topbar_notification_text }}</p>
+          </li>
+          {% comment %}
+          <li class="notify-wrap">
+            <div class="contact-wrap">
+              <a href="tel:{{ settings.contact }}">
+                <i class="fa fa-phone"></i>
+                <span>{{ settings.contact }}</span>
+              </a>
+            </div>
+            <div class="mail-wrap">
+              <a href="mailto:{{ settings.email }}">
+                <i class="ti-email"></i>
+                <span>{{ settings.email }}</span>
+              </a>
+            </div>
+          </li>
+          {% endcomment %}
+          <li class="notify-wrap">
+            <div class="user-wrap">
+              {%- include 'store-account' -%}
+            </div>
+            <div class="currency-wrap">
+              {%- render 'bold-currency-picker-mount', openDirection: 'up' -%}
+            </div>
+          </li>     
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% comment %}
+<script type="text/javascript">
+var nToggle = $('.notification-close-btn');
+nToggle.on('click', function(){
+$('.top-notification-bar').slideToggle();
+});
+</script>
+{% endcomment %}

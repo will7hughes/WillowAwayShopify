@@ -1,0 +1,189 @@
+<!-- Start Shop Page -->
+<div class="main-content-wrap shop-page section-ptb">
+  <div class="container">
+    <div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}position-left{% elsif section.settings.sidebar_handle == 'right_sidebar_handle' %}position-right{% endif %}">
+      <div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col{% else %}col-lg-9 col-md-8 col-12 pro-grli-wrap{% endif %}">
+        <div class="ajax-filter-loader">
+          <div class="load-block">
+            <div class="overlay__content">
+              <span class="spinner"></span>
+            </div>
+          </div>
+        </div>
+        <div class="collection-img-wrap">
+          <h1 class="st-title">
+            {{ collection.title }}
+          </h1>
+          {%- if product.available -%}
+          {%- if section.settings.collection_info_enable and collection.image -%}
+          <div class="collection-image">
+            {% if collection.image %}
+              <img class="img-fluid lazyload" src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20360%20459%22%3E%3C/svg%3E" data-src="{{ collection | img_url: 'master' }}" alt="{{ collection.image.alt }}"/>
+            {% endif %}
+          </div>
+          <div class="description">
+            <p class="collection-description">{{ collection.description }}</p>
+          </div>
+          {%- endif -%}
+          {%- endif -%}
+        </div>
+        {%- if section.settings.tab_bar_enable or section.settings.short_by_enable -%}
+        {%- include 'collection-sorting' -%}
+        {%- endif -%}
+        <div class="get-data-products">
+          <div class="shop-grid">
+            {%- assign products_limit = section.settings.products_limit_handle -%}
+            {%- paginate collection.products by products_limit -%}
+            {%- if collection.products.size > 0 -%}
+            <div class="product-grid-view">
+              <div class="shop-product-wrap grid-3">
+                <div class="row">
+                  {%- for product in collection.products -%}
+                  <div class="col-md-4 col-6 st-col-item">
+                    {%- include 'product-grid-item' -%}
+                  </div>
+                  {%- endfor -%}
+                </div>
+              </div>
+              <div class="paginatoin-area">
+                <ul class="paginate">
+                  {% if section.settings.showing_product_counter_enable %}
+                  <li class="page-numerous">
+                    {%- assign paginate_checker = paginate.current_page | times: products_limit -%}
+                    {%- if paginate.items > paginate_checker -%}
+                    {%- assign paginate_final = paginate_checker -%}
+                    {%- else -%}
+                    {%- assign paginate_final = paginate.items -%}
+                    {%- endif -%}
+                    {% assign showing_title = section.settings.showing_title_handle | split: "|" %}
+                    <p>{{ showing_title | slice: 0 }}
+                      {{ paginate.current_offset | plus: 1 }} - {{ paginate_final }}
+                      {{ showing_title | slice: 1 }}
+                      {{ paginate.items }}
+                      {{ showing_title | slice: 2 }}
+                    </p>
+                  </li>
+                  {% endif %}
+                  {% if paginate.pages > 1 %}
+                  <li class="page-numerous">
+                    {%- include 'pagination' -%}
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+            {%- else -%}
+            <div class="empty-product">
+              <span><i class="ion-minus-circled"></i></span>
+              <h2>EMPTY</h2>
+              <p>There are no products matching the selection</p>
+            </div>
+            {%- endif -%}
+            {%- endpaginate -%}
+          </div>
+        </div>
+      </div>
+      {%- unless section.settings.sidebar_handle == 'without_sidebar' -%}
+      <div class="col-lg-3 col-md-4 col-12 pro-grli-wrap">
+        <div class="shop-sidebar-wrap">
+          {%- include 'collection-sidebar' -%}
+        </div>
+      </div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+<!-- End Shop Page -->
+{% schema %}
+{
+  "name": "Collection Template",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product Options"
+    },
+    {
+      "type": "text",
+      "id": "products_limit_handle",
+      "label": "Product Limit",
+      "default": "12",
+      "info": "How many posts will appear on each page"
+    },
+    {
+      "type": "header",
+      "content": "Collection Sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_bar_enable",
+      "label": "Show Grid/List View",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "short_by_enable",
+      "label": "Show Short By",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "showing_product_counter_enable",
+      "label": "Show Product Counter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "showing_title_handle",
+      "label": "Showing Title",
+      "default": "Showing | of | result"
+    },
+    {
+      "type": "header",
+      "content": "Collection Sidebar"
+    },
+    {
+      "type": "radio",
+      "id": "sidebar_handle",
+      "label": "Sidebar Position",
+      "options": [
+        {
+          "label": "Left Sidebar",
+          "value": "left_sidebar_handle"
+        },
+        {
+          "label": "Right Sidebar",
+          "value": "right_sidebar_handle"
+        },
+        {
+          "label": "Without Sidebar",
+          "value": "without_sidebar"
+        }
+      ],
+      "default": "left_sidebar_handle"
+    },
+    {
+      "type": "image_picker",
+      "id": "sidebar_banner",
+      "label": "Banner Image",
+      "info": "Recommended Size: 463px x 512px"
+    },
+    {
+      "type": "url",
+      "id": "sidebar_banner_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "checkbox",
+      "id": "best_product_enable",
+      "label": "Show Best Product",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_info_enable",
+      "label": "Show Collection Info",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

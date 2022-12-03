@@ -1,0 +1,214 @@
+<section class="article-area section-ptb">
+    <div class="container">
+        <div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}left-wrap{% elsif section.settings.sidebar_handle == 'right_sidebar_handle' %}right-wrap{% endif %}">
+            <div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col{% else %}col-xl-9 col-lg-8 col-md-8 col-12 blog-article-wrap{% endif %}">
+                <div class="single-blog-area">
+                    <div class="blog-image">
+                        <a href="{{ article.url }}">
+                            <img class="lazyload" src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20360%20459%22%3E%3C/svg%3E" data-src="{{ article.image | img_url: '1024x1024' }}" alt="{{ article.title | escape }}" class="img-fluid" />
+                        </a>
+                    </div>
+                    <div class="blog-revert">
+                        <h2 class="post-title">{{ article.title }}</h2>
+                        <ul class="blogger-info">
+                            <li>
+                                <span class="blog-off date-time">
+                                    <i class="icon-clock"></i>
+                                    <span>{{ article.published_at | date: '%b %d, %Y' }}</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="blog-off blog-author">
+                                    <i class="icon-user"></i>
+                                    <span>{{ section.settings.article_through }}</span>
+                                    <span>{{ article.author | truncatewords: 2 | remove: "." }}</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span class="blog-off blog-comment">
+                                    <i class="icon-bubble"></i>
+                                    <span>{{ article.comments_count }}</span>
+                                    <span>{{ section.settings.article_cmt }}</span>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="blog-content">
+                        {{ article.content }}
+                    </div>
+                    <div class="post-info">
+                        <blockquote>
+                            <i class="fa fa-quote-left"></i>
+                            <h2 class="post-title">{{ article.title }}</h2>
+                            <span class="post-author">{{ article.author | truncatewords: 2 | remove: "." }}</span>
+                        </blockquote>
+                    </div>
+                    <div class="post-info-tag">
+                        <ul class="post-tag">
+                            {% for tag in article.tags %}
+                            <li>{{ tag | link_to_tag: tag }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="blog-share">
+                        {% include 'social-share-blog' %}
+                    </div>
+                    {% if article.comments_enabled? %}
+                    {% assign comment_post_limit = section.settings.comment_post_limit_handle %}
+                    {% paginate article.comments by comment_post_limit %}
+                    <div id="comments" class="blog-comments">
+                        {% if article.comments.size > 0 %}
+                        {% include 'blog-comments' %}
+                        {% endif %}
+                        {% if paginate.pages > 1 %}
+                        <div class="comment-pagination">
+                            {% include 'pagination' %}
+                        </div>
+                        {% endif %}
+                        {% endpaginate %}
+                        <div class="blog-comment-form">
+                            {% include 'blog-comment-form' %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% unless section.settings.sidebar_handle == 'without_sidebar' %}
+            <div class="col-xl-3 col-lg-4 col-md-4 col-12 blog-article-wrap">
+                {% include 'blog-sidebar' %}
+            </div>
+            {% endunless %}
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "Article Page",
+    "settings": [
+    {
+        "type" : "header",
+        "content" : "Background Color"
+    },
+    {
+        "type" : "checkbox",
+        "id" : "article_check",
+        "label" : "With Backgorund",
+        "default" : true
+    },
+    {
+        "type" : "color",
+        "id" : "article_bgcolor",
+        "label" : "Background Color",
+        "default" : "#fff"
+    },
+    {
+        "type": "text",
+        "id": "article_through",
+        "label": "Through",
+        "default": "By"
+    },
+    {
+        "type": "text",
+        "id": "article_cmt",
+        "label": "Comment",
+        "default": "Comment"
+    },
+    {
+        "type" : "header",
+        "content" : "Submit button"
+    },
+    {
+        "type": "text",
+        "id": "article_cmt_send",
+        "label": "title",
+        "default": "Sending"
+    },
+    {
+        "type": "text",
+        "id": "article_cmt_done",
+        "label": "title",
+        "default": "Done!"
+    },
+    {
+        "type" : "header",
+        "content" : "Avtar option"
+    },
+    {
+        "type": "checkbox",
+        "id": "article_avtar_enable",
+        "label": "Show Avtar",
+        "default": false
+    },
+    {
+        "type": "header",
+        "content": "Article Sidebar"
+    },
+    {
+        "type": "radio",
+        "id": "sidebar_handle",
+        "label": "Sidebar Position",
+        "options": [
+        {
+            "label": "Left Sidebar",
+            "value": "left_sidebar_handle"
+        },
+        {
+            "label": "Right Sidebar",
+            "value": "right_sidebar_handle"
+        },
+        {
+            "label": "Without Sidebar",
+            "value": "without_sidebar"
+        }
+        ],
+        "default": "left_sidebar_handle"
+    },
+    {
+        "type": "paragraph",
+        "content": "Sidebar List"
+    },
+    {
+        "type": "checkbox",
+        "id": "blog_search_bar_enable",
+        "label": "Show Searchbar",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "recent_post_enable",
+        "label": "Show Recent Posts",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "archive_enable",
+        "label": "Show Archive",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "tags_enable",
+        "label": "Show Tags",
+        "default": true
+    },
+    {
+        "type": "header",
+        "content": "Comment Box"
+    },
+    {
+        "type": "text",
+        "id": "comment_post_limit_handle",
+        "label": "How Many Comment Post Show",
+        "default": "5"
+    }
+    ]
+}
+{% endschema %}
+<style>
+  .article-area {
+    {% if section.settings.article_check %}
+    background-color: {{ section.settings.article_bgcolor }};
+    {% endif %}
+  }
+</style>

@@ -1,0 +1,26 @@
+{% if customer %}
+<a class="header-wishlist-btn" href="/pages/wishlist" title="Wishlist">
+	<span class="wishlist-title">Wishlist</span>
+	<span class="wishlist-counter">{{ wishlist.count }}</span>
+</a>	
+{% else %}
+<a class="header-wishlist-btn" href="/account/login" title="Wishlist">
+	<span class="wishlist-title">Wishlist</span>
+	<span class="wishlist-counter">{{ wishlist.count }}</span>
+</a>	
+{% endif %}
+<style>
+	a.header-wishlist-btn{
+		display: flex;
+		align-items: center;
+	}
+	a.header-wishlist-btn span.wishlist-counter{
+		/*margin-left: 5px;*/
+	}
+	a.header-wishlist-btn span.wishlist-counter::before{
+		content: "(";
+	}
+	a.header-wishlist-btn span.wishlist-counter::after{
+		content: ")";
+	}
+</style>

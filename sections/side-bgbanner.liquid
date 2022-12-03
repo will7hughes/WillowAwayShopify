@@ -1,0 +1,136 @@
+<!-- banner-area start -->
+<div class="bgbanner-grid">
+    <div class="row">
+        <div class="col">
+            <div class="side-section">
+                <div class="side-section-title">
+                    {% if section.settings.bgbanner_title !='' %}
+                    <h2 class="heading-home">
+                        <span>{{ section.settings.bgbanner_title }}</span>
+                    </h2>
+                    <a data-toggle="collapse" href="#collapse-{{ section.settings.bgbanner_title | replace: ' ' , '-' | remove: '&' }}" class="heading-home">
+                        <span>{{ section.settings.bgbanner_title }}</span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="collapse" id="collapse-{{ section.settings.bgbanner_title | replace: ' ' , '-' | remove: '&' }}">
+                    <div class="big-sale-wrap lazyload" style="background-image: url('{% if section.settings.bgbanner_img %}{{ section.settings.bgbanner_img | img_url: 'master' }}{% else %}https://via.placeholder.com/295x180{% endif %};">
+                        <div class="big-offer-txt">
+                            <h2>Big <span>50%</span></h2>
+                            <h6>OFFER</h6>
+                            <p>Only Accessories Fashion</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- banner-area end -->
+{% schema %}
+{
+    "name": "Side Backgorund Banner",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Section Padding"
+        },
+        {
+            "type": "range",
+            "id": "bgbanner_padding_top",
+            "label": "Section Padding Top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        },
+        {
+            "type": "range",
+            "id": "bgbanner_padding_bottom",
+            "label": "Section Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        },
+        {
+            "type": "header",
+            "content": "Section Heading"
+        },
+        {
+            "type": "text",
+            "id": "bgbanner_title",
+            "label": "Section Title",
+            "default": "Big Sale"
+        },
+        {
+            "type": "image_picker",
+            "id": "bgbanner_img",
+            "label": "Banner Image",
+            "info": "Recommended Size: 300px x 370px"
+        }
+    ],
+    "presets":[
+        {
+            "name": "Side Backgorund Banner",
+            "category": "side backgorund banner"
+        }
+    ]
+}
+{% endschema %}
+<style>
+    .bgbanner-grid{
+        padding-top: {{ section.settings.bgbanner_padding_top }}px;
+        padding-bottom: {{ section.settings.bgbanner_padding_bottom }}px;
+    }
+    .big-sale-wrap{
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+    .big-sale-wrap::after{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #fff;
+        opacity: 0.9;
+    }
+    .big-offer-txt{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+        position: relative;
+        z-index: 1;
+    }
+    .big-offer-txt h2{
+        font-size: 30px;
+        display: flex;
+        align-items: flex-end;
+        text-transform: uppercase;
+    }
+    .big-offer-txt h2 span{
+        font-size: 35px;
+        color: {{ settings.color_primary }};
+        margin-left: 5px;
+    }
+    .big-offer-txt h6{
+        font-size: 30px;
+        letter-spacing: 7px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    .big-offer-txt p{
+        color: #222;
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+</style>

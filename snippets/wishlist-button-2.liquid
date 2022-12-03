@@ -1,0 +1,35 @@
+{% if customer %}
+<div class="wishlist">
+	<a class="header-wishlist-btn" href="/pages/wishlist" title="Wishlist">
+	  <span class="wishlist-icon"><i class="ti-heart"></i></span>
+	  <span class="wishlist-counter">{{ wishlist.count }}0</span>
+	</a>	
+</div>
+{% else %}
+<div class="wishlist">
+	<a class="header-wishlist-btn" href="/account/login" title="Wishlist">
+	  <span class="wishlist-icon"><i class="ti-heart"></i></span>
+	  <span class="wishlist-counter">{{ wishlist.count }}0</span>
+	</a>
+</div>
+{% endif %}
+<style>
+	.wishlist a{
+		display: flex;
+		align-items: center;
+	}
+	.wishlist a span.wishlist-counter{
+		{% if settings.enable_rtl %}
+		margin-right: 0px;
+		{% else %}
+		margin-left: 0px;
+		{% endif %}
+		position: relative;
+	}
+	.wishlist a span.wishlist-counter::before{
+		content: "";
+	}
+	.wishlist a span.wishlist-counter::after{
+		content: "";
+	}
+</style>

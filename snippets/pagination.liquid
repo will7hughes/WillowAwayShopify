@@ -1,0 +1,38 @@
+<ul class="pagination-box">
+  {% if paginate.previous %}
+  <li class="prev">
+    <a href="{{ paginate.previous.url }}" class="Previous" aria-label="Previous">
+      <i class="fa fa-angle-double-left"></i>
+    </a>
+  </li>
+  {% endif %}
+  {% for part in paginate.parts %}
+  {% if part.is_link %}
+    <li class="number">
+      <a href="{{ part.url }}" title="{{ part.title }}">{{ part.title }}</a>
+    </li>
+  {% else %}
+  {% if part.title == paginate.current_page %}
+  <li class="active">
+    <a href="javascript:void(0)">{{ part.title }}</a>
+  </li>
+  {% else %}
+  <li>
+    <a href="javascript:void(0)">{{ part.title }}</a>
+  </li>
+  {% endif %}
+  {% endif %}
+  {% endfor %}
+  {% if paginate.next %}
+  <li class="next">
+    <a href="{{ paginate.next.url }}" class="Next" title="{{ paginate.next.title }}">
+      <i class="fa fa-angle-double-right"></i>
+    </a>
+  </li>
+  {% endif %}
+</ul>
+
+<script>
+  $(".theme-default-pagination .disabled a"). removeAttr("href");
+  $(".theme-default-pagination li.active a"). removeAttr("href");
+</script>

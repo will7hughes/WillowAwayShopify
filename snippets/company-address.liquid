@@ -1,0 +1,34 @@
+{% if settings.add1 != "" or settings.add2 != "" %}
+<li class="ftcon-li">
+	{% if settings.add_icon != "" %}
+	<span class="con-icon"><i class="{{ settings.add_icon }}"></i></span>
+	{% endif %}
+	<span class="con-add">
+		{% if settings.add1 != "" %}
+		<span>{{ settings.add1 }}</span>
+		{% endif %}
+		{% if settings.add2 != "" %}
+		<span>{{ settings.add2 }}</span>
+		{% endif %}
+	</span>
+</li class="ftcon-li">
+{% endif %}
+{% if settings.contact != "" %}
+<li class="ftcon-li">
+	{% if settings.con_icon != "" %}
+	<span class="con-icon"><i class="{{ settings.con_icon }}"></i></span>
+	{% endif %}
+	<a href="tel:{{ settings.contact }}">{{ settings.contact }}</a>
+</li class="ftcon-li">
+{% endif %}
+{% if settings.email != "" %}
+<li class="ftcon-li">
+	{% if settings.mail_icon != "" %}
+	<span class="con-icon"><i class="{{ settings.mail_icon }}"></i></span>
+	{% endif %}
+	<a href="mailto:{{ settings.email }}">{{ settings.email }}</a>
+</li class="ftcon-li">
+{% endif %}
+<li class="ftcon-li">
+  {%- include 'app-img' -%}
+</li>

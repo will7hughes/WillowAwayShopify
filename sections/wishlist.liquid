@@ -1,0 +1,185 @@
+<section class="customer-page section-ptb">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        {% if customer %}
+        <div class="wishlist-page">
+          <div class="wishlist-grid">
+            <div class="wish-wrap">
+              <div class="wishlist-title">
+                <h2>{{ section.settings.wish_title }}</h2>
+                <span class="wish-count">
+                  <span class="wishlist-counter">{{ wishlist.count }}</span>
+                  <span class="wish-item-title">{{ section.settings.wish_item_title }}</span>
+                </span>
+              </div>
+              {% for product in collections.all.products %}
+              <ul class="wishlist-tile-container" data-product-id="{{ product.id }}" data-product-handle="{{ product.handle }}">
+                <li class="wishlist-info">
+                  <div class="item-img">
+                    <a href="{{ product.url }}"><img class="lazyload" src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20360%20459%22%3E%3C/svg%3E" data-src="{{ product.featured_image | product_img_url: '150x150', crop: 'center' }}" alt="{{ product.title | escape }}" /></a>
+                  </div>
+                  <div class="item-title">
+                    <a href="{{ product.url }}" title="{{ product.title }}">{{ product.title | truncate: 80 }}</a>
+                  </div>
+                </li>
+                <li class="item-add-remove">
+                  <div class="item-add">
+                    {% if product.available %}
+                    <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="add-to-cart ajax-spin-cart" data-toggle="tooltip" data-placement="top" title="Add to cart">
+                        <span>
+                            <span class="cart-title">{{ section.settings.wish_cart_title }}</span>
+                            <span class="cart-loading animated infinite rotateOut"><i class="{{ section.settings.wish_cart_loading }}"></i></span>
+                            <span class="cart-added">{{ section.settings.wish_cart_add }}</span>
+                            <span class="cart-unavailable"><i class="{{ section.settings.wish_cart_unvlbe }}"></i></span>
+                        </span>
+                    </a>
+                    {% else %}
+                    <a class="disabled-add-to-cart out-of-stock" href="javascript:void(0)" title="out of stock">
+                        <span class="cart-title">{{ section.settings.wish_cart_stock_out }}</span>
+                    </a>
+                    {% endif %}
+                  </div>
+                  <div class="item-buy">
+                    <a href="/checkout" data-toggle="tooltip" data-placement="top" title="Direct to checkout">
+                      <span>{{ section.settings.wish_buy_now }}</span>
+                    </a>
+                  </div>
+                </li>
+                <li class="item-price">
+                  <span class="product-price">
+                    {% if product.compare_at_price > product.price %}
+                    <span class="price-sale">{{ product.price | money }}</span>
+                    <span class="compare-price">{{ product.compare_at_price | money }}</span>
+                    {% else %}
+                    <span class="pro-price">{{ product.price | money }}</span>
+                    {% endif %}
+                  </span>
+                  <span class="item-remove">
+                    <a class="action-wishlist wishlist-btn" onclick="reloadPage();"  href="javascript:void(0)" data-product-handle="{{ product.handle }}" data-toggle="tooltip" data-placement="top" title="remove">
+                      <span class="remove-wishlist"><i class="ion-android-close"></i></span>
+                    </a>
+                  </span>
+                </li>
+              </ul>
+              {% endfor %}
+              <div class="wishlist-buttons">
+                <a href="/collections/all">{{ section.settings.wish_cart_conti }}</a>
+                <a href="/wishlist/clear">{{ section.settings.wish_cart_clear }}</a>
+              </div>
+            </div>
+          </div>
+          <div class="wishlist-grid-empty-list">
+            <div class="empty-list-info">
+              <h2>
+                <span>{{ settings.wishlist_empty_title1 }}</span>
+                <span>{{ settings.wishlist_empty_title2}}</span>
+                <span>{{ settings.wishlist_empty_title3 }}</span>
+                <span>{{ settings.wishlist_empty_title4 }}</span>
+              </h2>
+              <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+            </div>
+          </div>
+          <!-- Loader -->
+          <div class="wishlist-loader" style="display: none;">
+            <p class="wishlist-loader--text">Loading...</p>
+          </div>
+        </div>
+        {% else %}
+        <div class="login-wishlist">
+          <ul>
+            <li>
+              <span>{{ settings.login_request_title }}</span>
+              {{ 'layout.customer.log_in' | t | customer_login_link }}
+            </li>
+            <li>
+              <span>{{ settings.dnt_acc_title }}</span>
+              {{ 'layout.customer.create_account' | t | customer_register_link }}
+            </li>
+          </ul>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wishlist Page",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Title"
+  },
+  {
+    "type": "text",
+    "id": "wish_title",
+    "label": "Title",
+    "default": "My Wishlist:"
+  },
+  {
+    "type": "text",
+    "id": "wish_item_title",
+    "label": "Title",
+    "default": "Item"
+  },
+  {
+    "type": "header",
+    "content": "Cart Button Label"
+  },
+  {
+    "type": "text",
+    "id": "wish_cart_title",
+    "label": "Title",
+    "default": "Add to cart"
+  },
+  {
+    "type": "text",
+    "id": "wish_cart_loading",
+    "label": "Title",
+    "default": "ion-load-a"
+  },
+  {
+    "type": "text",
+    "id": "wish_cart_add",
+    "label": "Title",
+    "default": "Done!"
+  },
+  {
+    "type": "text",
+    "id": "wish_cart_unvlbe",
+    "label": "Title",
+    "default": "ion-android-alert"
+  },
+  {
+    "type": "text",
+    "id": "wish_cart_stock_out",
+    "label": "Title",
+    "default": "Out Of Stock"
+  },
+  {
+    "type": "text",
+    "id": "wish_buy_now",
+    "label": "Title",
+    "default": "Buy Now"
+  },
+  {
+    "type": "header",
+    "content": "Wishlist Button Action"
+  },
+  {
+    "type": "text",
+    "id": "wish_cart_conti",
+    "label": "Title",
+    "default": "Continue Shopping"
+  },
+  {
+    "type": "text",
+    "id": "wish_cart_clear",
+    "label": "Title",
+    "default": "Clear Wishlist"
+  }
+  ]
+}
+{% endschema %}

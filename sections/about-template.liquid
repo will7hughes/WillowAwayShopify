@@ -1,0 +1,147 @@
+<section class="about-area">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="about-content">
+                    <div class="content-main-title">
+                        {% if section.settings.about_product_title != '' %}
+                        <h2>{{ section.settings.about_product_title }}</h2>
+                        {% endif %}
+
+                        {% if section.settings.about_des != '' %}
+                        <p>{{ section.settings.about_des }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="about-banner-area">
+                        <div class="single-banner lazyload" style="background-image: url('{% if section.settings.about_banner_img %}{{ section.settings.about_banner_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x1024{% endif %}');">
+                        </div>
+                        <div class="abt-banner-desc">
+                            {% if section.settings.title != '' %}
+                            <h3>{{ section.settings.title }}</h3>
+                            {% endif %}
+
+                            {% if section.settings.title_sub != '' %}
+                            <span>{{ section.settings.title_sub }}</span>
+                            {% endif %}
+
+                            {% if section.settings.text != '' %}
+                            <p>{{ section.settings.text }}</p>
+                            {% endif %}
+
+                            {% if block.settings.about_des != '' %}
+                            <ul>
+                                {% for block in section.blocks %}
+                                <li>{{ block.settings.about_banner_des }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "About Product",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "about_product_padding_top",  
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },           
+    {
+      "type": "range",
+      "id": "about_product_padding_bottom", 
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 60
+    },
+    {
+        "type": "header",
+        "content": "Content"
+    },
+    {
+        "type": "text",
+        "id": "about_product_title",
+        "label": "Title",
+        "default": "What We Do?"
+    },
+    {
+        "type": "textarea",
+        "id": "about_des",
+        "label": "About Description",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sed libero vel ex maximus vulputate nec eu ligula. Vestibulum elementum nisi ut fermentum lobortis. Sed quis iaculis felis."
+    },
+    {
+        "type": "image_picker",
+        "id": "about_banner_img",
+        "label": "Image",
+        "info": "Recommended Size: 1920 x 1024px"
+    },
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Our company"
+    },
+    {
+        "type": "text",
+        "id": "title_sub",
+        "label": "Sub Title",
+        "default": "Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididun."
+    },
+    {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet conse ctetur adipisicing elit."
+    }
+    ],
+    "blocks":[
+    {
+        "type": "about-description",
+        "name": "About Description",
+        "settings": [
+        {
+            "type": "textarea",
+            "id": "about_banner_des",
+            "label": "Description"
+        }
+        ]
+    }
+    ],
+    "presets":[
+    {
+        "name": "About us",
+        "category": "2. About us"
+    }
+    ]
+}
+{% endschema %}
+<style>
+    .about-area{
+        padding-top: {{ section.settings.about_product_padding_top }}px;
+        padding-bottom: {{ section.settings.about_product_padding_bottom }}px;
+    }
+    @media (max-width: 767px){
+        .about-area{
+            padding-top: 40px;
+        }
+    }
+</style>

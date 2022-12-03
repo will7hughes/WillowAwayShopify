@@ -1,0 +1,27 @@
+<a href="javascript:void(0)" class="payment-icon">
+    <img src="{% if settings.payment_visaimg %}{{ settings.payment_visaimg | img_url: 'master' }}{% else %}https://via.placeholder.com/40x25{% endif %}" class="img-fluid" alt="{{ settings.payment_visaimg.alt | default: shop.name }}">
+    <img src="{% if settings.payment_masterimg %}{{ settings.payment_masterimg | img_url: 'master' }}{% else %}https://via.placeholder.com/40x25{% endif %}" class="img-fluid" alt="{{ settings.payment_masterimg.alt | default: shop.name }}">
+    <img src="{% if settings.payment_paypalimg %}{{ settings.payment_paypalimg | img_url: 'master' }}{% else %}https://via.placeholder.com/40x25{% endif %}" class="img-fluid" alt="{{ settings.payment_paypalimg.alt | default: shop.name }}">
+    <img src="{% if settings.payment_expressimg %}{{ settings.payment_expressimg | img_url: 'master' }}{% else %}https://via.placeholder.com/40x25{% endif %}" class="img-fluid" alt="{{ settings.payment_expressimg.alt | default: shop.name }}">
+    <img src="{% if settings.payment_discoverimg %}{{ settings.payment_discoverimg | img_url: 'master' }}{% else %}https://via.placeholder.com/40x25{% endif %}" class="img-fluid" alt="{{ settings.payment_discoverimg.alt | default: shop.name }}">
+</a>
+<style>
+	.payment-icon{
+		display: flex;
+	}
+	{% if settings.enable_rtl %}
+	.payment-icon img{
+		margin-left: 5px;
+	}
+	.payment-icon img:last-of-type{
+		margin-left: 0;
+	}
+	{% else %}
+	.payment-icon img{
+		margin-right: 5px;
+	}
+	.payment-icon img:last-of-type{
+		margin-right: 0;
+	}
+	{% endif %}
+</style>

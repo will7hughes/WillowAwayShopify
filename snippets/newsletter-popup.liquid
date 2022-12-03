@@ -1,0 +1,37 @@
+{% if settings.newsletter_popup_enable %}
+<div class="popup_wrapper" id="one-time-newsletter">
+  <div class="modal fade" id="myModal">
+    <div class="newsletter_popup_inner modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-dismiss="modal"><i class="ti-close"></i></button>
+          <div class="newsletter-info">
+            <div class="newsletter-image lazyload" style="background-image: url('{% if settings.newsletter_img %}{{ settings.newsletter_img | img_url: 'master' }}{% else %}https://via.placeholder.com/350x450{% endif %}');">
+            </div>
+            <div class="subscribe_area">
+              <div class="subscribe-heading">
+                <h2>{{ settings.newletter_popup_title }}</h2>
+                <p>{{ settings.newsletter_text }}</p>
+              </div>
+              <div class="popup-newsletter">
+                {%- include 'newsletter' -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<script>
+  $(window).on('load',function(){
+    $('#myModal').modal('show');
+  });
+  
+  {% if settings.one_day_popup_enable %}
+  {{ 'newsletter-js.js' | asset_url | script_tag }}
+  {% endif %}
+</script>
+

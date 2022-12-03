@@ -1,0 +1,261 @@
+<!-- banner-area start -->
+<div class="banner-grid banner1">
+	<div class="container">
+		<div class="row">
+			{% for block in section.blocks %}
+			<div class="col-md-6 col-12 nth-child">
+				<div class="banner-block">
+					<a href="{{ block.settings.banner_url }}" class="banner-hover">
+						<img class="img-fluid" src="{% if block.settings.banner_img %}{{ block.settings.banner_img | img_url: 'master' }}{% else %}https://via.placeholder.com/720x270{% endif %}">
+					</a>
+					<div class="banner-content{% if block.settings.banner_content_position == 'left' %} banner-content-left{% elsif block.settings.banner_content_position == 'right' %} banner-content-right{% else %} banner-content-center{% endif %}{% if block.settings.banner_text_position == 'left' %} banner-text-left{% elsif block.settings.banner_text_position == 'right' %} banner-text-right{% else %} banner-text-center{% endif %}">
+						{%if block.settings.banner_label != '' %} 
+						<span class="banner-label">{{ block.settings.banner_label }}</span>
+						{%endif%}
+						{%if block.settings.banner_title != '' %} 
+						<h6>{{ block.settings.banner_title }}</h6>
+						{%endif%}
+						{%if block.settings.banner_offer1 != '' %}
+						<p>
+							<span>{{ block.settings.banner_offer1 }}</span>
+							<span style="color: {{ block.settings.banner_offer2_color }};">{{ block.settings.banner_offer2 }}</span>
+							<span>{{ block.settings.banner_offer3 }}</span>
+						</p>
+						{%endif%}
+						{%if block.settings.banner_button_text != '' %} 
+						<a href="{{ block.settings.banner_url }}" class="btn btn-style3">{{ block.settings.banner_button_text }}</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+<!-- banner-area end -->
+{% schema %}
+{
+	"name": "Banner Grid1",
+	"settings": [
+	{
+		"type": "range",
+		"id": "banner1_padding_top",	
+		"label": "Section Padding Top",
+		"min": 0,
+		"max": 100,
+		"step": 1,
+		"unit": "px",
+		"default": 30
+	},           
+	{
+		"type": "range",
+		"id": "banner1_padding_bottom",	
+		"label": "Section Padding Bottom",
+		"min": 0,
+		"max": 100,
+		"step": 1,
+		"unit": "px",
+		"default": 30
+	}
+	],
+	"blocks":[
+	{
+		"type": "full_width_banner",
+		"name": "Banner Grid",
+		"limit": 2,
+		"settings": [
+		{
+			"type": "image_picker",
+			"id": "banner_img",
+			"label": "Banner BG Image",
+			"info": "Recommended Size: 720px x 270px"
+		},
+		{
+			"type": "text",
+			"id": "banner_label",
+			"label": "Banner Label",
+			"default": "Fresh Food"
+		},
+		{
+			"type": "text",
+			"id": "banner_title",
+			"label": "Banner Title",
+			"default": "Chair Collection"
+		},
+		{
+			"type": "text",
+			"id": "banner_offer1",
+			"label": "Banner Offer Text1"
+		},
+		{
+			"type": "text",
+			"id": "banner_offer2",
+			"label": "Banner Offer Text2"
+		},
+		{
+			"type": "color",
+			"id": "banner_offer2_color",
+			"label": "Text2 Color"
+		},
+		{
+			"type": "text",
+			"id": "banner_offer3",
+			"label": "Banner Offer Text3"
+		},
+		{
+			"type": "text",
+			"id": "banner_button_text",
+			"label": "Button Text",
+			"default": "Shop Now"
+		},
+		{
+			"type": "url",
+			"id": "banner_url",
+			"label": "Button URL"
+		},
+		{
+			"type": "radio",
+			"id": "banner_content_position",
+			"label": "Content Position",
+			"options": [
+			{
+				"label": "Content Left",
+				"value": "left"
+			},
+			{
+				"label": "Content Right",
+				"value": "right"
+			},
+			{
+				"label": "Content Center",
+				"value": "center"
+			}
+			],
+			"default": "left"
+		},
+		{
+			"type": "radio",
+			"id": "banner_text_position",
+			"label": "Text Position",
+			"options": [
+			{
+				"label": "Text Left",
+				"value": "left"
+			},
+			{
+				"label": "Text Right",
+				"value": "right"
+			},
+			{
+				"label": "Text Center",
+				"value": "center"
+			}
+			],
+			"default": "left"
+		}
+		]
+	}
+	],	
+	"presets":[
+	{
+		"name": "Banner Grid1",
+		"category": "banner grid",
+		"blocks":[
+		{
+			"type": "full_width_banner"
+		},
+		{
+			"type": "full_width_banner"
+		}
+		]
+	}
+	]
+}
+{% endschema %}
+<style>
+	.banner1{
+		padding-top: {{ section.settings.banner1_padding_top }}px;
+		padding-bottom: {{ section.settings.banner1_padding_bottom }}px;
+	}
+	@media(max-width: 767px){
+		.banner1{
+			padding-top: 40px;
+			padding-bottom: 40px;
+		}
+	}
+	.banner1 .banner-block .banner-content.banner-content-left,
+	.banner1 .banner-block .banner-content.banner-content-right{
+		width: 50%;
+	}
+	.banner1 .banner-block .banner-content.banner-content-left{
+		{%- if settings.enable_rtl -%}
+		right: 30px;
+		{%- else -%}
+		left: 30px;
+		{%- endif -%}
+	}
+	.banner1 .banner-block .banner-content.banner-content-right{
+		{%- if settings.enable_rtl -%}
+		left: 30px;
+		{%- else -%}
+		right: 30px;
+		{%- endif -%}
+	}
+	.banner1 .banner-block .banner-content.banner-content-center{
+		left: 30px;
+		right: 30px;
+		margin: 0 auto;
+	}
+
+	.banner1 .banner-block .banner-content.banner-text-left{
+		{%- if settings.enable_rtl -%}
+		text-align: right;
+		{%- else -%}
+		text-align: left;
+		{%- endif -%}
+	}
+	.banner1 .banner-block .banner-content.banner-text-right{
+		{%- if settings.enable_rtl -%}
+		text-align: left;
+		{%- else -%}
+		text-align: right;
+		{%- endif -%}
+	}
+	.banner1 .banner-block .banner-content.banner-text-center{
+		text-align: center;
+	}
+
+	{%if block.settings.banner_offer1 != '' %}
+	.banner1 .banner-block .banner-content p span:nth-child(2){
+		font-weight: 600;
+	}
+	{%endif%}
+
+	@media(max-width: 767px){
+		.banner-grid.banner1 .nth-child{
+			margin-top: 30px;
+		}
+		.banner-grid.banner1 .nth-child:first-child{
+			margin-top: 0px;
+		}
+		.banner1 .banner-block .banner-content.banner-content-left{
+			{%- if settings.enable_rtl -%}
+			right: 15px;
+			{%- else -%}
+			left: 15px;
+			{%- endif -%}
+		}
+		.banner1 .banner-block .banner-content.banner-content-right{
+			{%- if settings.enable_rtl -%}
+			left: 15px;
+			{%- else -%}
+			right: 15px;
+			{%- endif -%}
+		}
+		.banner1 .banner-block .banner-content.banner-content-center{
+			left: 15px;
+			right: 15px;
+			margin: 0 auto;
+		}
+	}
+</style>

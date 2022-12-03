@@ -1,0 +1,92 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%}
+
+<div class="single-product-wrap">
+    <div class="{% if product.available %}product-image{% else %}product-image stock-out{% endif %}">
+        <a class="pro-img" href="{{ product.url | within: collection }}">
+          {% if product.media.size == 1 %}
+              {% render 'media-grid-item', media: product.media[0] %}
+          {% elsif product.media.size >= 1 %}
+              {% render 'media-grid-item-cycle', media: product.media[0] %}
+          {% else %}
+            <p>There is no media (image or video) attached to this product</p>
+          {% endif %}
+        </a>
+        <div class="product-label">
+            {%- include 'product-label' -%}
+        </div>
+    </div>
+    <div class="product-con-wrap">
+        <div class="product-content">
+            <div class="price-rating">
+                <div class="product-ratting">
+                    <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                </div>
+                
+            </div>
+            <h3>
+                <a href="{{ product.url | within: collection }}" title="{{ product.title }}">{{ product.title | truncate: 30 }}</a>
+            </h3>
+            <div class="price-box">
+                <span class="new-price">{{ product.price | money }}</span>
+                {% if product.compare_at_price_max > product.price %}
+                <span class="old-price">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+            </div>
+            
+            <div class="product-description pro_details">
+                {%- if product.description contains '[short_description]' -%}
+                {%- assign short_description_first = product.description | split:'[/short_description]' | first -%}
+                {%- assign short_description_final = short_description_first | split:'[short_description]' | last -%}
+                {{ short_description_final }}
+                {%- else -%}
+                {{ product.description | strip_html | truncatewords: 35 | split: '[short_description]' | first | split: '[product_description]' | first | split: '[new_products]' | first | split: '[product_video]' | first | split: '[affiliate_link]' | first }}
+                {%- endif -%}
+            </div>
+            
+        </div>
+
+        {% if product.available %}
+        <div class="product-action">
+            {% if product.description contains '[affiliate_link]' and product.available %}
+            {% assign affiliate_link_first = product.description | split:'[/affiliate_link]' | first %}
+            {% assign affiliate_link_final = affiliate_link_first | split:'[affiliate_link]' | last %}
+            <a class="add-to-cart" title="{{ 'products.product.add_to_cart' | t }}" href="{{ affiliate_link_final }}" data-toggle="tooltip" data-placement="top" title="Add to cart">
+                <i class="ti-shopping-cart"></i>
+            </a>
+            {% elsif product.available %}
+            <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="add-to-cart ajax-spin-cart" data-toggle="tooltip" data-placement="top" title="Add to cart">
+                <span>
+                    <span class="cart-title">
+                        <span class="add-to-cart-t">Add to cart</span>
+                        <i class="ti-shopping-cart"></i>
+                    </span>
+                    <span class="cart-loading animated infinite rotateOut"><i class="ion-load-a"></i></span>
+                    <span class="cart-added"><i class="ion-android-done"></i></span>
+                    <span class="cart-unavailable"><i class="ion-android-alert"></i></span>
+                </span>
+            </a>
+            {% else %}
+            <a class="disabled-add-to-cart add-to-cart" href="#" title="{{ 'products.product.add_to_cart' | t }}">
+                <i class="ti-shopping-cart"></i>
+            </a>
+            {% endif %}
+
+            <a href="javascript:void(0);" onclick="quiqview('{{ product.handle | handleize }}')" class="quick-view" data-toggle="tooltip" data-placement="top" title="Quickview">
+                <i class="ti-eye"></i>
+            </a>
+            {% include 'wishlist-button' %}
+        </div>
+        {% endif %}
+    </div>
+</div>

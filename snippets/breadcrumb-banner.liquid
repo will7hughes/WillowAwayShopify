@@ -1,0 +1,15 @@
+<!-- breadcrumb-area start -->
+{% if settings.breadcrumb_banner_enable %}
+<div class="breadcrumb-area overlay-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <!-- breadcrumb-list start -->
+        {% include 'breadcrumb-builtin' %}
+        <!-- breadcrumb-list end -->
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<!-- breadcrumb-area end -->

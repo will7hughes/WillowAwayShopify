@@ -1,0 +1,220 @@
+<section class="instagram-warp">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="section-title">
+          <h2>{{ section.settings.instagram_title }}</h2>
+        </div>
+        <div class="insta-wrap">
+          <div class="insta-follow">
+            <a href="javascript:void(0)" class="insta-icon">
+              <i class="{{ section.settings.insta_icon }}"></i>
+            </a>
+            <h2>
+              <span>{{ section.settings.insta_title1 }}</span>
+              <span>{{ section.settings.insta_title2 }}</span>
+            </h2>
+            <p>{{ section.settings.insta_follow }}</p>
+            <a href="{{ section.settings.insta_follow_url }}" class="btn btn-style1">{{ section.settings.insta_follow_btn }}</a>
+          </div>
+          <div class="insta-photo">
+            <div class="insta-slider owl-carousel owl-theme" id="{{ section.settings.instagram_id }}"></div>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+<script>
+(function ($) {
+  "use strict";
+  jQuery(document).ready(function(){
+    var userFeed = new Instafeed({
+      target: '{{ section.settings.instagram_id }}',
+        "edge_liked_by": {
+          "count": 821544
+        },
+        {%- if settings.enable_rtl -%}
+    rtl: true,
+    {%- endif -%}
+      get: 'user',
+      userId: '{{ section.settings.instafeed_user_id }}',
+      accessToken: '{{ section.settings.instafeed_access_token }}',
+      resolution: 'standard_resolution',
+      after: function () {
+        $('.insta-slider').owlCarousel({
+          loop: false,
+          rewind: true,
+          margin: 30,
+          nav: true,
+          navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+          dots: false,
+          {%- if settings.enable_rtl -%}
+          rtl: true,
+          {%- endif -%}
+          autoplay: true,
+          sautoplayTimeout: 5000,
+          autoplayHoverPause: true,
+          responsive:{
+            0:{
+              margin: 15,
+              items: 2
+            },
+            479:{
+              margin: 15,
+              items: 2
+            },
+            768:{
+              items: 3
+            },
+            979:{
+              items: 2
+            },
+            1199:{
+              items: 3
+            }
+
+          }
+        });
+      },
+    });
+    userFeed.run();
+  });
+})(jQuery);
+</script>
+{% schema %}
+{
+  "name": "Instagram",
+  "settings": [
+  {
+    "type": "range",
+    "id": "insta_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 2,
+    "unit": "px",
+    "default": 0
+  },
+  {
+    "type": "range",
+    "id": "insta_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 2,
+    "unit": "px",
+    "default": 0
+  },
+  {
+    "type" : "header",
+    "content" : "Background Color"
+  },
+  {
+    "type" : "checkbox",
+    "id" : "insta_check",
+    "label" : "With Backgorund",
+    "default" : true
+  },
+  {
+    "type" : "color",
+    "id" : "insta_bgcolor",
+    "label" : "Background Color",
+    "default" : "#fff"
+  },
+  {
+    "type": "text",
+    "id": "instagram_title",
+    "label": "Instagram Title",
+    "default": "Follow Us Instagram"
+  },
+  {
+    "type": "header",
+    "content": "Instagram Follow"
+  },
+  {
+    "type": "text",
+    "id": "insta_icon",
+    "label": "Icon Class",
+    "default": "fa fa-instagram"
+  },
+  {
+    "type": "text",
+    "id": "insta_title1",
+    "label": "Title",
+    "default": "Mikshaa"
+  },
+  {
+    "type": "text",
+    "id": "insta_title2",
+    "label": "Title",
+    "default": "Fashion"
+  },
+  {
+    "type": "text",
+    "id": "insta_follow",
+    "label": "Type To Follow",
+    "default": "Follow Us On Instagram"
+  },
+  {
+    "type": "url",
+    "id": "insta_follow_url",
+    "label": "Link"
+  },
+  {
+    "type": "text",
+    "id": "insta_follow_btn",
+    "label": "Button Title",
+    "default": "Follow Us"
+  },
+  {
+    "type": "header",
+    "content": "Instagram Fetch"
+  },
+  {
+    "type": "text",
+    "id": "instagram_id",
+    "label": "Instagram ID",
+    "default": "instafeed"
+  },
+  {
+    "type": "text",
+    "id": "instafeed_user_id",
+    "label": "Instafeed Use Id",
+    "default": "6667588161"
+  },
+  {
+    "type": "textarea",
+    "id": "instafeed_access_token",
+    "label": "Instafeed Access Token",
+    "default": "6667588161.1677ed0.705c7b82e16f42b2898cd19e737dc53e"
+  }
+  ],
+  "presets": [
+  {
+    "name": "Instagram",
+    "category": "instagram"
+  }
+  ]
+}
+{% endschema %}
+{% stylesheet %}
+{% endstylesheet %}
+{% javascript %}
+{% endjavascript %}
+
+<style>
+  .instagram-warp {
+    padding-top:{{ section.settings.insta_padding_top }}px;
+    padding-bottom:{{ section.settings.insta_padding_bottom }}px;
+    {% if section.settings.insta_check %}
+    background-color: {{ section.settings.insta_bgcolor }};
+    {% endif %}
+  }
+  @media (max-width: 767px){
+    .instagram-warp {
+      padding-top: 40px;
+    }
+  }
+</style>

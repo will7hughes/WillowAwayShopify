@@ -1,0 +1,41 @@
+/* Willow: Carousel images and Catalog product images 
+that do not have a second image will fade instead of disappear*/
+.single-product-wrap .product-image:hover a.pro-img .img1 {
+    opacity: 0.75;
+}
+
+#navbarContent {
+  margin-top: 0;
+}
+
+.navbar-brand {
+  margin-left: 0.5rem;
+}
+
+
+/* account css */
+.account-wrap .account a .account-icon{
+    color: #fff;
+    display: block;
+    font-size: 30px;
+    line-height: 0;
+}
+.account-wrap .account a span.account-counter{
+    color: #fff;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 11px;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    line-height: 1;
+}
+@media (max-width: 1199px) {
+    .account-wrap .account a .account-icon{
+        font-size: 24px;
+    }
+}

@@ -1,0 +1,308 @@
+<section class="slider-content" style="background-image: url('{% if section.settings.main_bg_img %}{{ section.settings.main_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x850{% endif %}');">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-6 col-lg-5 col-md-12 col-12 slider-text-info">
+                <div class="slider-text">
+                    <div class="{% if section.settings.slider_content_position == "right" %} slider-content-right{% else %} slider-content-left{% endif %}{% if section.settings.slider_text_position == "right" %} slider-text-right{% else %} slider-text-left{% endif %}">
+                        {%if section.settings.slider_sub_title != '' %}
+                        <span style="color:{{ section.settings.slider_sub_title_color }};">{{ section.settings.slider_sub_title }}</span>
+                        {%endif%}
+
+                        {%if section.settings.slider_title != '' %}
+                        <h1 style="color:{{ section.settings.slider_title_color }};">{{ section.settings.slider_title }}</h1>
+                        {%endif%}
+                    </div>
+                    <div class="search-wrap">
+                        {%- include 'search-bar' -%}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-5 col-md-8 col-12 slider-img-info">
+                <div class="home-slider owl-carousel owl-theme" id="home-slider">
+                    {% for block in section.blocks %}
+                    <div class="item">
+                        <div class="slide-image">
+                            {% if block.settings.slider_button != '' %}
+                            <a href="{{ block.settings.slider_button_url }}"><img src="{% if block.settings.slider_bg_img %}{{ block.settings.slider_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/615x808{% endif %}')"></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hero Section End -->
+<script>
+    $('#home-slider').owlCarousel({
+        loop: false,
+        rewind: true,
+        items: 1,
+        margin: 0,
+        {%- if settings.enable_rtl -%}
+        rtl: true,
+        {%- else -%}
+        fade: true,
+        {%- endif -%}
+        nav: true,
+        navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+        dots: false,
+        singleItem : true,
+        animateOut: 'fadeOut'
+    });     
+</script>
+{% schema %}
+{
+    "name": "Slider",
+    "settings": [
+    {
+        "type": "image_picker",
+        "id": "main_bg_img",
+        "label": "Image",
+        "info": "Recommended Size: 1920px x 850px"
+    },
+    {
+        "type": "text",
+        "id": "slider_sub_title",
+        "label": "Sub Title",
+        "default": "Art & Antique Gallery"
+    },
+    {
+        "type": "color",
+        "id": "slider_sub_title_color",
+        "label": "Sub Title Color",
+        "default": "#fff"
+    },
+    {
+        "type": "text",
+        "id": "slider_title",
+        "label": "Title",
+        "default": "Buy The Best One Pieces"
+    },
+    {
+        "type": "color",
+        "id": "slider_title_color",
+        "label": "Title Color",
+        "default": "#fff"
+    },
+    {
+        "type": "radio",
+        "id": "slider_content_position",
+        "label": "Content Position",
+        "options": [
+        {
+            "label": "left",
+            "value": "left"
+        },
+        {
+            "label": "Right",
+            "value": "right"
+        }
+        ],
+        "default": "left"
+    },
+    {
+        "type": "radio",
+        "id": "slider_text_position",
+        "label": "Text Position",
+        "options": [
+        {
+            "label": "left",
+            "value": "left"
+        },
+        {
+            "label": "Right",
+            "value": "right"
+        }
+        ],
+        "default": "left"
+    }
+    ],
+    "blocks":[
+    {
+        "type": "slide",
+        "name": "Slide",
+        "limit": 3,
+        "settings": [
+        {
+            "type": "image_picker",
+            "id": "slider_bg_img",
+            "label": "Image",
+            "info": "Recommended Size: 615 x 808px"
+        },
+        {
+            "type": "url",
+            "id": "slider_button_url",
+            "label": "Button URL"
+        }
+        ]
+    }
+    ],
+    "presets":[
+    {
+        "name": "Slider",
+        "category": "1. slider",
+        "blocks":[
+        {
+            "type": "slide"
+        },
+        {
+            "type": "slide"
+        }
+        ]
+    }
+    ]
+}
+{% endschema %}
+<style>
+    {% if section.settings.main_bg_img %}
+    .slider-content{
+        background-repeat: no-repeat;
+        background-size: 100%;
+        padding-top: 210px;
+    }
+    {% endif %}
+    .home-slider{
+        position: relative;
+    }
+    .home-slider::before,
+    .home-slider::after{
+        content: "";
+        position: absolute;
+        background-color: {{ settings.color_primary }};
+    }
+    .home-slider::before{
+        {% if settings.enable_rtl %}
+        right: -125px;
+        clip-path: polygon(15% 0, 0% 100%, 100% 70%);
+        {% else %}
+        left: -125px;
+        clip-path: polygon(85% 0, 0 70%, 100% 100%);
+        {% endif %}
+        top: -40px;
+        height: 162px;
+        width: 180px;
+        animation: mover 1s infinite alternate;
+    }
+    .home-slider::after{
+        {% if settings.enable_rtl %}
+        right: 100%;
+        clip-path: circle(50% at 100% 50%);
+        {% else %}
+        left: 100%;
+        clip-path: circle(50% at 0 50%);
+        {% endif %}
+        bottom: -20px;
+        height: 570px;
+        width: 270px;
+        animation: mover 2s infinite alternate;
+    }
+    @-webkit-keyframes mover{
+        0%
+        {
+            transform: translateY(0)
+        }
+        100%
+        {
+            transform: translateY(-10px)
+        }
+    }
+    @keyframes mover{
+        0%{
+            transform: translateY(0)
+        }
+        100%
+        {
+            transform: translateY(-10px)
+        }
+    }
+    @media (max-width: 1599px) {
+        {% if section.settings.main_bg_img %}
+        .slider-content{
+            padding-top: 170px;
+        }
+        {% endif %}
+        .home-slider::after{
+            bottom: 0px;
+            height: 370px;
+            width: 200px;
+        }
+    }
+    @media (max-width: 1199px) {
+        {% if section.settings.main_bg_img %}
+        .slider-content{
+            padding-top: 60px;
+        }
+        {% endif %}
+        .home-slider::after{
+            height: 300px;
+            width: 170px;
+        }
+    }
+    @media (max-width: 991px) {
+        .home-slider::after{
+            width: 130px;
+        }
+    }
+    @media (max-width: 767px) {
+        .home-slider::before,
+        .home-slider::after{
+            display: none;
+        }
+    }
+    .slider-content .slider-text-info .slider-content-left{
+        {%- if settings.enable_rtl -%}
+        margin-left: auto;
+        {%- else -%}
+        margin-right: auto;
+        {%- endif -%}
+    }
+    .slider-content .slider-text-info .slider-content-right{
+        {%- if settings.enable_rtl -%}
+        margin-right: auto;
+        {%- else -%}
+        margin-left: auto;
+        {%- endif -%}
+    }
+    .slider-content .slider-text-info .slider-text-left{
+        {%- if settings.enable_rtl -%}
+        text-align: right;
+        {%- else -%}
+        text-align: left;
+        {%- endif -%}
+    }
+    .slider-content .slider-text-info .slider-text-right{
+        {%- if settings.enable_rtl -%}
+        text-align: left;
+        {%- else -%}
+        text-align: right;
+        {%- endif -%}
+    }
+    @media (max-width: 991px) {
+        {% if section.settings.main_bg_img %}
+        .slider-content{
+            padding-top: 10px;
+        }
+        {%- endif -%}
+        .slider-content .slider-text-info .slider-content-left,
+        .slider-content .slider-text-info .slider-content-right{
+            {%- if settings.enable_rtl -%}
+            margin-left: auto;
+            margin-right: auto;
+            {%- else -%}
+            margin-left: auto;
+            margin-right: auto;
+            {%- endif -%}
+        }
+        .slider-content .slider-text-info .slider-text-left,
+        .slider-content .slider-text-info .slider-text-right{
+            {%- if settings.enable_rtl -%}
+            text-align: center;
+            {%- else -%}
+            text-align: center;
+            {%- endif -%}
+        }
+    }
+</style>

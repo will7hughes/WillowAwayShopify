@@ -1,0 +1,61 @@
+<!-- banner-area start -->
+<div class="banner-grid side-banner2">
+    <div class="banner-block">
+        <a href="{{ section.settings.sidebanner2_url }}" class="banner-hover">
+            <img class="lazyload" src="{% if section.settings.sidebanner2_img %}{{ section.settings.sidebanner2_img | img_url: 'master' }}{% else %}https://via.placeholder.com/300x370{% endif %}">
+        </a>
+    </div>
+</div>
+<!-- banner-area end -->
+{% schema %}
+{
+    "name": "Side Banner2",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Side banner"
+        },
+        {
+            "type": "range",
+            "id": "sidebanner2_padding_top",
+            "label": "Section Padding Top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        },
+        {
+            "type": "range",
+            "id": "sidebanner2_padding_bottom",
+            "label": "Section Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "default": 30
+        },
+        {
+            "type": "image_picker",
+            "id": "sidebanner2_img",
+            "label": "Banner Image",
+            "info": "Recommended Size: 300px x 370px"
+        },
+        {
+            "type": "url",
+            "id": "sidebanner2_url",
+            "label": "URL"
+        }
+    ],
+    "presets":[
+        {
+            "name": "Side Banner2",
+            "category": "side banner2"
+        }
+    ]
+}
+{% endschema %}
+<style>
+    .side-banner2{
+        padding-top: {{ section.settings.sidebanner2_padding_top }}px;
+        padding-bottom: {{ section.settings.sidebanner2_padding_bottom }}px;
+    }
+</style>

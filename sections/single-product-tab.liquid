@@ -1,0 +1,252 @@
+{% if section.settings.product_tab_enable %}
+<section class="product-description-tab">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="tab">
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation">
+              <a class="active show" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
+                {{ section.settings.product_info_tab_title }}
+              </a>
+            </li>
+
+            {% if section.settings.product_review_tab_enable %}
+            <li role="presentation">
+              <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
+                {{ section.settings.product_review_tab_title }}
+              </a>
+            </li>
+            {% endif %}
+
+            {% if product.description contains '[product_video]' %}
+            <li role="presentation">
+              <a href="#product-video" data-toggle="tab" aria-selected="false">
+                {{ section.settings.product_video_title }}
+              </a>
+            </li>
+            {% endif %}
+
+            {% if section.settings.product_comments_enable %}
+            <li role="presentation">
+              <a href="#comment-box" data-toggle="tab" aria-selected="false">
+                {{ section.settings.product_comments_title }}
+              </a>
+            </li>
+            {% endif %}
+
+            {% assign i = 1 %}
+            {% for block in section.blocks %}
+            <li role="presentation">
+              <a href="#custom-tab-{{ i }}" data-toggle="tab" role="tab" aria-selected="false">
+                {{ block.settings.custom_tab_title }}
+              </a>
+            </li>
+            {% assign i = i | plus: 1 %}
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="description-review-text tab-content">
+          <div class="tab-pane active" id="pro-dec" role="tabpanel">
+            {%- if product.description contains '[product_description]' -%}            
+            {%- assign product_description_first = product.description | split:'[/product_description]' | first -%}
+            {%- assign product_description_final = product_description_first | split:'[product_description]' | last -%} 
+            {{ product_description_final }}
+            {%- else -%}
+            {{ product.description | split: '[short_description]' | first | split: '[product_description]' | first | split: '[new_products]' | first | split: '[product_video]' | first | split: '[affiliate_link]' | first }}
+            {%- endif -%}
+          </div>
+
+          {% if section.settings.product_review_tab_enable %}
+          <div class="tab-pane" id="pro-review" role="tabpanel">
+            <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+          </div>
+          {% endif %}  
+
+          {% if product.description contains '[product_video]' %}
+          <div class="tab-pane" id="product-video" role="tabpanel">                
+            {% assign product_video_first = product.description | split:'[/product_video]' | first %}
+            {% assign product_video_final = product_video_first | split:'[product_video]' | last %}
+            <div class="youtube-video">
+              {{ product_video_final }}
+            </div>
+          </div>
+          {% endif %}
+          
+          {% if section.settings.product_comments_enable %}
+          <div role="tabpanel" class="tab-pane" id="comment-box">
+            <div class="fb-comment-box">
+              <!-- facebook comment box start -->
+              {% if section.settings.product_page_comments_box == 'facebook_comment' %}
+              {% include 'facebook-comment' %}
+              {% include 'facebook-comment-box-script' %}
+              {% endif %}
+              <!-- facebook comment box end -->
+            </div>
+          </div>
+          {% endif %}
+
+          {% assign i = 1 %}
+          {% for block in section.blocks %}
+          <div class="tab-pane" id="custom-tab-{{ i }}" role="tabpanel">
+            {{ pages[block.settings.custom_tab_handle].content }}
+          </div>
+          {% assign i = i | plus: 1 %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+
+
+
+{% schema %}
+{
+  "name": "Information Tab",
+  "settings": [
+  {
+    "type": "checkbox",
+    "id": "product_tab_enable",
+    "label": "Show Product Tab Section",
+    "default": true
+  },
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "product_detail_tab_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "range",
+    "id": "product_detail_tab_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "header",
+    "content": "Description Tab"
+  },
+  {
+    "type": "text",
+    "id": "product_info_tab_title",
+    "label": "Description Title",
+    "default": "Description"
+  },
+  {
+    "type": "header",
+    "content": "Review Tab"
+  },
+  {
+    "type": "checkbox",
+    "id": "product_review_tab_enable",
+    "label": "Show Product Review",
+    "info": "Install Free Apps for Product Review [Click Here](https:\/\/apps.shopify.com\/product-reviews)",
+    "default": true
+  },
+  {
+    "type": "text",
+    "id": "product_review_tab_title",
+    "label": "Title",
+    "default": "Reviews"
+  },
+  {
+    "type": "header",
+    "content": "Product Video Tab"
+  },
+  {
+    "type": "text",
+    "id": "product_video_title",
+    "label": "Title",
+    "default": "Video",
+    "info": "Use shortcode for show product video. Ex: [product_video]RmJLi7ikMXk[/product_video]"
+  },
+  {
+    "type": "header",
+    "content": "Comments"
+  },
+  {
+    "type": "checkbox",
+    "id": "product_comments_enable",
+    "label": "Show Comment",
+    "default": true
+  },
+  {
+    "type": "text",
+    "id": "product_comments_title",
+    "label": "Comments Title",
+    "default": "Comments"
+  },
+  {
+    "type": "radio",
+    "id": "product_page_comments_box",
+    "label": "Select comments box",
+    "options": [
+    {
+      "value": "disqus_comment",
+      "label": "Disqus comments"
+    },
+    {
+      "value": "facebook_comment",
+      "label": "Facebook comments"
+    }
+    ],
+    "default": "facebook_comment"
+  },
+  {
+    "type": "text",
+    "id": "facebook_comments_post_limit",
+    "label": "FacebooK Comment Limit",
+    "default": "10"
+  },
+  {
+    "type": "text",
+    "id": "disqus_shortname",
+    "label": "Your Store Name",
+    "default": "demo-store",
+    "info": "Disqus Shortname (Get your shortname)[disqus.com](http:\/\/disqus.com)"
+  }
+  ],
+  "blocks": [
+  {
+    "name": "Custom Tab",
+    "type": "custom_tab",
+    "settings": [
+    {
+      "type": "text",
+      "id": "custom_tab_title",
+      "label": "Tab Title",
+      "default": "Tab Title"
+    },
+    {
+      "type": "page",
+      "id": "custom_tab_handle",
+      "label": "Select Page for information",
+      "info": "[Create a page](\/admin\/pages\/new)"
+    }
+    ]
+  }
+  ]
+}
+{% endschema %}
+<style>
+  .product-description-tab {
+    padding-top: {{ section.settings.product_detail_tab_padding_top }}px;
+    padding-bottom: {{ section.settings.product_detail_tab_padding_bottom }}px;
+  }
+</style>

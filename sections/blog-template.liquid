@@ -1,0 +1,270 @@
+<section class="blog-content-wrap section-ptb">
+  <div class="container">
+    <div class="row {% if section.settings.blog_news_sidebar_handle == 'left_sidebar_handle' %}left-wrap{% elsif section.settings.blog_news_sidebar_handle == 'right_sidebar_handle' %}right-wrap{% endif %}">
+
+      {%- assign blogs_limit = section.settings.blog_news_limit_handle -%}
+      {%- paginate blog.articles by blogs_limit -%}
+      <div class="{% if section.settings.blog_news_sidebar_handle == 'without_sidebar' %}col{% else %}col-xl-9 col-lg-8 col-md-8 blog-grid-wrap{% endif %}">
+        <ul class="single-blog-area">
+          {% for article in blog.articles %}
+          <li class="blog-slider">
+            {% include 'blog-grid-item' %}
+          </li>
+          {% endfor %}
+        </ul>
+        <div class="paginatoin-area">
+          <ul class="paginate">
+            {% if section.settings.showing_blog_counter_enable %}
+            <li class="page-numerous">
+              {%- assign paginate_checker = paginate.current_page | times: blogs_limit -%}
+              {%- if paginate.items > paginate_checker -%}
+              {%- assign paginate_final = paginate_checker -%}
+              {%- else -%}
+              {%- assign paginate_final = paginate.items -%}
+              {%- endif -%}
+              {% assign showing_title = section.settings.showing_title_handle | split: "|" %}
+              <p>
+                {{ showing_title | slice: 0 }}
+                {{ paginate.current_offset | plus: 1 }} - {{ paginate_final }}
+                {{ showing_title | slice: 1 }}
+                {{ paginate.items }}
+                {{ showing_title | slice: 2 }}
+              </p>
+            </li>
+            {% endif %}
+            {% if paginate.pages > 1 %}
+            <li class="page-numerous">
+              {%- include 'pagination' -%}
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+      {%- endpaginate -%}
+      {%- unless section.settings.blog_news_sidebar_handle == 'without_sidebar' -%}
+      <div class="col-xl-3 col-lg-4 col-md-4 col-12 blog-grid-wrap">
+        {% include 'blog-sidebar' %}
+      </div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Blog Page",
+  "settings": [
+  {
+    "type": "range",
+    "id": "blog_news_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "blog_news_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 200,
+    "step": 2,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "select",
+    "id": "blog_news_column",
+    "label": "Post Column",
+    "options":[
+    {
+      "label": "2 Blogs",
+      "value": "6"
+    },
+    {
+      "label": "3 Blogs",
+      "value": "4"
+    }
+    ],
+    "default": "6"
+  },
+  {
+    "type": "text",
+    "id": "blog_news_limit_handle",
+    "label": "Post Limit",
+    "default": "6",
+    "info": "How many posts will appear on each page"
+  },
+  {
+    "type" : "header",
+    "content" : "After Opacity"
+  },
+  {
+    "type": "range",
+    "id": "blog_news_after_opacity",
+    "min": 0,
+    "max": 1,
+    "step": 0.1,
+    "label": "Banner Overlay Color Opacity",
+    "default": 0.8
+  },
+  {
+    "type": "text",
+    "id": "blog_news_through",
+    "label": "Through",
+    "default": "By"
+  },
+  {
+    "type": "text",
+    "id": "blog_news_read_btn",
+    "label": "Button Text",
+    "default": "Read More"
+  },
+  {
+    "type": "text",
+    "id": "blog_news_cmt",
+    "label": "Comment",
+    "default": "Comment"
+  },
+  {
+    "type": "header",
+    "content": "Blog Sidebar"
+  },
+  {
+    "type": "radio",
+    "id": "blog_news_sidebar_handle",
+    "label": "Sidebar Position",
+    "options": [
+    {
+      "label": "Left Sidebar",
+      "value": "left_sidebar_handle"
+    },
+    {
+      "label": "Right Sidebar",
+      "value": "right_sidebar_handle"
+    },
+    {
+      "label": "Without Sidebar",
+      "value": "without_sidebar"
+    }
+    ],
+    "default": "left_sidebar_handle"
+  },
+  {
+    "type": "checkbox",
+    "id": "showing_blog_counter_enable",
+    "label": "Show Blog Counter",
+    "default": true
+  },
+  {
+    "type": "text",
+    "id": "showing_title_handle",
+    "label": "Showing Title",
+    "default": "Showing | of | result"
+  },
+  {
+    "type": "paragraph",
+    "content": "Sidebar List"
+  },
+  {
+    "type": "checkbox",
+    "id": "blog_search_bar_enable",
+    "label": "Show Searchbar",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "recent_post_enable",
+    "label": "Show Recent Posts",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "archive_enable",
+    "label": "Show Archive",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "tags_enable",
+    "label": "Show Tags",
+    "default": true
+  }
+  ]
+}
+{% endschema %}
+<style>
+
+  .blog-content-wrap ul.single-blog-area li::after{
+    content: "";
+    opacity: {{ section.settings.blog_news_after_opacity }};
+  }
+
+  {% if section.settings.blog_news_sidebar_handle == 'left_sidebar_handle' or section.settings.blog_news_sidebar_handle == 'right_sidebar_handle' or section.settings.blog_news_column == '6' %}
+  .blog-content-wrap ul.single-blog-area li{
+    width: calc(50% - 30px);
+  }
+  .blog-content-wrap ul.single-blog-area li:nth-child(1),
+  .blog-content-wrap ul.single-blog-area li:nth-child(2){
+    margin-top: 0px;
+  }
+
+  @media (max-width : 991px){
+    .blog-content-wrap ul.single-blog-area li{
+      width: calc(100% - 30px);
+    }
+    .blog-content-wrap ul.single-blog-area li:nth-child(2){
+      margin-top: 30px;
+    }
+  }
+  @media (max-width : 767px){
+    .blog-content-wrap ul.single-blog-area li:nth-child(2){
+      margin-top: 20px;
+    }
+  }
+  {% endif %}
+
+  {% if section.settings.blog_news_sidebar_handle == 'without_sidebar' or section.settings.blog_news_column == '4' %}
+  .blog-content-wrap ul.single-blog-area li{
+    width: calc(33.33% - 30px);
+  }
+  .blog-content-wrap ul.single-blog-area li:nth-child(1),
+  .blog-content-wrap ul.single-blog-area li:nth-child(2),
+  .blog-content-wrap ul.single-blog-area li:nth-child(3){
+    margin-top: 0px;
+  }
+  @media (max-width : 991px){
+    .blog-content-wrap ul.single-blog-area li{
+      width: calc(50% - 30px);
+    }
+    .blog-content-wrap ul.single-blog-area li:nth-child(3){
+      margin-top: 30px;
+    }
+  }
+  @media (max-width : 767px){
+    .blog-content-wrap ul.single-blog-area li:nth-child(2),
+    .blog-content-wrap ul.single-blog-area li:nth-child(3){
+      margin-top: 20px;
+    }
+  }
+  {% endif %}
+
+  @media (max-width : 767px){
+    .blog-content-wrap ul.single-blog-area{
+      {%- if settings.enable_rtl -%}
+      margin-right: -15px;
+      {%- else -%}
+      margin-left: -15px;
+      {%- endif -%}
+    }
+    .blog-content-wrap ul.single-blog-area li{
+      width: calc(100% - 15px);
+       {%- if settings.enable_rtl -%}
+      margin: 20px 15px 0 0;
+      {%- else -%}
+      margin: 20px 0 0 15px;
+      {%- endif -%}
+    }
+  }
+</style>

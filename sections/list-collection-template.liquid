@@ -1,0 +1,76 @@
+<!-- shop start -->
+<section class="list-product-collection">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="grid grid-gallery">
+            <ul class="masonry-items work-gallery grid collectio-content">
+              {% for collection in collections %}
+              {% unless collection.handle == 'frontpage' %}
+              {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+              {% assign collection =  collection.object %}
+              {% if collection.image %}
+              <li class="weight-lifting body-building xs-no-padding wow fadeInUp">
+                <div class="img-block">
+                  <figure>
+                    <img src="{{ collection.image.src | collection_img_url: master  }}" alt="{{ collection.image.alt }}" />
+                  </figure>
+                  <a href="{{ collection.url }}">
+                    <h3 class="title">{{ collection_title }}</h3>
+                    <h4 class="title-total">({{ collection.all_products_count }}) Items</h4>
+                    <span class="button">{{ section.settings.collcetions_btn }}</span>
+                  </a>
+                </div>
+              </li>
+              {% endif %}
+              {% endunless %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+{% schema %}
+{
+  "name": "All Collection List",
+  "settings": [
+    {
+      "type" : "header",
+      "content" : "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "collections_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "collections_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "text",
+      "id": "collcetions_btn",
+      "label": "Button Title",
+      "default": "Shop Now"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .list-product-collection{
+    padding-top:{{ section.settings.collections_padding_top }}px;
+    padding-bottom:{{ section.settings.collections_padding_bottom }}px;
+  }
+</style>

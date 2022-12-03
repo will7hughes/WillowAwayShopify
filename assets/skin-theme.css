@@ -1,0 +1,111 @@
+/* Newsletter PopUp */
+.popup_wrapper .modal-body button.close{
+  color: #ffffff;
+  background-color: #1b5e20;
+}
+.popup_wrapper .modal-body button.close:hover{
+  color: #fff;
+  background-color: #1e1e1e;
+}
+.newsletter-info .subscribe_area .subscribe-heading h2{
+  color: #333333;
+}
+.newsletter-info .subscribe_area .popup-newsletter .news-content .subscribe-block input::-webkit-input-placeholder,
+.newsletter-info .subscribe_area .popup-newsletter .news-content .subscribe-block input::-moz-placeholder,
+.newsletter-info .subscribe_area .popup-newsletter .news-content .subscribe-block input::-ms-input-placeholder,
+.newsletter-info .subscribe_area .popup-newsletter .news-content .subscribe-block input::placeholder{
+  color: #000000;
+}
+
+/* Breadcurmb Banner */
+.breadcrumb-area {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.breadcrumb-area {
+  background: #fafafa  !important;
+    }
+.breadcrumb-area::before {
+  background-color: #000000;
+  opacity: 0;
+}
+@media (max-width: 767px) {
+  .breadcrumb-area {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+.breadcrumb-title {
+  color: #717171;
+}
+.breadcrumb-list > li > a {
+  color: #717171;
+}
+.breadcrumb-list > li::before {
+  color: #717171;
+}
+
+/* Top Bar Noticfication */ 
+
+/* Typography */
+
+
+
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_n4.934accbf9f5987aa89334210e6c1e9151f37d3b6.woff2?h1=d2lsbG93YXdheS5jb20&hmac=70ae8c6300b3f62065546b221f9b6e3563ae5759dc57820894be19719cd34eca") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_n4.ee28d4489eaf5de9cf6e17e696991b5e9148c716.woff?h1=d2lsbG93YXdheS5jb20&hmac=e3ad23be0c5b818114cb1b175f56c9475ea101c2ab3cca32e9405fe1d4a6d738") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_n4.934accbf9f5987aa89334210e6c1e9151f37d3b6.woff2?h1=d2lsbG93YXdheS5jb20&hmac=70ae8c6300b3f62065546b221f9b6e3563ae5759dc57820894be19719cd34eca") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_n4.ee28d4489eaf5de9cf6e17e696991b5e9148c716.woff?h1=d2lsbG93YXdheS5jb20&hmac=e3ad23be0c5b818114cb1b175f56c9475ea101c2ab3cca32e9405fe1d4a6d738") format("woff");
+}
+
+@font-face {
+  font-family: Poppins;
+  font-weight: 400;
+  font-style: normal;
+  src: url("https://fonts.shopifycdn.com/poppins/poppins_n4.934accbf9f5987aa89334210e6c1e9151f37d3b6.woff2?h1=d2lsbG93YXdheS5jb20&hmac=70ae8c6300b3f62065546b221f9b6e3563ae5759dc57820894be19719cd34eca") format("woff2"),
+       url("https://fonts.shopifycdn.com/poppins/poppins_n4.ee28d4489eaf5de9cf6e17e696991b5e9148c716.woff?h1=d2lsbG93YXdheS5jb20&hmac=e3ad23be0c5b818114cb1b175f56c9475ea101c2ab3cca32e9405fe1d4a6d738") format("woff");
+}
+
+
+/* Custom Page */
+.section-ptb {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+@media (max-width: 767px) {
+  .section-ptb {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+.create-page, .theme-default-margin{
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+@media (max-width: 767px) {
+  .create-page, .theme-default-margin{
+    margin-top: 70px;
+    margin-bottom: 70px;
+  }
+}
+/* End Custom Page */
+
+/* title background image */
+
+
+/* footer background image */
+.footer-bg{
+  
+  background-color: #fff;
+  
+}

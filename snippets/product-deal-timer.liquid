@@ -1,0 +1,65 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%}
+
+<div class="single-product-wrap">
+    <div class="{% if product.available %}product-image{% else %}product-image stock-out{% endif %}">
+        <a class="pro-img" href="{{ product.url | within: collection }}">
+            <img class="img-fluid img1 lazyload" src="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20360%20459%22%3E%3C/svg%3E" data-src="{{ product.featured_image.src | img_url : '303X353', crop: 'center' }}" alt="{{ image.alt | escape  }}">
+        </a>
+        <div class="product-label">
+            {%- include 'product-label' -%}
+        </div>
+    </div>
+    <div class="product-content">
+        <h3><a href="{{ product.url | within: collection }}" title="{{ product.title }}">{{ product.title | truncate: 30 }}</a></h3>
+
+        {%- if product.description contains '[short_description]' -%}
+        {%- assign short_description_first = product.description | split:'[/short_description]' | first -%}
+        {%- assign short_description_final = short_description_first | split:'[short_description]' | last -%}
+        <p class="product-description">{{ short_description_final | truncate: 110 }}</p>
+        {%- endif -%}
+
+        <div class="price-box">
+            <span class="new-price">{{ product.price | money }}</span>
+            {% if product.compare_at_price_max > product.price %}
+            <span class="old-price">{{ product.compare_at_price | money }}</span>
+            {% endif %}
+        </div>
+        <div class="product-ratting">
+            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        </div>
+        {% if product.description contains '[product_timer]' and product.compare_at_price_max > product.price and product.available %}
+        {% assign product_timer_first = product.description | split:'[/product_timer]' | first %}
+        {% assign product_timer_final = product_timer_first | split:'[product_timer]' | last %}
+        <div class="timer-section counter-event-{{product.id}}" id="counter-event" data-enddate="{{product_timer_final}}"></div>
+            {% endif %}
+
+            {% if product.available %}
+            <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="add-to-cart ajax-spin-cart btn btn-style2" data-toggle="tooltip" data-placement="top" title="Add to cart">
+                <span>
+                    <span class="cart-title">ADD TO CART</span>
+                    <span class="cart-loading animated infinite rotateOut"><i class="ion-load-a"></i></span>
+                    <span class="cart-added"><i class="ion-android-done"></i></span>
+                    <span class="cart-unavailable"><i class="ion-android-alert"></i></span>
+                </span>
+            </a>
+        
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    $('.counter-event-{{product.id}}').countdown($('.counter-event-{{product.id}}').attr("data-enddate")).on('update.countdown', function (event) {
+    var $this = $(this).html(event.strftime('' + '<ul class="contdown_row"><li class="countdown_section"><span id="days" class="countdown_timer">%-D</span>{% if settings.count_text_enable %}<span class="countdown_title">{{ settings.day_title }}</span>{% endif %}</li>' + '<li class="countdown_section"><span id="hours" class="countdown_timer">%H</span>{% if settings.count_text_enable %}<span class="countdown_title">{{ settings.hour_title }}</span>{% endif %}</li>' + '<li class="countdown_section"><span id="minutes" class="countdown_timer">%M</span>{% if settings.count_text_enable %}<span class="countdown_title">{{ settings.minute_title }}</span>{% endif %}</li>' + '<li class="countdown_section"><span id="seconds" class="countdown_timer">%S</span>{% if settings.count_text_enable %}<span class="countdown_title">{{ settings.second_title }}</span>{% endif %}</li></ul>'))
+    });
+</script>
