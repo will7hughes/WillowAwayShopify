@@ -14,6 +14,11 @@ Customize this theme in the Theme Editor, and use 'theme pull' to get the change
 shopify theme pull
 ```
 
+Publish changes to Shopify using 'theme push' and navigate to the development theme with 'k' - up, 'j' - down
+```
+shopify theme push
+```
+
 To upgrade Shopify CLI 3.x to the latest version ```shopify upgrade```
 
 To check your CLI version ```shopify version```
