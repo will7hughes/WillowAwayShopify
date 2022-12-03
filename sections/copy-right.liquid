@@ -1,85 +1,85 @@
 <footer class="footer-bottom-area">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <ul class="ft-bottom">
-            <li class="copy-right">
-                <p>
-                    <span>{{ section.settings.copy_right_text1 }}</span>
-                    <i class="{{ section.settings.copy_right_icon }}"></i>
-                    <span>{{ section.settings.copy_right_text2 }}</span>
-                </p>
-            </li>
-            <li class="payment-img">
-              {% include 'payment-icon' %}
-            </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<ul class="ft-bottom">
+					<li class="copy-right">
+						<p>
+							<span>{{ section.settings.copy_right_text1 }}</span>
+							<i class="{{ section.settings.copy_right_icon }}"></i>
+							<span>{{ section.settings.copy_right_text2 }}</span>
+						</p>
+					</li>
+					<li class="payment-img">
+						{% include 'payment-icon' %}
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </footer>
 <a href="javascript:void(0)" id="top" class="scroll">
-  <i class="ti-arrow-up"></i>
+	<i class="ti-arrow-up"></i>
 </a>
 {% schema %}
 {
-    "name": "Copyright",
-    "settings": [
-    {
-        "type" : "header",
-        "content" : "Copyright Text"
-    },
-    {
-        "type": "range",
-        "id": "foot_bt_padding_top",
-        "label": "Section Padding Top",
-        "min": 0,
-        "max": 30,
-        "step": 1,
-        "unit": "px",
-        "default": 15
-    },
-    {
-        "type": "range",
-        "id": "foot_bt_padding_bottom",
-        "label": "Section Padding Bottom",
-        "min": 0,
-        "max": 30,
-        "step": 1,
-        "unit": "px",
-        "default": 15
-    },
-    {
-        "type": "text",
-        "id": "copy_right_text1",
-        "label": "CopyRight Text1",
-        "default": "Copyright"
-    },
-    {
-        "type": "text",
-        "id": "copy_right_icon",
-        "label": "CopyRight Class",
-        "default": "fa fa-copyright"
-    },
-    {
-        "type": "text",
-        "id": "copy_right_text2",
-        "label": "CopyRight Text2",
-        "default": "2020 spacingtech all rights reserved"
-    }
-    ],
-    "presets":[
-    {
-        "name": "Copyright",
-        "category": "copyright"
-    }
-    ]
+	"name": "Copyright",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Copyright Text"
+		},
+		{
+			"type": "range",
+			"id": "foot_bt_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 30,
+			"step": 1,
+			"unit": "px",
+			"default": 15
+		},
+		{
+			"type": "range",
+			"id": "foot_bt_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 30,
+			"step": 1,
+			"unit": "px",
+			"default": 15
+		},
+		{
+			"type": "text",
+			"id": "copy_right_text1",
+			"label": "CopyRight Text1",
+			"default": "Copyright"
+		},
+		{
+			"type": "text",
+			"id": "copy_right_icon",
+			"label": "CopyRight Class",
+			"default": "fa fa-copyright"
+		},
+		{
+			"type": "text",
+			"id": "copy_right_text2",
+			"label": "CopyRight Text2",
+			"default": "2020 spacingtech all rights reserved"
+		}
+	],
+	"presets": [
+		{
+			"name": "Copyright",
+			"category": "copyright"
+		}
+	]
 }
 {% endschema %}
 
 <style>
-  .footer-bottom-area {
-    padding-top:{{ section.settings.foot_bt_padding_top }}px;
-    padding-bottom:{{ section.settings.foot_bt_padding_bottom }}px;
-  }
+	.footer-bottom-area {
+	  padding-top:{{ section.settings.foot_bt_padding_top }}px;
+	  padding-bottom:{{ section.settings.foot_bt_padding_bottom }}px;
+	}
 </style>

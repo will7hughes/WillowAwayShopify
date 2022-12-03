@@ -1,34 +1,34 @@
 <section class="page-not-found section-ptb">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="search-error-wrapper">
-          {% if settings.opps_404 %}
-            <img src="{{ settings.opps_404 | img_url: '1024x1024' }}" alt="" />
-          {% endif %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="search-error-wrapper">
+					{% if settings.opps_404 %}
+						<img src="{{ settings.opps_404 | img_url: '1024x1024' }}" alt="">
+					{% endif %}
 
-          <h1>
-            <span>{{ settings.heading_4041 }}</span>
-            <span>{{ settings.heading_4042 }}</span>
-            <span>{{ settings.heading_4043 }}</span>
-          </h1>
+					<h1>
+						<span>{{ settings.heading_4041 }}</span>
+						<span>{{ settings.heading_4042 }}</span>
+						<span>{{ settings.heading_4043 }}</span>
+					</h1>
 
-          <h2>
-            <span>{{ settings.sub_text_4041 }}</span>
-            <span>{{ settings.sub_text_4042 }}</span>
-            <span>{{ settings.sub_text_4043 }}</span>
-            <span>{{ settings.sub_text_4044 }}</span>
-          </h2>
-          
-          {% if settings.desc_text_404 !='' %}
-          <p class="home-link">{{ settings.desc_text_404 }}</p>
-          {% endif %}
+					<h2>
+						<span>{{ settings.sub_text_4041 }}</span>
+						<span>{{ settings.sub_text_4042 }}</span>
+						<span>{{ settings.sub_text_4043 }}</span>
+						<span>{{ settings.sub_text_4044 }}</span>
+					</h2>
 
-		      {% if settings.button_title !='' %}
-          <a href="{{ settings.button_url }}" data-text="{{ settings.button_title }}" >{{ settings.button_title }}</a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
+					{% if settings.desc_text_404 != '' %}
+						<p class="home-link">{{ settings.desc_text_404 }}</p>
+					{% endif %}
+
+					{% if settings.button_title != '' %}
+						<a href="{{ settings.button_url }}" data-text="{{ settings.button_title }}">{{ settings.button_title }}</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

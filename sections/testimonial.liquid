@@ -1,269 +1,274 @@
 <!-- testimonial-area start -->
-<section class="testimonial-area" {% if section.settings.testi_bg_img_check %}style="background-image: url('{% if section.settings.testi_bg_img %}{{ section.settings.testi_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x194{% endif %}');"{% endif %}>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        {% if section.settings.testi_title !='' %}
-        <div class="section-capture">
-          <div class="section-title">
-            {% if section.settings.testi_title !='' %}
-            <h2>{{ section.settings.testi_title }}</h2>
-            {% endif %}
-            {% if section.settings.testi_desc !='' %}
-            <p>{{ section.settings.testi_desc }}</p>
-            {% endif %}
-          </div>
-        </div>
-        {% endif %}
-        <div class="testimonial-slider owl-carousel owl-theme" id="testimonial-slider">
-          {% for block in section.blocks %}
-          <div class="item">
-            <div class="testi-content{% if section.settings.testi_content_position == "center" %} testi-center{% elsif section.settings.testi_content_position == "right" %} testi-right{% else %} testi-left{% endif %}">
-              <i class="{{ section.settings.testi_quote }} quote"></i>
-              <h6>{{ block.settings.testi_authrtitle }}</h6>
-              <span class="author-name">{{ block.settings.testi_authrname }}</span>
-              <p>{{ block.settings.testi_desc }}</p>
-              {% comment %}
-              <div class="author-detail">
-                <span class="author-review">
-                  {% if block.settings.testi_review1 !='' %}
-                  <i class="{{ block.settings.testi_review1 }}"></i>
-                  {% endif %}
-                  {% if block.settings.testi_review2 !='' %}
-                  <i class="{{ block.settings.testi_review2 }}"></i>
-                  {% endif %}
-                  {% if block.settings.testi_review3 !='' %}
-                  <i class="{{ block.settings.testi_review3 }}"></i>
-                  {% endif %}
-                  {% if block.settings.testi_review4 !='' %}
-                  <i class="{{ block.settings.testi_review4 }}"></i>
-                  {% endif %}
-                  {% if block.settings.testi_review5 !='' %}
-                  <i class="{{ block.settings.testi_review5 }}"></i>
-                  {% endif %}
-                </span>
-              </div>
-              {% endcomment %}
-            </div>            
-          </div>
-          {%- endfor -%}
-        </div>
-      </div>
-    </div>
-  </div>
+<section
+	class="testimonial-area"
+	{% if section.settings.testi_bg_img_check %}
+		style="background-image: url('{% if section.settings.testi_bg_img %}{{ section.settings.testi_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x194{% endif %}');"
+	{% endif %}
+>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				{% if section.settings.testi_title != '' %}
+					<div class="section-capture">
+						<div class="section-title">
+							{% if section.settings.testi_title != '' %}
+								<h2>{{ section.settings.testi_title }}</h2>
+							{% endif %}
+							{% if section.settings.testi_desc != '' %}
+								<p>{{ section.settings.testi_desc }}</p>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+				<div class="testimonial-slider owl-carousel owl-theme" id="testimonial-slider">
+					{% for block in section.blocks %}
+						<div class="item">
+							<div class="testi-content{% if section.settings.testi_content_position == "center" %} testi-center{% elsif section.settings.testi_content_position == "right" %} testi-right{% else %} testi-left{% endif %}">
+								<i class="{{ section.settings.testi_quote }} quote"></i>
+								<h6>{{ block.settings.testi_authrtitle }}</h6>
+								<span class="author-name">{{ block.settings.testi_authrname }}</span>
+								<p>{{ block.settings.testi_desc }}</p>
+								{% comment %}
+									<div class="author-detail">
+									  <span class="author-review">
+									    {% if block.settings.testi_review1 !='' %}
+									    <i class="{{ block.settings.testi_review1 }}"></i>
+									    {% endif %}
+									    {% if block.settings.testi_review2 !='' %}
+									    <i class="{{ block.settings.testi_review2 }}"></i>
+									    {% endif %}
+									    {% if block.settings.testi_review3 !='' %}
+									    <i class="{{ block.settings.testi_review3 }}"></i>
+									    {% endif %}
+									    {% if block.settings.testi_review4 !='' %}
+									    <i class="{{ block.settings.testi_review4 }}"></i>
+									    {% endif %}
+									    {% if block.settings.testi_review5 !='' %}
+									    <i class="{{ block.settings.testi_review5 }}"></i>
+									    {% endif %}
+									  </span>
+									</div>
+								{% endcomment %}
+							</div>
+						</div>
+					{%- endfor -%}
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- testimonial-area end -->
 
 <script>
-  $('#testimonial-slider').owlCarousel({
-    loop: false,
-    rewind: true,
-    nav: false,
-    items: 1,
-    margin: 30,
-    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    {%- if settings.enable_rtl -%}
-    rtl: true,
-    {%- endif -%}
-    responsive:{
-      0:{
-        items: 1,
-        margin: 15
-      },
-      479:{
-        items: 1,
-        margin: 15
-      },
-      768:{
-        items: 2
-      },
-      979:{
-        items: 1
-      },
-      1199:{
-        items: 1
-      }
-    }
-  });
+	$('#testimonial-slider').owlCarousel({
+	  loop: false,
+	  rewind: true,
+	  nav: false,
+	  items: 1,
+	  margin: 30,
+	  navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+	  {%- if settings.enable_rtl -%}
+	  rtl: true,
+	  {%- endif -%}
+	  responsive:{
+	    0:{
+	      items: 1,
+	      margin: 15
+	    },
+	    479:{
+	      items: 1,
+	      margin: 15
+	    },
+	    768:{
+	      items: 2
+	    },
+	    979:{
+	      items: 1
+	    },
+	    1199:{
+	      items: 1
+	    }
+	  }
+	});
 </script>
 {% schema %}
 {
-  "name": "Testimonial",
-  "settings": [
-  {
-    "type": "range",
-    "id": "testi_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 30
-  },
-  {
-    "type": "range",
-    "id": "testi_padding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 30
-  },
-    {
-    "type" : "checkbox",
-    "id" : "our_ser_check",
-    "label" : "With Backgorund",
-    "default" : true
-  },
-  {
-    "type" : "color",
-    "id" : "our_ser_bgcolor",
-    "label" : "Background Color",
-    "default" : "#fff"
-  },
-  {
-    "type": "image_picker",
-    "id": "testi_bg_img",
-    "label": "Backgorund Image",
-    "info": "Recommended Size: 1920px x 194px"
-  },
-  {
-    "type" : "checkbox",
-    "id" : "testi_bg_img_check",
-    "label" : "Show Backgorund Images",
-    "default" : true
-  },
-  {
-    "type": "text",
-    "id": "testi_title",
-    "label": "Section Title",
-    "default": "Customer Love"
-  },
-  {
-    "type": "text",
-    "id": "testi_desc",
-    "label": "Section Description",
-    "default": "Hot trend for this week"
-  },
-  {
-    "type": "radio",
-    "id": "testi_content_position",
-    "label": "Content Position",
-    "options": [
-    {
-      "label": "left",
-      "value": "left"
-    },
-    {
-      "label": "Center",
-      "value": "center"
-    },
-    {
-      "label": "Right",
-      "value": "right"
-    }
-    ],
-    "default": "center"
-  },
-  {
-    "type": "text",
-    "id": "testi_quote",
-    "label": "Content Icon",
-    "default": "fa fa-quote-left"
-  }
-  ],
-  "blocks":[
-  {
-    "type": "single_slide",
-    "name": "Testimonial Items",
-    "settings": [
-    {
-      "type": "text",
-      "id": "testi_authrtitle",
-      "label": "Reviewer title",
-      "default": "Innovatory Themes"
-    },
-    {
-      "type": "text",
-      "id": "testi_authrname",
-      "label": "Reviewer Name",
-      "default": "Wed Censtoriya"
-    },
-    {
-      "type": "textarea",
-      "id": "testi_desc",
-      "label": "Review Content",
-      "default": "Make a type specimen book. It has survived not only five centuries, but also the leap into eIt was make a"
-    },
-    {
-      "type": "text",
-      "id": "testi_review1",
-      "label": "Review Icon"
-    },
-    {
-      "type": "text",
-      "id": "testi_review2",
-      "label": "Review Icon"
-    },
-    {
-      "type": "text",
-      "id": "testi_review3",
-      "label": "Review Icon"
-    },
-    {
-      "type": "text",
-      "id": "testi_review4",
-      "label": "Review Icon"
-    },
-    {
-      "type": "text",
-      "id": "testi_review5",
-      "label": "Review Icon"
-    }
-    ]
-  }
-  ],
-  "presets":[
-  {
-    "name": "Testimonial",
-    "category": "7. Testimonial"
-  }
-  ]
+	"name": "Testimonial",
+	"settings": [
+		{
+			"type": "range",
+			"id": "testi_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 30
+		},
+		{
+			"type": "range",
+			"id": "testi_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 30
+		},
+		{
+			"type": "checkbox",
+			"id": "our_ser_check",
+			"label": "With Backgorund",
+			"default": true
+		},
+		{
+			"type": "color",
+			"id": "our_ser_bgcolor",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "image_picker",
+			"id": "testi_bg_img",
+			"label": "Backgorund Image",
+			"info": "Recommended Size: 1920px x 194px"
+		},
+		{
+			"type": "checkbox",
+			"id": "testi_bg_img_check",
+			"label": "Show Backgorund Images",
+			"default": true
+		},
+		{
+			"type": "text",
+			"id": "testi_title",
+			"label": "Section Title",
+			"default": "Customer Love"
+		},
+		{
+			"type": "text",
+			"id": "testi_desc",
+			"label": "Section Description",
+			"default": "Hot trend for this week"
+		},
+		{
+			"type": "radio",
+			"id": "testi_content_position",
+			"label": "Content Position",
+			"options": [
+				{
+					"label": "left",
+					"value": "left"
+				},
+				{
+					"label": "Center",
+					"value": "center"
+				},
+				{
+					"label": "Right",
+					"value": "right"
+				}
+			],
+			"default": "center"
+		},
+		{
+			"type": "text",
+			"id": "testi_quote",
+			"label": "Content Icon",
+			"default": "fa fa-quote-left"
+		}
+	],
+	"blocks": [
+		{
+			"type": "single_slide",
+			"name": "Testimonial Items",
+			"settings": [
+				{
+					"type": "text",
+					"id": "testi_authrtitle",
+					"label": "Reviewer title",
+					"default": "Innovatory Themes"
+				},
+				{
+					"type": "text",
+					"id": "testi_authrname",
+					"label": "Reviewer Name",
+					"default": "Wed Censtoriya"
+				},
+				{
+					"type": "textarea",
+					"id": "testi_desc",
+					"label": "Review Content",
+					"default": "Make a type specimen book. It has survived not only five centuries, but also the leap into eIt was make a"
+				},
+				{
+					"type": "text",
+					"id": "testi_review1",
+					"label": "Review Icon"
+				},
+				{
+					"type": "text",
+					"id": "testi_review2",
+					"label": "Review Icon"
+				},
+				{
+					"type": "text",
+					"id": "testi_review3",
+					"label": "Review Icon"
+				},
+				{
+					"type": "text",
+					"id": "testi_review4",
+					"label": "Review Icon"
+				},
+				{
+					"type": "text",
+					"id": "testi_review5",
+					"label": "Review Icon"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Testimonial",
+			"category": "7. Testimonial"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .testimonial-area {
-    padding-top: {{ section.settings.testi_padding_top }}px;
-    padding-bottom: {{ section.settings.testi_padding_bottom }}px;
+	.testimonial-area {
+	  padding-top: {{ section.settings.testi_padding_top }}px;
+	  padding-bottom: {{ section.settings.testi_padding_bottom }}px;
 
-    {% if section.settings.our_ser_check %}
-    background-color: {{ section.settings.our_ser_bgcolor }};
-    {% endif %}
+	  {% if section.settings.our_ser_check %}
+	  background-color: {{ section.settings.our_ser_bgcolor }};
+	  {% endif %}
 
-    {% if section.settings.testi_bg_img_check %}
-    background-repeat: no-repeat;
-    background-position: bottom
-    {% endif %}
-  }
-  .testimonial-slider .testi-content.testi-center{
-    text-align: center;
-  }
-  .testimonial-slider .testi-content.testi-right{
-    text-align: right;
-  }
-  .testimonial-slider .testi-content.testi-left{
-    text-align: left;
-  }
-  .testimonial-slider .testi-content i.quote{
-    font-size: 46px;
-    display: block;
-    color: #e6e6e6;
-  }
-  @media (max-width: 767px){
-    .testimonial-area {
-      padding-top: 40px;
-      padding-bottom: 40px;
-    }
-  }
+	  {% if section.settings.testi_bg_img_check %}
+	  background-repeat: no-repeat;
+	  background-position: bottom
+	  {% endif %}
+	}
+	.testimonial-slider .testi-content.testi-center{
+	  text-align: center;
+	}
+	.testimonial-slider .testi-content.testi-right{
+	  text-align: right;
+	}
+	.testimonial-slider .testi-content.testi-left{
+	  text-align: left;
+	}
+	.testimonial-slider .testi-content i.quote{
+	  font-size: 46px;
+	  display: block;
+	  color: #e6e6e6;
+	}
+	@media (max-width: 767px){
+	  .testimonial-area {
+	    padding-top: 40px;
+	    padding-bottom: 40px;
+	  }
+	}
 </style>

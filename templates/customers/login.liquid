@@ -1,113 +1,143 @@
 <section class="customer-page section-ptb">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="log-acc-page" id="CustomerLoginForm">
-          <div class="acc-page">
-            <div class="login">
-              {% form 'customer_login' %}
-              {{ form.errors | default_errors }}
-              <div class="login-form-container">
-                <div class="title-text">
-                  <h2>{{ 'customer.login.title' | t }}</h2>
-                  {%- if settings.login_sub_text != '' -%}
-                  <p>{{ settings.login_sub_text }}</p>
-                  {%- endif -%}
-                </div>
-                <ul class="fill-form">
-                  <li class="log-email">
-                    <label for="Email">{{ 'customer.login.email' | t }}</label>
-                    <input type="email" name="customer[email]" id="CustomerEmail" class="input-full{% if form.errors contains 'email' %} error{% endif %}" placeholder="{{ 'customer.login.email' | t }}" autocorrect="off" autocapitalize="off" autofocus>
-                  </li>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="log-acc-page" id="CustomerLoginForm">
+					<div class="acc-page">
+						<div class="login">
+							{% form 'customer_login' %}
+								{{ form.errors | default_errors }}
+								<div class="login-form-container">
+									<div class="title-text">
+										<h2>{{ 'customer.login.title' | t }}</h2>
+										{%- if settings.login_sub_text != '' -%}
+											<p>{{ settings.login_sub_text }}</p>
+										{%- endif -%}
+									</div>
+									<ul class="fill-form">
+										<li class="log-email">
+											<label for="Email">{{ 'customer.login.email' | t }}</label>
+											<input
+												type="email"
+												name="customer[email]"
+												id="CustomerEmail"
+												class="input-full{% if form.errors contains 'email' %} error{% endif %}"
+												placeholder="{{ 'customer.login.email' | t }}"
+												autocorrect="off"
+												autocapitalize="off"
+												autofocus
+											>
+										</li>
 
-                  {% if form.password_needed %}
-                  <li class="log-pwd">
-                    <label>{{ 'customer.login.password' | t }}</label>
-                    <input type="password" value="" name="customer[password]" id="CustomerPassword" class="input-full{% if form.errors contains 'password' %} error{% endif %}" placeholder="{{ 'customer.login.password' | t }}">
-                  </li>
-                  {% endif %}
+										{% if form.password_needed %}
+											<li class="log-pwd">
+												<label>{{ 'customer.login.password' | t }}</label>
+												<input
+													type="password"
+													value=""
+													name="customer[password]"
+													id="CustomerPassword"
+													class="input-full{% if form.errors contains 'password' %} error{% endif %}"
+													placeholder="{{ 'customer.login.password' | t }}"
+												>
+											</li>
+										{% endif %}
 
-                  <li class="form-toggle-btn">
-                    <div class="form-action-button">
-                      <button class="btn btn-style" type="submit">{{ 'customer.login.sign_in' | t }}</button>
-                      {% if form.password_needed %}
-                      <a href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
-                      {% endif %}
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              {% endform %}
-            </div>
-          </div>
-          <div class="acc-page">
-            <div class="side-form-wrap">
-              <div class="acc-title">
-                <h6>{{ settings.dnt_acc_title }}</h6>
-                <div class="account-optional-action">
-                  {{ 'layout.customer.create_account' | t | customer_register_link }}
-                </div>
-              </div>
-              <div class="term-privacy">
-                <p class="term-con">
-                  <span><sup>{{ settings.log_term_con_syn }}</sup></span>
-                  <a href="{{ settings.log_term_con_url }}" target="_blank">{{ settings.log_term_con_text }}</a>
-                </p>
-                <p class="pri-pol">
-                  <span>{{ settings.log_pri_pol_desc }}<a href="{{ settings.log_pri_pol_url }}" target="_blank">{{ settings.log_pri_pol_text }}</a></span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="log-acc-page" id="RecoverPasswordForm" style="display: none;">
-          {% form 'recover_customer_password' %}
-          {{ form.errors | default_errors }}
-          {% if form.posted_successfully? %}
-          {% assign resetPassword = true %}
-          {% endif %}
-          <div class="login-form-container">
-            <div class="title-text">
-              <h2>{{ 'customer.recover_password.title' | t }}</h2>
-              <p>{{ 'customer.recover_password.subtext' | t }}</p>
-            </div>
-            <ul class="fill-form">
-              <li class="log-email">
-                <label for="Email">{{ 'customer.login.email' | t }}</label>
-                <input type="email" value="" name="email" id="RecoverEmail" class="input-full" placeholder="{{ 'customer.recover_password.email' | t }}" autocorrect="off" autocapitalize="off">
-              </li>
-              <li class="form-toggle-btn">
-                <div class="form-action-button">
-                  <button type="submit">{{ 'customer.recover_password.submit' | t }}</button>
-                  <a href="#" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-          {% endform %}
-        </div>
-        {% if shop.checkout.guest_login %}
-        <div class="log-acc-page" id="guest-login">
-          <div class="login-form-container">
-            <div class="title-text">
-              <h2>{{ 'customer.login.guest_title' | t }}</h2>
-              {% form 'guest_login' %}
-              <input type="submit" value="{{ 'customer.login.guest_continue' | t }}">
-              {% endform %}
-            </div>
-          </div>
-        </div>
-        {% endif %}
-      </div>
-    </div>
-  </div>
+										<li class="form-toggle-btn">
+											<div class="form-action-button">
+												<button class="btn btn-style" type="submit">{{ 'customer.login.sign_in' | t }}</button>
+												{% if form.password_needed %}
+													<a href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
+												{% endif %}
+											</div>
+										</li>
+									</ul>
+								</div>
+							{% endform %}
+						</div>
+					</div>
+					<div class="acc-page">
+						<div class="side-form-wrap">
+							<div class="acc-title">
+								<h6>{{ settings.dnt_acc_title }}</h6>
+								<div class="account-optional-action">
+									{{ 'layout.customer.create_account' | t | customer_register_link }}
+								</div>
+							</div>
+							<div class="term-privacy">
+								<p class="term-con">
+									<span
+										><sup>{{ settings.log_term_con_syn }}</sup></span
+									>
+									<a href="{{ settings.log_term_con_url }}" target="_blank">{{ settings.log_term_con_text }}</a>
+								</p>
+								<p class="pri-pol">
+									<span>
+										{{- settings.log_pri_pol_desc -}}
+										<a href="{{ settings.log_pri_pol_url }}" target="_blank">{{ settings.log_pri_pol_text }}</a></span
+									>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="log-acc-page" id="RecoverPasswordForm" style="display: none;">
+					{% form 'recover_customer_password' %}
+						{{ form.errors | default_errors }}
+						{% if form.posted_successfully? %}
+							{% assign resetPassword = true %}
+						{% endif %}
+						<div class="login-form-container">
+							<div class="title-text">
+								<h2>{{ 'customer.recover_password.title' | t }}</h2>
+								<p>{{ 'customer.recover_password.subtext' | t }}</p>
+							</div>
+							<ul class="fill-form">
+								<li class="log-email">
+									<label for="Email">{{ 'customer.login.email' | t }}</label>
+									<input
+										type="email"
+										value=""
+										name="email"
+										id="RecoverEmail"
+										class="input-full"
+										placeholder="{{ 'customer.recover_password.email' | t }}"
+										autocorrect="off"
+										autocapitalize="off"
+									>
+								</li>
+								<li class="form-toggle-btn">
+									<div class="form-action-button">
+										<button type="submit">{{ 'customer.recover_password.submit' | t }}</button>
+										<a href="#" id="HideRecoverPasswordLink">{{ 'customer.recover_password.cancel' | t }}</a>
+									</div>
+								</li>
+							</ul>
+						</div>
+					{% endform %}
+				</div>
+				{% if shop.checkout.guest_login %}
+					<div class="log-acc-page" id="guest-login">
+						<div class="login-form-container">
+							<div class="title-text">
+								<h2>{{ 'customer.login.guest_title' | t }}</h2>
+								{% form 'guest_login' %}
+									<input type="submit" value="{{ 'customer.login.guest_continue' | t }}">
+								{% endform %}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
 </section>
 
 <style>
-  .customer-page .log-acc-page .acc-page .side-form-wrap .acc-title a::after{
-    content: "";
-  }
-  .customer-page .log-acc-page .acc-page .side-form-wrap .acc-title a:hover::after{
-    opacity: {{ settings.acc_opacity }};
-  }
+	.customer-page .log-acc-page .acc-page .side-form-wrap .acc-title a::after{
+	  content: "";
+	}
+	.customer-page .log-acc-page .acc-page .side-form-wrap .acc-title a:hover::after{
+	  opacity: {{ settings.acc_opacity }};
+	}
 </style>

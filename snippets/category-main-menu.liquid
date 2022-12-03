@@ -1,13 +1,12 @@
 <ul class="category-main-menu">
-  {% for link in linklists.category-menu.links %}
-  {% assign child_list_handle = link.title | handleize %}
-  {% if link.type == "collection_link" %}
-  <li class="category-menu-banner">
-    <a href="{{ link.url }}">
-      <span>{{ link.title }}</span>
-    </a>
-  </li>
-  {% endif %}
-  {% endfor %}
+	{% for link in linklists['category-menu'].links %}
+		{% assign child_list_handle = link.title | handleize %}
+		{% if link.type == 'collection_link' %}
+			<li class="category-menu-banner">
+				<a href="{{ link.url }}">
+					<span>{{ link.title }}</span>
+				</a>
+			</li>
+		{% endif %}
+	{% endfor %}
 </ul>
-

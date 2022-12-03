@@ -1,227 +1,241 @@
 <!-- product-area start -->
 <div class="product-area product-tab-ptb">
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-        <div class="section-capture tab">
-          <!-- section-title start -->
-          <div class="section-title">
-            {% if section.settings.section_title !='' %}
-            <h2>{{ section.settings.section_title }}</h2>
-            {% endif %}
-            {% if section.settings.section_desc !='' %}
-            <p>{{ section.settings.section_desc }}</p>
-            {% endif %}
-            {% if settings.section_title_img %}
-            <span>
-              <img src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/232x5{% endif %}" alt="{{ section.title.image.alt }}" />
-            </span>
-            {% endif %}
-          </div>
-          <!-- section-title end -->
-          <ul class="nav nav-tabs" role="tablist">
-            {% for block in section.blocks %}
-            {% case block.type %}
-            {% when 'product_tab' %}
-            {% assign category_product = collections[block.settings.tab_product] %}
-            <li role="presentation">
-              <a class="{% if forloop.first == true %}active show{% endif %}" role="tab" data-toggle="tab" href="#tab-{{ block.id }}">{{ category_product.title }}</a>
-            </li>
-            {% endcase %}
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="tab-content tabs">
-          {% for block in section.blocks %}
-          {% case block.type %}
-          {% when 'product_tab' %}
-          <div class="tab-pane fade{% if forloop.first == true %} active show{% endif %}" id="tab-{{ block.id }}" role="tabpanel">
-            <div class="swiper-container" id="feture_pro_tab">
-              <div class="swiper-wrapper">
-                {% for product in collections[block.settings.tab_product].products %}
-                <div class="swiper-slide">
-                  {% include 'product-grid-item' %}
-                </div>
-                {% endfor %}
-              </div>
-              <div class="swiper-buttons">
-                <button class="swiper-prev"><i class="fa fa-angle-left"></i></button>
-                <button class="swiper-next"><i class="fa fa-angle-right"></i></button>
-              </div>
-            </div>
-          </div>
-          {% endcase %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+				<div class="section-capture tab">
+					<!-- section-title start -->
+					<div class="section-title">
+						{% if section.settings.section_title != '' %}
+							<h2>{{ section.settings.section_title }}</h2>
+						{% endif %}
+						{% if section.settings.section_desc != '' %}
+							<p>{{ section.settings.section_desc }}</p>
+						{% endif %}
+						{% if settings.section_title_img %}
+							<span>
+								<img
+									src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/232x5{% endif %}"
+									alt="{{ section.title.image.alt }}"
+								>
+							</span>
+						{% endif %}
+					</div>
+					<!-- section-title end -->
+					<ul class="nav nav-tabs" role="tablist">
+						{% for block in section.blocks %}
+							{% case block.type %}
+								{% when 'product_tab' %}
+									{% assign category_product = collections[block.settings.tab_product] %}
+									<li role="presentation">
+										<a
+											class="{% if forloop.first == true %}active show{% endif %}"
+											role="tab"
+											data-toggle="tab"
+											href="#tab-{{ block.id }}"
+										>
+											{{- category_product.title -}}
+										</a>
+									</li>
+							{% endcase %}
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="tab-content tabs">
+					{% for block in section.blocks %}
+						{% case block.type %}
+							{% when 'product_tab' %}
+								<div
+									class="tab-pane fade{% if forloop.first == true %} active show{% endif %}"
+									id="tab-{{ block.id }}"
+									role="tabpanel"
+								>
+									<div class="swiper-container" id="feture_pro_tab">
+										<div class="swiper-wrapper">
+											{% for product in collections[block.settings.tab_product].products %}
+												<div class="swiper-slide">
+													{% include 'product-grid-item' %}
+												</div>
+											{% endfor %}
+										</div>
+										<div class="swiper-buttons">
+											<button class="swiper-prev"><i class="fa fa-angle-left"></i></button>
+											<button class="swiper-next"><i class="fa fa-angle-right"></i></button>
+										</div>
+									</div>
+								</div>
+						{% endcase %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- product-area end -->
 <script>
-  var swiper = new Swiper('.swiper-container#feture_pro_tab', {
-    slidesPerColumn: {{ section.settings.product_col }},
-    slidesPerView: 3,
-    spaceBetween: 30,
-    observer: true,
-    observeParents: true,
-    {%- if settings.enable_rtl -%}
-    rtl: true,
-    {%- endif -%}
-    navigation: {
-      nextEl: '.swiper-next',
-      prevEl: '.swiper-prev',
-    },
-    breakpoints: {
-      0: {
-        slidesPerView: 2,
-        spaceBetween: 15
-      },
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 15
-      },
-      768: {
-        slidesPerView: 3
-      },
-      1024: {
-        slidesPerView: 3
-      }
-    },
-  });
+	var swiper = new Swiper('.swiper-container#feture_pro_tab', {
+	  slidesPerColumn: {{ section.settings.product_col }},
+	  slidesPerView: 3,
+	  spaceBetween: 30,
+	  observer: true,
+	  observeParents: true,
+	  {%- if settings.enable_rtl -%}
+	  rtl: true,
+	  {%- endif -%}
+	  navigation: {
+	    nextEl: '.swiper-next',
+	    prevEl: '.swiper-prev',
+	  },
+	  breakpoints: {
+	    0: {
+	      slidesPerView: 2,
+	      spaceBetween: 15
+	    },
+	    640: {
+	      slidesPerView: 2,
+	      spaceBetween: 15
+	    },
+	    768: {
+	      slidesPerView: 3
+	    },
+	    1024: {
+	      slidesPerView: 3
+	    }
+	  },
+	});
 </script>
 {% schema %}
 {
-  "name": "Product Tab Slider",
-  "settings": [
-  {
-    "type" : "header",
-    "content" : "Section Padding"
-  },
-  {
-    "type": "range",
-    "id": "pro_tab_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "range",
-    "id": "pro_tab_padding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "header",
-    "content": "Section Heading"
-  },
-  {
-    "type": "text",
-    "id": "section_title",
-    "label": "Section Title",
-    "default": "Featured Products"
-  },
-  {
-    "type": "text",
-    "id": "section_desc",
-    "label": "Section Description",
-    "default": "New popular in accesories store"
-  },
-  {
-    "type": "header",
-    "content": "Product"
-  },
-  {
-    "type": "select",
-    "id": "product_col",
-    "label": "slides Per Column",
-    "options":[
-    {
-      "label": "1 Products",
-      "value": "1"
-    },
-    {
-      "label": "2 Products",
-      "value": "2"
-    },
-    {
-      "label": "3 Products",
-      "value": "3"
-    }
-    ],
-    "default": "1"
-  },
-  {
-    "type": "select",
-    "id": "slide_product_limit",
-    "label": "slides Per View",
-    "options":[
-    {
-      "label": "2 Products",
-      "value": "2"
-    },
-    {
-      "label": "3 Products",
-      "value": "3"
-    },
-    {
-      "label": "4 Products",
-      "value": "4"
-    }
-    ],
-    "default": "4"
-  },
-  {
-    "type": "text",
-    "id": "featured_product_limit_handle",
-    "label": "Product Limit",
-    "default": "10"
-  },
-  {
-    "type": "color",
-    "id": "pro_tab_bg_color", 
-    "label": "Background Color",
-    "default":   "#fff"
-  }
-  ],
-  "blocks" : [
-  {
-    "type" : "product_tab",
-    "name" : "Our Product",
-    "limit" : 6,
-    "settings" : [
-    {
-      "type" : "collection",
-      "id" : "tab_product",
-      "label" : "Tab With Product"
-    }
-    ]
-  }
-  ],
-  "presets": [
-  {
-    "name": "Featured Product Tab Slider",
-    "category": "Product Tab Slider"
-  }
-  ]
+	"name": "Product Tab Slider",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "pro_tab_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "range",
+			"id": "pro_tab_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "header",
+			"content": "Section Heading"
+		},
+		{
+			"type": "text",
+			"id": "section_title",
+			"label": "Section Title",
+			"default": "Featured Products"
+		},
+		{
+			"type": "text",
+			"id": "section_desc",
+			"label": "Section Description",
+			"default": "New popular in accesories store"
+		},
+		{
+			"type": "header",
+			"content": "Product"
+		},
+		{
+			"type": "select",
+			"id": "product_col",
+			"label": "slides Per Column",
+			"options": [
+				{
+					"label": "1 Products",
+					"value": "1"
+				},
+				{
+					"label": "2 Products",
+					"value": "2"
+				},
+				{
+					"label": "3 Products",
+					"value": "3"
+				}
+			],
+			"default": "1"
+		},
+		{
+			"type": "select",
+			"id": "slide_product_limit",
+			"label": "slides Per View",
+			"options": [
+				{
+					"label": "2 Products",
+					"value": "2"
+				},
+				{
+					"label": "3 Products",
+					"value": "3"
+				},
+				{
+					"label": "4 Products",
+					"value": "4"
+				}
+			],
+			"default": "4"
+		},
+		{
+			"type": "text",
+			"id": "featured_product_limit_handle",
+			"label": "Product Limit",
+			"default": "10"
+		},
+		{
+			"type": "color",
+			"id": "pro_tab_bg_color",
+			"label": "Background Color",
+			"default": "#fff"
+		}
+	],
+	"blocks": [
+		{
+			"type": "product_tab",
+			"name": "Our Product",
+			"limit": 6,
+			"settings": [
+				{
+					"type": "collection",
+					"id": "tab_product",
+					"label": "Tab With Product"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Featured Product Tab Slider",
+			"category": "Product Tab Slider"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .product-tab-ptb {
-    padding-top: {{ section.settings.pro_tab_padding_top }}px;
-    padding-bottom: {{ section.settings.pro_tab_padding_bottom }}px;
-    background-color: {{ section.settings.pro_tab_bg_color }};
-  }
-  @media (max-width: 767px){
-    .product-tab-ptb {
-      padding-top: 40px;
-    }
-  }
+	.product-tab-ptb {
+	  padding-top: {{ section.settings.pro_tab_padding_top }}px;
+	  padding-bottom: {{ section.settings.pro_tab_padding_bottom }}px;
+	  background-color: {{ section.settings.pro_tab_bg_color }};
+	}
+	@media (max-width: 767px){
+	  .product-tab-ptb {
+	    padding-top: 40px;
+	  }
+	}
 </style>

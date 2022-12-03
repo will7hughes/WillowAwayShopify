@@ -1,136 +1,136 @@
 <!-- deal start -->
 <section class="deal-section">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="section-title">
-          {% if section.settings.deal_title !='' %}
-          <h2>{{ section.settings.deal_title }}</h2>
-          {% endif %}
-          {% if section.settings.deal_desc !='' %}
-          <p>{{ section.settings.deal_desc }}</p>
-          {% endif %}
-        </div>
-        <div class="deal-slider-bg">
-          <div class="deal-slider owl-carousel owl-theme" id="deal-slider">
-            {% for product in collections[section.settings.label_deal_product].products %}
-            <div class="item">
-              {% include 'product-deal-timer' %}
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="section-title">
+					{% if section.settings.deal_title != '' %}
+						<h2>{{ section.settings.deal_title }}</h2>
+					{% endif %}
+					{% if section.settings.deal_desc != '' %}
+						<p>{{ section.settings.deal_desc }}</p>
+					{% endif %}
+				</div>
+				<div class="deal-slider-bg">
+					<div class="deal-slider owl-carousel owl-theme" id="deal-slider">
+						{% for product in collections[section.settings.label_deal_product].products %}
+							<div class="item">
+								{% include 'product-deal-timer' %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- deal end -->
 <script type="text/javascript">
-  $('#deal-slider').owlCarousel({
-    loop: false,
-    rewind: true,
-    margin: 0,
-    items: 1,
-    nav: true,
-    dots: false,
-    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    {%- if settings.enable_rtl -%}
-    rtl: true
-    {%- endif -%}
-  });
+	$('#deal-slider').owlCarousel({
+	  loop: false,
+	  rewind: true,
+	  margin: 0,
+	  items: 1,
+	  nav: true,
+	  dots: false,
+	  navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+	  {%- if settings.enable_rtl -%}
+	  rtl: true
+	  {%- endif -%}
+	});
 </script>
 {% schema %}
 {
-  "name": "Deal Section",
-  "settings": [
-  {
-    "type" : "header",
-    "content" : "Section Padding"
-  },
-  {
-    "type": "range",
-    "id": "deal_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "range",
-    "id": "deal_padding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type" : "header",
-    "content" : "Section Background Color"
-  },
-  {
-    "type": "color",
-    "id": "deal_bg_color",
-    "label": "Section Background Color",
-    "default": "#f7f7f7"
-  },
-  {
-    "type": "checkbox",
-    "id": "deal_bg_color_enable",
-    "label": "Show Background Color",
-    "default": true
-  },
-  {
-    "type": "text",
-    "id": "deal_title",
-    "label": "Section Title",
-    "default": "Deal Of The Week"
-  },
-  {
-    "type": "text",
-    "id": "deal_desc",
-    "label": "Section Description",
-    "default": "Best collection"
-  },
-  {
-    "type" : "header",
-    "content" : "Collection"
-  },
-  {
-    "type" : "collection",
-    "id" : "label_deal_product",
-    "label" : "Deal Collection"
-  }
-  ],
-  "presets": [
-  {
-    "name": "Deal Section",
-    "category": "deal section"
-  }
-  ]
+	"name": "Deal Section",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "deal_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "range",
+			"id": "deal_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "header",
+			"content": "Section Background Color"
+		},
+		{
+			"type": "color",
+			"id": "deal_bg_color",
+			"label": "Section Background Color",
+			"default": "#f7f7f7"
+		},
+		{
+			"type": "checkbox",
+			"id": "deal_bg_color_enable",
+			"label": "Show Background Color",
+			"default": true
+		},
+		{
+			"type": "text",
+			"id": "deal_title",
+			"label": "Section Title",
+			"default": "Deal Of The Week"
+		},
+		{
+			"type": "text",
+			"id": "deal_desc",
+			"label": "Section Description",
+			"default": "Best collection"
+		},
+		{
+			"type": "header",
+			"content": "Collection"
+		},
+		{
+			"type": "collection",
+			"id": "label_deal_product",
+			"label": "Deal Collection"
+		}
+	],
+	"presets": [
+		{
+			"name": "Deal Section",
+			"category": "deal section"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .deal-section{
-    padding-top: {{ section.settings.deal_padding_top }}px;
-    padding-bottom: {{ section.settings.deal_padding_bottom }}px;
+	.deal-section{
+	  padding-top: {{ section.settings.deal_padding_top }}px;
+	  padding-bottom: {{ section.settings.deal_padding_bottom }}px;
 
-    {% if section.settings.deal_bg_color_enable %}
-    background-color: {{ section.settings.deal_bg_color }};
-    {% endif %}
-  }
-  @media (max-width: 767px) {
-    .deal-section{
-      padding-top: 40px;
-    }
-  }
-  .deal-section .deal-slider .single-product-wrap{
-    margin-top: 0;
-  }
-  .deal-section .deal-slider .single-product-wrap .product-image{
-    line-height: 0;
-  }
+	  {% if section.settings.deal_bg_color_enable %}
+	  background-color: {{ section.settings.deal_bg_color }};
+	  {% endif %}
+	}
+	@media (max-width: 767px) {
+	  .deal-section{
+	    padding-top: 40px;
+	  }
+	}
+	.deal-section .deal-slider .single-product-wrap{
+	  margin-top: 0;
+	}
+	.deal-section .deal-slider .single-product-wrap .product-image{
+	  line-height: 0;
+	}
 </style>

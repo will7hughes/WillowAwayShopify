@@ -1,17 +1,17 @@
 <div class="acc-desk">
-  <a class="acc-ti" data-toggle="collapse" href="#store-account">
-<!--     <i class="ti-user"></i> -->
-    <span class="acc-signin">My Account</span>
-  </a>
-  {% if customer and shop.customer_accounts_enabled %}
-  <div class="acc-re-lo collapse" id="store-account">
-    <a href="/account">Account</a>
-    <a href="/account/logout">Logout</a>
-  </div>
-  {% else %}
-  <div class="acc-re-lo collapse" id="store-account">
-    <a href="/account/login">Sign in</a>
-    <a href="/account/register">Register</a>
-  </div>  
-  {% endif %}
+	<a class="acc-ti" data-toggle="collapse" href="#store-account">
+		<!-- <i class="ti-user"></i> -->
+		<span class="acc-signin">My Account</span>
+	</a>
+	{% if customer and shop.customer_accounts_enabled %}
+		<div class="acc-re-lo collapse" id="store-account">
+			<a href="/account">Account</a>
+			<a href="/account/logout">Logout</a>
+		</div>
+	{% else %}
+		<div class="acc-re-lo collapse" id="store-account">
+			<a href="/account/login">Sign in</a>
+			<a href="/account/register">Register</a>
+		</div>
+	{% endif %}
 </div>

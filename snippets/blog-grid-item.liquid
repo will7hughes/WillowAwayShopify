@@ -1,25 +1,24 @@
 <div class="blog-post">
-  {% assign article_has_image = false %}
-  {% assign content = article.excerpt_or_content %}
-  {% if article.image %}
-  <a href="{{ article.url }}" class="blog-img">
-    <img src="{{ article.image | img_url: '1024x1024' }}" alt="{{ article.title | escape }}" class="img-fluid" />
-    <span class="blog-icon">
-      <i class="ti-link"></i></span>
-  </a>
-  {% endif %}
-  <div class="blog-post-content">
-    <span class="date-time">
-      <span class="date">{{ article.published_at | date: '%d' }}</span>
-      <span class="time">{{ article.published_at | date: '%b' }}</span>
-    </span>
-    <h2 class="blog-title">
-      <a href="{{ article.url }}">{{ article.title | truncate: 50 }}</a>
-    </h2>
-    <p class="blog-desc">{{ article.content | strip_html | strip | truncate: 100 }}</p>
-    <a href="{{ article.url }}" class="read-btn" aria-label="Read more: {{ article.title }}">
-      <span>{{ settings.blog_read_btn }}</span>
-      <i class="fa fa-angle-right"></i>
-    </a>
-  </div>
+	{% assign article_has_image = false %}
+	{% assign content = article.excerpt_or_content %}
+	{% if article.image %}
+		<a href="{{ article.url }}" class="blog-img">
+			<img src="{{ article.image | img_url: '1024x1024' }}" alt="{{ article.title | escape }}" class="img-fluid">
+			<span class="blog-icon"> <i class="ti-link"></i></span>
+		</a>
+	{% endif %}
+	<div class="blog-post-content">
+		<span class="date-time">
+			<span class="date">{{ article.published_at | date: '%d' }}</span>
+			<span class="time">{{ article.published_at | date: '%b' }}</span>
+		</span>
+		<h2 class="blog-title">
+			<a href="{{ article.url }}">{{ article.title | truncate: 50 }}</a>
+		</h2>
+		<p class="blog-desc">{{ article.content | strip_html | strip | truncate: 100 }}</p>
+		<a href="{{ article.url }}" class="read-btn" aria-label="Read more: {{ article.title }}">
+			<span>{{ settings.blog_read_btn }}</span>
+			<i class="fa fa-angle-right"></i>
+		</a>
+	</div>
 </div>

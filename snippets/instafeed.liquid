@@ -1,24 +1,18 @@
 <div id="instafeed" class="row"></div>
 
 <script>
-  
-  (function ($) {
-    "use strict";
+	(function ($) {
+		'use strict';
 
-    jQuery(document).ready(function(){
-
-      var userFeed = new Instafeed({
-        get: 'user',
-        userId: '{{ section.settings.instafeed_user_id }}',
-        limit: '{{ section.settings.instafeed_limit }}',
-        accessToken: '{{ section.settings.instafeed_access_token }}',
-        resolution: 'standard_resolution'
-      });
-      userFeed.run();
-
-
-    });
-
-  })(jQuery); 
-  
+		jQuery(document).ready(function () {
+			var userFeed = new Instafeed({
+				get: 'user',
+				userId: '{{ section.settings.instafeed_user_id }}',
+				limit: '{{ section.settings.instafeed_limit }}',
+				accessToken: '{{ section.settings.instafeed_access_token }}',
+				resolution: 'standard_resolution',
+			});
+			userFeed.run();
+		});
+	})(jQuery);
 </script>

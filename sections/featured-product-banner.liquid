@@ -1,124 +1,125 @@
 <!-- product-area start -->
-<div class="product-area section-ptb" style="padding-top:{{ section.settings.section_padding_top }}px;padding-bottom:{{ section.settings.section_padding_bottom }}px;background:{{ section.settings.bg_color }};">
-  <div class="container">
-    <div class="row">
-    <!-- product-warpper start -->
-    {% for block in section.blocks %}
-    {% assign category_product = collections[block.settings.featured_product_handle] %}
-    {% case block.type %}
-    {% when 'product_tab' %}
-      <div class="col-xl-3">
-        <h3 class="filter-category-title">{{ category_product.title }}</h3>
-        <div class="product-warpper swiper-container">
-          <div class="category-slider swiper-wrapper">
-        {% for product in collections[block.settings.featured_product_handle].products %}
-          <div class="item swiper-slide">
-            {% include 'product-grid-list' %}
-          </div>
-        {% endfor %}
-        </div>
-      </div>
-      </div>
-    {% endcase %}
-    {% endfor %}
-    </div>
-  </div>
+<div
+	class="product-area section-ptb"
+	style="padding-top:{{ section.settings.section_padding_top }}px;padding-bottom:{{ section.settings.section_padding_bottom }}px;background:{{ section.settings.bg_color }};"
+>
+	<div class="container">
+		<div class="row">
+			<!-- product-warpper start -->
+			{% for block in section.blocks %}
+				{% assign category_product = collections[block.settings.featured_product_handle] %}
+				{% case block.type %}
+					{% when 'product_tab' %}
+						<div class="col-xl-3">
+							<h3 class="filter-category-title">{{ category_product.title }}</h3>
+							<div class="product-warpper swiper-container">
+								<div class="category-slider swiper-wrapper">
+									{% for product in collections[block.settings.featured_product_handle].products %}
+										<div class="item swiper-slide">
+											{% include 'product-grid-list' %}
+										</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+				{% endcase %}
+			{% endfor %}
+		</div>
+	</div>
 </div>
 <!-- product-area end -->
-<script>  
-var swiper = new Swiper('.swiper-container', {
-      pagination: {
-        el: '.swiper-pagination',
-        type: 'fraction',
-      },
-      navigation: {
-        nextEl: '.sw-next',
-        prevEl: '.sw-prev',
-      },
-      slidesPerColumn: 2,
-      breakpoints: {
-        640: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        768: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        991: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        1199: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-        1920: {
-          slidesPerView: 1,
-          spaceBetween: 10,
-        },
-      }
-    });
-  
-</script>  
+<script>
+	var swiper = new Swiper('.swiper-container', {
+		pagination: {
+			el: '.swiper-pagination',
+			type: 'fraction',
+		},
+		navigation: {
+			nextEl: '.sw-next',
+			prevEl: '.sw-prev',
+		},
+		slidesPerColumn: 2,
+		breakpoints: {
+			640: {
+				slidesPerView: 1,
+				spaceBetween: 10,
+			},
+			768: {
+				slidesPerView: 1,
+				spaceBetween: 10,
+			},
+			991: {
+				slidesPerView: 1,
+				spaceBetween: 10,
+			},
+			1199: {
+				slidesPerView: 1,
+				spaceBetween: 10,
+			},
+			1920: {
+				slidesPerView: 1,
+				spaceBetween: 10,
+			},
+		},
+	});
+</script>
 
 {% schema %}
-  {
-    "name": "Product With",
-    "settings": [
-    {
-      "type": "header",
-            "content": "Section Heading"
-        },
-     {
-            "type": "header",
-            "content": "Padding"
-          },
-      {
-            "type": "range",
-            "id": "section_padding_top",  
-            "label": "Section Padding Top",
-            "min":       0,
-            "max":        200,
-            "step":       2,
-            "unit":   "px",
-            "default":   100
-          },           
-          {
-            "type": "range",
-            "id": "section_padding_bottom", 
-            "label": "Section Padding Bottom",
-            "min":       0,
-            "max":        200,
-            "step":       2,
-            "default":   100
-          },
-          {
-            "type": "color",
-            "id": "bg_color", 
-            "label": "Background Color",
-            "default":   "#fff"
-         }
-
-    ],
-    "blocks" :[
-      {
-        "name" : "Product Category",
-        "type" : "product_tab",
-        "settings" : [
-          {
-            "type": "collection",
-            "id": "featured_product_handle",
-            "label": "Select Your Collection"
-          }
-        ]
-      }
-    ],
-  "presets": [
-    {
-      "name": "Featured Product With Carousel",
-      "category": "5. product"
-    }
-  ]
-  }
+{
+	"name": "Product With",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Heading"
+		},
+		{
+			"type": "header",
+			"content": "Padding"
+		},
+		{
+			"type": "range",
+			"id": "section_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 200,
+			"step": 2,
+			"unit": "px",
+			"default": 100
+		},
+		{
+			"type": "range",
+			"id": "section_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 200,
+			"step": 2,
+			"default": 100
+		},
+		{
+			"type": "color",
+			"id": "bg_color",
+			"label": "Background Color",
+			"default": "#fff"
+		}
+	],
+	"blocks": [
+		{
+			"name": "Product Category",
+			"type": "product_tab",
+			"settings": [
+				{
+					"type": "collection",
+					"id": "featured_product_handle",
+					"label": "Select Your Collection"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Featured Product With Carousel",
+			"category": "5. product"
+		}
+	]
+}
 {% endschema %}

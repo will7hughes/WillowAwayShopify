@@ -1,62 +1,63 @@
 <section class="section-ptb sitemap">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <ul class="sitemap-wrap"> 
-          {% for link in linklists[section.settings.menu].links %}
-          {% assign child_list_handle = link.title | handleize %}
-          {% if linklists[child_list_handle].links =='' %}
-          <li class="sitemap-wrapper">
-            <a class="sitemap-title-link" href="{{ link.url }}">{{ link.title }}</a>
-          </li>
-          {% else %}
-          <li class="sitemap-wrapper">
-            <a class="sitemap-title-link" href="{{ link.url }}">{{ link.title }}</a>
-            <ul class="sitemap-subwrap">
-              {% for childlink in linklists[child_list_handle].links %}
-              {% assign sub_childlink_handle = childlink.title | handle %}
-              {% if linklists[sub_childlink_handle].links == '' %}
-              <li class="sitemap-sub-wrapper">
-                <a class="sitemap-title-sublink" href="{{ childlink.url }}">{{ childlink.title }}</a>
-              </li>
-              {% else %}
-              <li class="sitemap-subwrapper">
-                <a class="sitemap-title-subtitle" href="{{ childlink.url }}">{{ childlink.title }}</a>
-                <ul class="sitemap-supwrap">
-                  {% for sub_childlink_handle in linklists[sub_childlink_handle].links %}
-                  <li class="sitemap-sup-wrapper">
-                    <a class="sitemap-title-suplink" href="{{ sub_childlink_handle.url }}">{{ sub_childlink_handle.title }}</a>
-                  </li>
-                  {% endfor %}
-                </ul>
-              </li>
-              {% endif %}
-              {% endfor %}
-            </ul>
-          </li>
-          {% endif %}
-          {% endfor %}
-          <!-- navbar ends -->
-        </ul>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<ul class="sitemap-wrap">
+					{% for link in linklists[section.settings.menu].links %}
+						{% assign child_list_handle = link.title | handleize %}
+						{% if linklists[child_list_handle].links == '' %}
+							<li class="sitemap-wrapper">
+								<a class="sitemap-title-link" href="{{ link.url }}">{{ link.title }}</a>
+							</li>
+						{% else %}
+							<li class="sitemap-wrapper">
+								<a class="sitemap-title-link" href="{{ link.url }}">{{ link.title }}</a>
+								<ul class="sitemap-subwrap">
+									{% for childlink in linklists[child_list_handle].links %}
+										{% assign sub_childlink_handle = childlink.title | handle %}
+										{% if linklists[sub_childlink_handle].links == '' %}
+											<li class="sitemap-sub-wrapper">
+												<a class="sitemap-title-sublink" href="{{ childlink.url }}">{{ childlink.title }}</a>
+											</li>
+										{% else %}
+											<li class="sitemap-subwrapper">
+												<a class="sitemap-title-subtitle" href="{{ childlink.url }}">{{ childlink.title }}</a>
+												<ul class="sitemap-supwrap">
+													{% for sub_childlink_handle in linklists[sub_childlink_handle].links %}
+														<li class="sitemap-sup-wrapper">
+															<a class="sitemap-title-suplink" href="{{ sub_childlink_handle.url }}">
+																{{- sub_childlink_handle.title -}}
+															</a>
+														</li>
+													{% endfor %}
+												</ul>
+											</li>
+										{% endif %}
+									{% endfor %}
+								</ul>
+							</li>
+						{% endif %}
+					{% endfor %}
+					<!-- navbar ends -->
+				</ul>
+			</div>
+		</div>
+	</div>
 </section>
-
 
 {% schema %}
 {
-	"name" : "Site Map",
-	"settings" : [
-	{
-		"type" : "header",
-		"content": "Section Sitemap"
-	},
-	{
-		"type" : "link_list",
-		"id" : "menu",
-		"label" : "Sitemap Menu"
-	}
+	"name": "Site Map",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Sitemap"
+		},
+		{
+			"type": "link_list",
+			"id": "menu",
+			"label": "Sitemap Menu"
+		}
 	]
 }
 {% endschema %}

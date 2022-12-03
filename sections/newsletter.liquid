@@ -1,174 +1,183 @@
-<div class="news-letter"> 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="news-join">
-          <div class="newsletter-bgimg" {% if section.settings.bg_img_check %}style="background-image: url('{% if section.settings.news_bg_img %}{{ section.settings.news_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/470x350{% endif %}');"{% endif %}></div>
-          <div class="newsletter">
-            <div class="news-title">
-              <div class="news-con">
-                {% if section.settings.mail_img %}
-                <img class="img-fluid" src="{% if section.settings.mail_img %}{{ section.settings.mail_img | img_url: '60x60', crop: 'center' }}{% else %}https://via.placeholder.com/512x512{% endif %}" alt="{{ section.settings.alt }}">
-                {% else %}
-                {% if section.settings.mail_icon != '' %}
-                <span><i class="{{ section.settings.mail_icon }}"></i></span>
-                {% endif %}
-                {% endif %}
-                {% if section.settings.newsletter_title != '' %}
-                <h2 class="newstitle">{{ section.settings.newsletter_title }}</h2>
-                {% endif %}
-              </div>
-              {% if section.settings.sub_title != '' %}
-              <p class="newstext">{{ section.settings.sub_title }}</p>
-              {% endif %}
-            </div>
-            <div class="subscribe-content">
-              {%- include 'newsletter' -%}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="news-letter">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="news-join">
+					<div
+						class="newsletter-bgimg"
+						{% if section.settings.bg_img_check %}
+							style="background-image: url('{% if section.settings.news_bg_img %}{{ section.settings.news_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/470x350{% endif %}');"
+						{% endif %}
+					></div>
+					<div class="newsletter">
+						<div class="news-title">
+							<div class="news-con">
+								{% if section.settings.mail_img %}
+									<img
+										class="img-fluid"
+										src="{% if section.settings.mail_img %}{{ section.settings.mail_img | img_url: '60x60', crop: 'center' }}{% else %}https://via.placeholder.com/512x512{% endif %}"
+										alt="{{ section.settings.alt }}"
+									>
+								{% else %}
+									{% if section.settings.mail_icon != '' %}
+										<span><i class="{{ section.settings.mail_icon }}"></i></span>
+									{% endif %}
+								{% endif %}
+								{% if section.settings.newsletter_title != '' %}
+									<h2 class="newstitle">{{ section.settings.newsletter_title }}</h2>
+								{% endif %}
+							</div>
+							{% if section.settings.sub_title != '' %}
+								<p class="newstext">{{ section.settings.sub_title }}</p>
+							{% endif %}
+						</div>
+						<div class="subscribe-content">
+							{%- include 'newsletter' -%}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 {% schema %}
 {
-  "name": "Newsletter",
-  "settings": [
-  {
-    "type" : "header",
-    "content" : "Section Padding"
-  },
-  {
-    "type": "range",
-    "id": "npadding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 30
-  },
-  {
-    "type": "range",
-    "id": "npadding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 30
-  },
-  {
-    "type" : "color",
-    "id" : "n_bgcolor",
-    "label" : "Background Color",
-    "default" : "#fff"
-  },
-  {
-    "type" : "checkbox",
-    "id" : "bg_color_check",
-    "label" : "Backgorund Color",
-    "default" : true
-  },
-  {
-    "type": "image_picker",
-    "id": "news_bg_img",
-    "label": "Backgorund Image",
-    "info": "Recommended Size: 1920 x 450px"
-  },
-  {
-    "type" : "checkbox",
-    "id" : "bg_img_check",
-    "label" : "Show Backgorund Images",
-    "default" : true
-  },
-  {
-    "type": "image_picker",
-    "id": "mail_img",
-    "label": "Icon Image",
-    "info": "Recommended Size: 512px x 512px"
-  },
-  {
-    "type": "text",
-    "id": "mail_icon",
-    "label": "Icon Class"
-  },
-  {
-    "type": "text",
-    "id": "newsletter_title",
-    "label": "Newsletter Title",
-    "default": "Subscribe Our Newsletter"
-  },
-  {
-    "type": "text",
-    "id": "sub_title",
-    "label": "Sub Title",
-    "default": "and receive $20 coupon for first shopping"
-  }
-  ],
-  "presets": [
-  {
-    "name": "Newsletter"
-  }
-  ]
+	"name": "Newsletter",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "npadding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 30
+		},
+		{
+			"type": "range",
+			"id": "npadding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 30
+		},
+		{
+			"type": "color",
+			"id": "n_bgcolor",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "checkbox",
+			"id": "bg_color_check",
+			"label": "Backgorund Color",
+			"default": true
+		},
+		{
+			"type": "image_picker",
+			"id": "news_bg_img",
+			"label": "Backgorund Image",
+			"info": "Recommended Size: 1920 x 450px"
+		},
+		{
+			"type": "checkbox",
+			"id": "bg_img_check",
+			"label": "Show Backgorund Images",
+			"default": true
+		},
+		{
+			"type": "image_picker",
+			"id": "mail_img",
+			"label": "Icon Image",
+			"info": "Recommended Size: 512px x 512px"
+		},
+		{
+			"type": "text",
+			"id": "mail_icon",
+			"label": "Icon Class"
+		},
+		{
+			"type": "text",
+			"id": "newsletter_title",
+			"label": "Newsletter Title",
+			"default": "Subscribe Our Newsletter"
+		},
+		{
+			"type": "text",
+			"id": "sub_title",
+			"label": "Sub Title",
+			"default": "and receive $20 coupon for first shopping"
+		}
+	],
+	"presets": [
+		{
+			"name": "Newsletter"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .news-letter{
-    padding-top:{{ section.settings.npadding_top }}px;
-    padding-bottom:{{ section.settings.npadding_bottom }}px;
+	.news-letter{
+	  padding-top:{{ section.settings.npadding_top }}px;
+	  padding-bottom:{{ section.settings.npadding_bottom }}px;
 
-    {% if section.settings.bg_color_check %}
-    background-color: {{ section.settings.n_bgcolor }};
-    {% endif %}
+	  {% if section.settings.bg_color_check %}
+	  background-color: {{ section.settings.n_bgcolor }};
+	  {% endif %}
 
-    {% if section.settings.bg_img_check %}
-    background-repeat: no-repeat;
-    background-size: cover;
-    {% endif %}
-  }
-  {% if section.settings.bg_img_check %}
-  .news-join{
-    display: flex;
-    align-items: center;
-    background-color: #f5f5f5;
-  }
-  .news-join .newsletter-bgimg{
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    min-height: 350px;
-    width: 40%;
-  }
-  .news-join .newsletter{
-    width: 60%;
-    padding: 30px 50px;
-  }
-  @media (max-width : 1199px){
-    .news-join .newsletter{
-      padding: 30px 30px;
-    }
-  }
-   @media (max-width : 767px){
-    .news-join{
-      flex-direction: column;
-    }
-    .news-join .newsletter-bgimg{
-      width: 100%;
-    }
-    .news-join .newsletter{
-      width: 100%;
-      padding: 15px 15px;
-    }
+	  {% if section.settings.bg_img_check %}
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	  {% endif %}
+	}
+	{% if section.settings.bg_img_check %}
+	.news-join{
+	  display: flex;
+	  align-items: center;
+	  background-color: #f5f5f5;
+	}
+	.news-join .newsletter-bgimg{
+	  background-repeat: no-repeat;
+	  background-position: center;
+	  background-size: cover;
+	  min-height: 350px;
+	  width: 40%;
+	}
+	.news-join .newsletter{
+	  width: 60%;
+	  padding: 30px 50px;
+	}
+	@media (max-width : 1199px){
+	  .news-join .newsletter{
+	    padding: 30px 30px;
+	  }
+	}
+	 @media (max-width : 767px){
+	  .news-join{
+	    flex-direction: column;
+	  }
+	  .news-join .newsletter-bgimg{
+	    width: 100%;
+	  }
+	  .news-join .newsletter{
+	    width: 100%;
+	    padding: 15px 15px;
+	  }
 
-  }
-  {% endif %}
+	}
+	{% endif %}
 
-  @media (max-width : 767px){
-    .news-letter{
-      padding-top: 40px;
-      padding-bottom: 40px;
-    }
-  }
+	@media (max-width : 767px){
+	  .news-letter{
+	    padding-top: 40px;
+	    padding-bottom: 40px;
+	  }
+	}
 </style>

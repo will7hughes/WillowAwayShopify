@@ -1,157 +1,165 @@
-<section class="our-service-area" {% if section.settings.service_bg_img_check %}style="background-image: url('{% if section.settings.service_bg_img %}{{ section.settings.service_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x1024{% endif %}');"{% endif %}>
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <ul class="single-service">
-          {% for block in section.blocks %}
-          <li class="service-content ser-box">
-            <div class="ser-block">
-              <a href="javascript:void(0)">
-                {% if block.settings.service_img %}
-                <img class="img-fluid" src="{{ block.settings.service_img | img_url: '50x50', crop: 'center' }}">
-                {% if block.settings.service_img2 %}
-                <img class="img-fluid img2" src="{{ block.settings.service_img2 | img_url: '50x50', crop: 'center' }}">
-                {% endif %}
-                {% else %}
-                <i class="{{ block.settings.service_icon }}"></i>
-                {% endif %}
-              </a>
-              <div class="service-text">
-                {%if block.settings.service_title != '' %}
-                <h6>{{ block.settings.service_title }}</h6>
-                {% endif %}
-                {%if block.settings.service_desc != '' %}
-                <p>{{ block.settings.service_desc }}</p>
-                {% endif %} 
-              </div>
-            </div>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-  </div>
+<section
+	class="our-service-area"
+	{% if section.settings.service_bg_img_check %}
+		style="background-image: url('{% if section.settings.service_bg_img %}{{ section.settings.service_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x1024{% endif %}');"
+	{% endif %}
+>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<ul class="single-service">
+					{% for block in section.blocks %}
+						<li class="service-content ser-box">
+							<div class="ser-block">
+								<a href="javascript:void(0)">
+									{% if block.settings.service_img %}
+										<img class="img-fluid" src="{{ block.settings.service_img | img_url: '50x50', crop: 'center' }}">
+										{% if block.settings.service_img2 %}
+											<img
+												class="img-fluid img2"
+												src="{{ block.settings.service_img2 | img_url: '50x50', crop: 'center' }}"
+											>
+										{% endif %}
+									{% else %}
+										<i class="{{ block.settings.service_icon }}"></i>
+									{% endif %}
+								</a>
+								<div class="service-text">
+									{% if block.settings.service_title != '' %}
+										<h6>{{ block.settings.service_title }}</h6>
+									{% endif %}
+									{% if block.settings.service_desc != '' %}
+										<p>{{ block.settings.service_desc }}</p>
+									{% endif %}
+								</div>
+							</div>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
 </section>
 {% schema %}
 {
-  "name": "Our Service",
-  "settings": [
-  {
-    "type": "range",
-    "id": "our_ser_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 0
-  },
-  {
-    "type": "range",
-    "id": "our_ser_padding_bottom",
-    "label": "Section Padding bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 0
-  },
-  {
-    "type" : "header",
-    "content" : "Background Image"
-  },
-  {
-    "type": "image_picker",
-    "id": "service_bg_img",
-    "label": "Image",
-    "info": "Recommended Size: 1920 x 770px"
-  },
-  {
-    "type" : "checkbox",
-    "id" : "service_bg_img_check",
-    "label" : "Show Backgorund Image",
-    "default" : true
-  },
-  {
-    "type" : "header",
-    "content" : "Background Color"
-  },
-  {
-    "type" : "color",
-    "id" : "our_ser_bgcolor",
-    "label" : "Background Color",
-    "default" : "#fff"
-  },
-  {
-    "type" : "checkbox",
-    "id" : "our_ser_check",
-    "label" : "Show Backgorund Color",
-    "default" : true
-  }
-  ],
-  "blocks":[
-  {
-    "type": "our_services",
-    "name": "Our Services",
-    "settings": [
-    {
-      "type": "image_picker",
-      "id": "service_img",
-      "label": "Service Image",
-      "info": "Recommended Size: 512px x 512px"
-    },
-    {
-      "type": "image_picker",
-      "id": "service_img2",
-      "label": "Service Image2",
-      "info": "Recommended Size: 512px x 512px"
-    },
-    {
-      "type": "text",
-      "id": "service_icon",
-      "label": "Icon Class"
-    },
-    {
-      "type": "text",
-      "id": "service_title",
-      "label": "Service Title",
-      "default": "Free Shipping"
-    },
-    {
-      "type": "text",
-      "id": "service_desc",
-      "label": "Service Description"
-    }
-    ]
-  }
-  ],
-  "presets":[
-  {
-    "name": "Our Service",
-    "category": "10. Our Service"
-  }
-  ]
+	"name": "Our Service",
+	"settings": [
+		{
+			"type": "range",
+			"id": "our_ser_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "our_ser_padding_bottom",
+			"label": "Section Padding bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 0
+		},
+		{
+			"type": "header",
+			"content": "Background Image"
+		},
+		{
+			"type": "image_picker",
+			"id": "service_bg_img",
+			"label": "Image",
+			"info": "Recommended Size: 1920 x 770px"
+		},
+		{
+			"type": "checkbox",
+			"id": "service_bg_img_check",
+			"label": "Show Backgorund Image",
+			"default": true
+		},
+		{
+			"type": "header",
+			"content": "Background Color"
+		},
+		{
+			"type": "color",
+			"id": "our_ser_bgcolor",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "checkbox",
+			"id": "our_ser_check",
+			"label": "Show Backgorund Color",
+			"default": true
+		}
+	],
+	"blocks": [
+		{
+			"type": "our_services",
+			"name": "Our Services",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "service_img",
+					"label": "Service Image",
+					"info": "Recommended Size: 512px x 512px"
+				},
+				{
+					"type": "image_picker",
+					"id": "service_img2",
+					"label": "Service Image2",
+					"info": "Recommended Size: 512px x 512px"
+				},
+				{
+					"type": "text",
+					"id": "service_icon",
+					"label": "Icon Class"
+				},
+				{
+					"type": "text",
+					"id": "service_title",
+					"label": "Service Title",
+					"default": "Free Shipping"
+				},
+				{
+					"type": "text",
+					"id": "service_desc",
+					"label": "Service Description"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Our Service",
+			"category": "10. Our Service"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .our-service-area {
-    padding-top:{{ section.settings.our_ser_padding_top }}px;
-    padding-bottom:{{ section.settings.our_ser_padding_bottom }}px;
+	.our-service-area {
+	  padding-top:{{ section.settings.our_ser_padding_top }}px;
+	  padding-bottom:{{ section.settings.our_ser_padding_bottom }}px;
 
-    {% if section.settings.service_bg_img_check %}
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    {% endif %}
+	  {% if section.settings.service_bg_img_check %}
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	  background-position: center;
+	  {% endif %}
 
-    {% if section.settings.our_ser_check %}
-    background-color: {{ section.settings.our_ser_bgcolor }};
-    {% endif %}
-  }
-  @media (max-width: 767px){
-    .product-tab-ptb,
-    .our-service-area {
-      padding-top: 40px;
-    }
-  }
+	  {% if section.settings.our_ser_check %}
+	  background-color: {{ section.settings.our_ser_bgcolor }};
+	  {% endif %}
+	}
+	@media (max-width: 767px){
+	  .product-tab-ptb,
+	  .our-service-area {
+	    padding-top: 40px;
+	  }
+	}
 </style>

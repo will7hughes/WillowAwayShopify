@@ -1,183 +1,194 @@
 <!-- Browuse categoryies -->
-<section class="slider-category" {% if section.settings.slider_cat_bg_img_enable %}style="background-image: url('{% if section.settings.slider_cat_bg_img %}{{ section.settings.slider_cat_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x735{% endif %}');"{% endif %}>
-  <div class="container"> 
-    <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12">
-        {% if section.settings.slider_cat_title !='' %}
-        <div class="section-capture">
-          <div class="section-title">
-            {% if section.settings.slider_cat_title !='' %}
-            <h2>{{ section.settings.slider_cat_title }}</h2>
-            {% endif %}
-            {% if section.settings.slider_cat_desc !='' %}
-            <p>{{ section.settings.slider_cat_desc }}</p>
-            {% endif %}
-            {% if settings.section_title_img %}
-            <span>
-              <img src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/232x5{% endif %}" alt="{{ section.title.image.alt }}" />
-            </span>
-            {% endif %}
-          </div>
-        </div>
-        {% endif %}
-        <div class="cat-slider owl-carousel owl-theme" id="category-slider">
-          {% for block in section.blocks %}
-          {% assign category_product = collections[block.settings.slider_category_handle] %}
-          <div class="item">
-            <div class="category-wrap">
-              <a href="{{ category_product.url }}" class="cat-img">
-                <img class="img-fluid" src="{% if block.settings.collection_img %}{{ block.settings.collection_img | img_url: 'master' }}{% else %}https://via.placeholder.com/270x335{% endif %}">
-              </a>
-              <a href="{{ category_product.url }}" class="cat-title">{{ category_product.title }}</a>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+<section
+	class="slider-category"
+	{% if section.settings.slider_cat_bg_img_enable %}
+		style="background-image: url('{% if section.settings.slider_cat_bg_img %}{{ section.settings.slider_cat_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x735{% endif %}');"
+	{% endif %}
+>
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12">
+				{% if section.settings.slider_cat_title != '' %}
+					<div class="section-capture">
+						<div class="section-title">
+							{% if section.settings.slider_cat_title != '' %}
+								<h2>{{ section.settings.slider_cat_title }}</h2>
+							{% endif %}
+							{% if section.settings.slider_cat_desc != '' %}
+								<p>{{ section.settings.slider_cat_desc }}</p>
+							{% endif %}
+							{% if settings.section_title_img %}
+								<span>
+									<img
+										src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/232x5{% endif %}"
+										alt="{{ section.title.image.alt }}"
+									>
+								</span>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+				<div class="cat-slider owl-carousel owl-theme" id="category-slider">
+					{% for block in section.blocks %}
+						{% assign category_product = collections[block.settings.slider_category_handle] %}
+						<div class="item">
+							<div class="category-wrap">
+								<a href="{{ category_product.url }}" class="cat-img">
+									<img
+										class="img-fluid"
+										src="{% if block.settings.collection_img %}{{ block.settings.collection_img | img_url: 'master' }}{% else %}https://via.placeholder.com/270x335{% endif %}"
+									>
+								</a>
+								<a href="{{ category_product.url }}" class="cat-title">{{ category_product.title }}</a>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <script type="text/javascript">
-  $('#category-slider').owlCarousel({
-    loop: false,
-    rewind: true,
-    margin: 30,
-    nav: false,
-    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    dots: false,
-    {%- if settings.enable_rtl -%}
-    rtl: true,
-    {%- endif -%}
-    autoplay: true,
-    sautoplayTimeout: 5000,
-    autoplayHoverPause: true,
-    responsive:{
-      0:{
-        items: 2,
-        margin: 15
-      },
-      479:{
-        items: 2,
-        margin: 15
-      },
-      768:{
-        items: 3
-      },
-      979:{
-        items: 4
-      },
-      1199:{
-        items: 4
-      }
-    }
-  });
+	$('#category-slider').owlCarousel({
+	  loop: false,
+	  rewind: true,
+	  margin: 30,
+	  nav: false,
+	  navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+	  dots: false,
+	  {%- if settings.enable_rtl -%}
+	  rtl: true,
+	  {%- endif -%}
+	  autoplay: true,
+	  sautoplayTimeout: 5000,
+	  autoplayHoverPause: true,
+	  responsive:{
+	    0:{
+	      items: 2,
+	      margin: 15
+	    },
+	    479:{
+	      items: 2,
+	      margin: 15
+	    },
+	    768:{
+	      items: 3
+	    },
+	    979:{
+	      items: 4
+	    },
+	    1199:{
+	      items: 4
+	    }
+	  }
+	});
 </script>
 {% schema %}
 {
-  "name": "Category Section",
-  "settings": [
-  {
-    "type": "range",
-    "id": "cat_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "range",
-    "id": "cat_padding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "image_picker",
-    "id": "slider_cat_bg_img",
-    "label": "Background Image",
-    "info": "Recommended Size: 1920 x 735px"
-  },
-  {
-    "type": "checkbox",
-    "id": "slider_cat_bg_img_enable",
-    "label": "Show Background Image",
-    "default": false
-  },
-  {
-    "type" : "checkbox",
-    "id" : "slider_cat_enable",
-    "label" : "With Backgorund",
-    "default" : true
-  },
-  {
-    "type" : "color",
-    "id" : "slider_cat_bgcolor",
-    "label" : "Background Color",
-    "default" : "#fff"
-  },
-  {
-    "type": "text",
-    "id": "slider_cat_title",
-    "label": "Section Title",
-    "default": "Shop By Category"
-  },
-  {
-    "type": "text",
-    "id": "slider_cat_desc",
-    "label": "Section Description",
-    "default": "Best accesories for man & woman"
-  }
-  ],
-  "blocks" : [
-  {
-    "name" : "slider-category",
-    "type" : "product_tab",
-    "settings" : [
-    {
-      "type": "collection",
-      "id": "slider_category_handle",
-      "label": "Select Your Collection"
-    },
-    {
-      "type": "image_picker",
-      "id": "collection_img",
-      "label": "Collection image",
-      "info": "Recommended Size: 270px x 335px"
-    }
-    ]
-  }
-  ],
-  "presets":[
-  {
-    "name": "Category By Collection"
-  }
-  ]
+	"name": "Category Section",
+	"settings": [
+		{
+			"type": "range",
+			"id": "cat_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "range",
+			"id": "cat_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "image_picker",
+			"id": "slider_cat_bg_img",
+			"label": "Background Image",
+			"info": "Recommended Size: 1920 x 735px"
+		},
+		{
+			"type": "checkbox",
+			"id": "slider_cat_bg_img_enable",
+			"label": "Show Background Image",
+			"default": false
+		},
+		{
+			"type": "checkbox",
+			"id": "slider_cat_enable",
+			"label": "With Backgorund",
+			"default": true
+		},
+		{
+			"type": "color",
+			"id": "slider_cat_bgcolor",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "text",
+			"id": "slider_cat_title",
+			"label": "Section Title",
+			"default": "Shop By Category"
+		},
+		{
+			"type": "text",
+			"id": "slider_cat_desc",
+			"label": "Section Description",
+			"default": "Best accesories for man & woman"
+		}
+	],
+	"blocks": [
+		{
+			"name": "slider-category",
+			"type": "product_tab",
+			"settings": [
+				{
+					"type": "collection",
+					"id": "slider_category_handle",
+					"label": "Select Your Collection"
+				},
+				{
+					"type": "image_picker",
+					"id": "collection_img",
+					"label": "Collection image",
+					"info": "Recommended Size: 270px x 335px"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Category By Collection"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .slider-category {
-    padding-top:{{ section.settings.cat_padding_top }}px;
-    padding-bottom:{{ section.settings.cat_padding_bottom }}px;
+	.slider-category {
+	  padding-top:{{ section.settings.cat_padding_top }}px;
+	  padding-bottom:{{ section.settings.cat_padding_bottom }}px;
 
-    {% if section.settings.slider_cat_enable %}
-    background-color: {{ section.settings.slider_cat_bgcolor }};
-    {% endif %}
+	  {% if section.settings.slider_cat_enable %}
+	  background-color: {{ section.settings.slider_cat_bgcolor }};
+	  {% endif %}
 
-    {% if section.settings.slider_cat_bg_img_enable %}
-    background-repeat: no-repeat;
-    {% endif %}
-    margin-bottom: -240px;
-  }
-  @media (max-width: 767px) {
-    .slider-category {
-      padding-top: 40px;
-      padding-bottom: 40px;
-      margin-bottom: -170px;
-    }
-  }
+	  {% if section.settings.slider_cat_bg_img_enable %}
+	  background-repeat: no-repeat;
+	  {% endif %}
+	  margin-bottom: -240px;
+	}
+	@media (max-width: 767px) {
+	  .slider-category {
+	    padding-top: 40px;
+	    padding-bottom: 40px;
+	    margin-bottom: -170px;
+	  }
+	}
 </style>

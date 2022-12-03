@@ -1,104 +1,112 @@
 <section class="section-ptb faq-page other-page">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="content-main-title">
-          {% if section.settings.faq_title != '' %}
-          <h2>{{ section.settings.faq_title }}</h2>
-          {% endif %}
-        </div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="content-main-title">
+					{% if section.settings.faq_title != '' %}
+						<h2>{{ section.settings.faq_title }}</h2>
+					{% endif %}
+				</div>
 
-        {% if section.settings.accordion_top_title_enable  %}
-        <div class="feequently-about-content">
-          {% if section.settings.accordion_top_title !='' %}
-          <h6>{{ section.settings.accordion_top_title }}</h6>
-          {% endif %}        
-        </div>
-        {% endif %}
+				{% if section.settings.accordion_top_title_enable %}
+					<div class="feequently-about-content">
+						{% if section.settings.accordion_top_title != '' %}
+							<h6>{{ section.settings.accordion_top_title }}</h6>
+						{% endif %}
+					</div>
+				{% endif %}
 
-        <div class="que-ans">
-          <ul>
-            {% assign i = 0 %}
-            {% for block in section.blocks %}
-            {% assign i = i | plus: 1 %}
-            <li>
-              <a href="#collapse-{{ i }}" data-toggle="collapse" {% if forloop.first %}aria-expanded="true"{% endif %}>{{ block.settings.accordion_title }}</a>
-                <div class="collapse{% if forloop.first %} show{% endif %}" id="collapse-{{ i }}">
-                <p>{{ block.settings.accordion_ans1 }}</p>
+				<div class="que-ans">
+					<ul>
+						{% assign i = 0 %}
+						{% for block in section.blocks %}
+							{% assign i = i | plus: 1 %}
+							<li>
+								<a
+									href="#collapse-{{ i }}"
+									data-toggle="collapse"
+									{% if forloop.first %}
+										aria-expanded="true"
+									{% endif %}
+								>
+									{{- block.settings.accordion_title -}}
+								</a>
+								<div class="collapse{% if forloop.first %} show{% endif %}" id="collapse-{{ i }}">
+									<p>{{ block.settings.accordion_ans1 }}</p>
 
-                {% if block.settings.accordion_ans2 != '' %}
-                <p>{{ block.settings.accordion_ans2 }}</p>
-                {% endif %}
-              </div>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+									{% if block.settings.accordion_ans2 != '' %}
+										<p>{{ block.settings.accordion_ans2 }}</p>
+									{% endif %}
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 {% schema %}
 {
-  "name": "Faq Accordion",
-  "settings": [
-  {
-    "type": "header",
-    "content": "Page Title"
-  },
-  {
-    "type": "text",
-    "id": "faq_title",
-    "label": "Title",
-    "default": "FAQ's"
-  },
-  {
-    "type": "header",
-    "content": "faq accordion Section"
-  },
-  {
-    "type": "checkbox",
-    "id": "accordion_top_title_enable",
-    "label": "Show faq accordion top Section",
-    "default": true
-  },
-  {
-    "type": "text",
-    "id": "accordion_top_title",
-    "label": "Accordion top Section Title",
-    "default": "Below are frequently asked questions, you may find the answer for yourself"
-  }
-  ],
-  "blocks": [
-  {
-    "type": "accordion_area",
-    "name": "Faq Accordion",
-    "settings": [
-    {
-      "type": "text",
-      "id": "accordion_title",
-      "label": "Accordion Title",
-      "default": "Type Here For Question?"
-    },
-    {
-      "type": "textarea",
-      "id": "accordion_ans1",
-      "label": "Answer1",
-      "default": "Type In SideBox For Ans"
-    },
-    {
-      "type": "textarea",
-      "id": "accordion_ans2",
-      "label": "Answer2"
-    }
-    ]
-  }
-  ],
-  "presets":[
-  {
-    "name": "Faq Accordion",
-    "category": "8. Faq Page"
-  }
-  ]
+	"name": "Faq Accordion",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Page Title"
+		},
+		{
+			"type": "text",
+			"id": "faq_title",
+			"label": "Title",
+			"default": "FAQ's"
+		},
+		{
+			"type": "header",
+			"content": "faq accordion Section"
+		},
+		{
+			"type": "checkbox",
+			"id": "accordion_top_title_enable",
+			"label": "Show faq accordion top Section",
+			"default": true
+		},
+		{
+			"type": "text",
+			"id": "accordion_top_title",
+			"label": "Accordion top Section Title",
+			"default": "Below are frequently asked questions, you may find the answer for yourself"
+		}
+	],
+	"blocks": [
+		{
+			"type": "accordion_area",
+			"name": "Faq Accordion",
+			"settings": [
+				{
+					"type": "text",
+					"id": "accordion_title",
+					"label": "Accordion Title",
+					"default": "Type Here For Question?"
+				},
+				{
+					"type": "textarea",
+					"id": "accordion_ans1",
+					"label": "Answer1",
+					"default": "Type In SideBox For Ans"
+				},
+				{
+					"type": "textarea",
+					"id": "accordion_ans2",
+					"label": "Answer2"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Faq Accordion",
+			"category": "8. Faq Page"
+		}
+	]
 }
 {% endschema %}

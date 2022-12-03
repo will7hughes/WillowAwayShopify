@@ -1,117 +1,119 @@
 <section class="about-new">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="new-idea" style="background-image: url('{% if section.settings.newidea_banner %}{{ section.settings.newidea_banner | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x400{% endif %}');">
-                    <div class="text-content">
-                        <h2>{{ section.settings.title }}</h2>
-                    <p>{{ section.settings.text }}</p>
-                    <a href="{{ section.settings.button_url }}" class="btn btn-style">{{ section.settings.button_text }}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div
+					class="new-idea"
+					style="background-image: url('{% if section.settings.newidea_banner %}{{ section.settings.newidea_banner | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x400{% endif %}');"
+				>
+					<div class="text-content">
+						<h2>{{ section.settings.title }}</h2>
+						<p>{{ section.settings.text }}</p>
+						<a href="{{ section.settings.button_url }}" class="btn btn-style">{{ section.settings.button_text }}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 {% schema %}
 {
-    "name": "New Idea",
-    "settings": [
-    {
-      "type": "header",
-      "content": "Section Padding"
-    },
-    {
-      "type": "range",
-      "id": "abt_new_padding_top",  
-      "label": "Section Padding Top",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 60
-    },           
-    {
-      "type": "range",
-      "id": "abt_new_padding_bottom", 
-      "label": "Section Padding Bottom",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 30
-    },
-    {
-        "type": "header",
-        "content": "Content"
-    },
-    {
-        "type": "image_picker",
-        "id": "newidea_banner",
-        "label": "Image",
-        "info": "Recommended Size: 1920 x 1024px"
-    },
-    {
-        "type" : "color",
-        "id" : "newidea_banner_bgcolor",
-        "label" : "Banner BG Color",
-        "default" : "#232323"
-      },
-    {
-      "type": "range",
-      "id": "newidea_banner_opacity",
-      "label": "Opacity",
-      "min": 0,
-      "max": 1,
-      "step": 0.1,
-      "default": 0.5
-    },
-    {
-        "type": "text",
-        "id": "title",
-        "label": "Title",
-        "default": "New In !"
-    },
-    {
-        "type": "text",
-        "id": "text",
-        "label": "Description",
-        "default": "Our latest collection is a combination of our designer's vision and our technical expert's invention; take Dobrada for example, an eye-catching lightweight hybrid with boat shoe detailing."
-    },
-    {
-        "type": "url",
-        "id": "button_url",
-        "label": "URL"
-      },
-      {
-        "type": "text",
-        "id": "button_text",
-        "label": "button text",
-        "default": "Shop now"
-    }
-    ],
-    "presets":[
-    {
-        "name": "New Idea",
-        "category": "2. About us"
-    }
-    ]
+	"name": "New Idea",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "abt_new_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "range",
+			"id": "abt_new_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 30
+		},
+		{
+			"type": "header",
+			"content": "Content"
+		},
+		{
+			"type": "image_picker",
+			"id": "newidea_banner",
+			"label": "Image",
+			"info": "Recommended Size: 1920 x 1024px"
+		},
+		{
+			"type": "color",
+			"id": "newidea_banner_bgcolor",
+			"label": "Banner BG Color",
+			"default": "#232323"
+		},
+		{
+			"type": "range",
+			"id": "newidea_banner_opacity",
+			"label": "Opacity",
+			"min": 0,
+			"max": 1,
+			"step": 0.1,
+			"default": 0.5
+		},
+		{
+			"type": "text",
+			"id": "title",
+			"label": "Title",
+			"default": "New In !"
+		},
+		{
+			"type": "text",
+			"id": "text",
+			"label": "Description",
+			"default": "Our latest collection is a combination of our designer's vision and our technical expert's invention; take Dobrada for example, an eye-catching lightweight hybrid with boat shoe detailing."
+		},
+		{
+			"type": "url",
+			"id": "button_url",
+			"label": "URL"
+		},
+		{
+			"type": "text",
+			"id": "button_text",
+			"label": "button text",
+			"default": "Shop now"
+		}
+	],
+	"presets": [
+		{
+			"name": "New Idea",
+			"category": "2. About us"
+		}
+	]
 }
 {% endschema %}
 <style>
-    .about-new{
-      padding-top: {{ section.settings.abt_new_padding_top }}px;
-      padding-bottom: {{ section.settings.abt_new_padding_bottom }}px;
-    }
-    .new-idea:after{
-      background-color: {{ section.settings.newidea_banner_bgcolor }};
-      opacity: {{ section.settings.newidea_banner_opacity }}; 
-    }
-    @media (max-width: 767px){
-      .about-new{
-        padding-top: 40px;
-      }
-    }
-    
+	.about-new{
+	  padding-top: {{ section.settings.abt_new_padding_top }}px;
+	  padding-bottom: {{ section.settings.abt_new_padding_bottom }}px;
+	}
+	.new-idea:after{
+	  background-color: {{ section.settings.newidea_banner_bgcolor }};
+	  opacity: {{ section.settings.newidea_banner_opacity }};
+	}
+	@media (max-width: 767px){
+	  .about-new{
+	    padding-top: 40px;
+	  }
+	}
 </style>

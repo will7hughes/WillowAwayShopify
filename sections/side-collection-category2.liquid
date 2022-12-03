@@ -1,158 +1,162 @@
 <div class="collection-side-category side-category2">
-    <div class="row">
-        <div class="col">
-            <div class="side-section">
-                <div class="side-section-title">
-                    {% if section.settings.side_cat2_title !='' %}
-                    <h2 class="heading-home">
-                        <span>{{ section.settings.side_cat2_title }}</span>
-                    </h2>
-                    <a data-toggle="collapse" href="#collapse-{{ section.settings.side_cat2_title | replace: ' ' , '-' | remove: '&' }}" class="heading-home">
-                        <span>{{ section.settings.side_cat2_title }}</span>
-                        <i class="fa fa-angle-down"></i>
-                    </a>
-                    {% endif %}
-                </div>
-                <div class="collapse" id="collapse-{{ section.settings.side_cat2_title | replace: ' ' , '-' | remove: '&' }}">
-                    {% assign category_product = collections[section.settings.side_cat2_product] %}
-                    <div class="swiper-container" id="side-cat-2">
-                        <div class="swiper-wrapper">
-                            {% assign category_product_limit = section.settings.side_cat2_product_limit_handle %}
-                            {% for product in category_product.products limit: category_product_limit %}
-                            <div class="swiper-slide">
-                                {% include 'product-grid-list' %}
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col">
+			<div class="side-section">
+				<div class="side-section-title">
+					{% if section.settings.side_cat2_title != '' %}
+						<h2 class="heading-home">
+							<span>{{ section.settings.side_cat2_title }}</span>
+						</h2>
+						<a
+							data-toggle="collapse"
+							href="#collapse-{{ section.settings.side_cat2_title | replace: ' ' , '-' | remove: '&' }}"
+							class="heading-home"
+						>
+							<span>{{ section.settings.side_cat2_title }}</span>
+							<i class="fa fa-angle-down"></i>
+						</a>
+					{% endif %}
+				</div>
+				<div class="collapse" id="collapse-{{ section.settings.side_cat2_title | replace: ' ' , '-' | remove: '&' }}">
+					{% assign category_product = collections[section.settings.side_cat2_product] %}
+					<div class="swiper-container" id="side-cat-2">
+						<div class="swiper-wrapper">
+							{% assign category_product_limit = section.settings.side_cat2_product_limit_handle %}
+							{% for product in category_product.products limit: category_product_limit %}
+								<div class="swiper-slide">
+									{% include 'product-grid-list' %}
+								</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script>
-  var swiper = new Swiper('.swiper-container#side-cat-2', {
-    slidesPerColumn: {{ section.settings.side_cat2_product_col }},
-    slidesPerView: 1,
-    observer: true,
-    observeParents: true,
-    {%- if settings.enable_rtl -%}
-    rtl: true,
-    {%- endif -%}
-    breakpoints: {
-      0: {
-        slidesPerColumn: {{ section.settings.side_cat2_product_col }},
-        spaceBetween: 15
-      },
-      640: {
-        slidesPerColumn: {{ section.settings.side_cat2_product_col }},
-        spaceBetween: 15
-      },
-      768: {
-        slidesPerColumn: {{ section.settings.side_cat2_product_col }},
-      },
-      1024: {
-        slidesPerColumn: 2
-      }
-    }
-  });
+	var swiper = new Swiper('.swiper-container#side-cat-2', {
+	  slidesPerColumn: {{ section.settings.side_cat2_product_col }},
+	  slidesPerView: 1,
+	  observer: true,
+	  observeParents: true,
+	  {%- if settings.enable_rtl -%}
+	  rtl: true,
+	  {%- endif -%}
+	  breakpoints: {
+	    0: {
+	      slidesPerColumn: {{ section.settings.side_cat2_product_col }},
+	      spaceBetween: 15
+	    },
+	    640: {
+	      slidesPerColumn: {{ section.settings.side_cat2_product_col }},
+	      spaceBetween: 15
+	    },
+	    768: {
+	      slidesPerColumn: {{ section.settings.side_cat2_product_col }},
+	    },
+	    1024: {
+	      slidesPerColumn: 2
+	    }
+	  }
+	});
 </script>
 {% schema %}
 {
-  "name": "Side Category Slider2",
-  "settings": [
-  {
-    "type" : "header",
-    "content" : "Section Padding"
-  },
-  {
-    "type": "range",
-    "id": "side_cat2_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 30
-  },
-  {
-    "type": "range",
-    "id": "side_cat2_padding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 30
-  },
-  {
-    "type": "header",
-    "content": "Section Heading"
-  },
-  {
-    "type": "text",
-    "id": "side_cat2_title",
-    "label": "Section Title",
-    "default": "Best Products"
-  },
-  {
-    "type": "header",
-    "content": "Product"
-  },
-  {
-    "type": "select",
-    "id": "side_cat2_product_col",
-    "label": "Slides Per Column",
-    "options":[
-    {
-      "label": "1 Products",
-      "value": "1"
-    },
-    {
-      "label": "2 Products",
-      "value": "2"
-    },
-    {
-      "label": "3 Products",
-      "value": "3"
-    },
-    {
-      "label": "4 Products",
-      "value": "4"
-    }
-    ],
-    "default": "4"
-  },
-  {
-    "type": "text",
-    "id": "side_cat2_product_limit_handle",
-    "label": "Product Limit",
-    "default": "8"
-  },
-  {
-    "type": "color",
-    "id": "side_cat2_bg_color", 
-    "label": "Background Color",
-    "default": "#fff"
-  },
-  {
-    "type" : "collection",
-    "id" : "side_cat2_product",
-    "label" : "Select Collection"
-  }
-  ],
-  "presets": [
-  {
-    "name": "Side Category Slider2",
-    "category": "side category slider2"
-  }
-  ]
+	"name": "Side Category Slider2",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "side_cat2_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 30
+		},
+		{
+			"type": "range",
+			"id": "side_cat2_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 30
+		},
+		{
+			"type": "header",
+			"content": "Section Heading"
+		},
+		{
+			"type": "text",
+			"id": "side_cat2_title",
+			"label": "Section Title",
+			"default": "Best Products"
+		},
+		{
+			"type": "header",
+			"content": "Product"
+		},
+		{
+			"type": "select",
+			"id": "side_cat2_product_col",
+			"label": "Slides Per Column",
+			"options": [
+				{
+					"label": "1 Products",
+					"value": "1"
+				},
+				{
+					"label": "2 Products",
+					"value": "2"
+				},
+				{
+					"label": "3 Products",
+					"value": "3"
+				},
+				{
+					"label": "4 Products",
+					"value": "4"
+				}
+			],
+			"default": "4"
+		},
+		{
+			"type": "text",
+			"id": "side_cat2_product_limit_handle",
+			"label": "Product Limit",
+			"default": "8"
+		},
+		{
+			"type": "color",
+			"id": "side_cat2_bg_color",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "collection",
+			"id": "side_cat2_product",
+			"label": "Select Collection"
+		}
+	],
+	"presets": [
+		{
+			"name": "Side Category Slider2",
+			"category": "side category slider2"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .side-category2{
-    padding-top: {{ section.settings.side_cat2_padding_top }}px;
-    padding-bottom: {{ section.settings.side_cat2_padding_bottom }}px;
-    background-color: {{ section.settings.side_cat2_bg_color }};
-  }
+	.side-category2{
+	  padding-top: {{ section.settings.side_cat2_padding_top }}px;
+	  padding-bottom: {{ section.settings.side_cat2_padding_bottom }}px;
+	  background-color: {{ section.settings.side_cat2_bg_color }};
+	}
 </style>

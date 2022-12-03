@@ -1,163 +1,166 @@
 <section class="collection-category">
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12">
-        <div class="section-capture">
-          <div class="section-title">
-            {% if section.settings.section_special_title !='' %}
-            <h2>{{ section.settings.section_special_title }}</h2>
-            {% endif %}
-            {% if section.settings.section_special_desc !='' %}
-            <p>{{ section.settings.section_special_desc }}</p>
-            {% endif %}
-            {% if settings.section_title_img %}
-            <span>
-              <img src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/77x6{% endif %}" alt="{{ section.title.image.alt }}" />
-            </span>
-            {% endif %}
-          </div>
-        </div>
-        {% assign category_product = collections[section.settings.special_label_product] %}
-        <div class="collection-slider owl-carousel owl-theme" id="pro-special">
-          {% assign category_product_limit = section.settings.category_special_product_limit_handle %}
-          {% for product in category_product.products limit: category_product_limit %}
-          <div class="item">
-            {% include 'product-grid-item' %}
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12">
+				<div class="section-capture">
+					<div class="section-title">
+						{% if section.settings.section_special_title != '' %}
+							<h2>{{ section.settings.section_special_title }}</h2>
+						{% endif %}
+						{% if section.settings.section_special_desc != '' %}
+							<p>{{ section.settings.section_special_desc }}</p>
+						{% endif %}
+						{% if settings.section_title_img %}
+							<span>
+								<img
+									src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/77x6{% endif %}"
+									alt="{{ section.title.image.alt }}"
+								>
+							</span>
+						{% endif %}
+					</div>
+				</div>
+				{% assign category_product = collections[section.settings.special_label_product] %}
+				<div class="collection-slider owl-carousel owl-theme" id="pro-special">
+					{% assign category_product_limit = section.settings.category_special_product_limit_handle %}
+					{% for product in category_product.products limit: category_product_limit %}
+						<div class="item">
+							{% include 'product-grid-item' %}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <script type="text/javascript">
-  $('#pro-special').owlCarousel({
-    loop: false,
-    rewind: true,
-    margin: 30,
-    nav: true,
-    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    dots: false,
-    {%- if settings.enable_rtl -%}
-    rtl: true,
-    {%- endif -%}
-    autoplay: true,
-    sautoplayTimeout: 5000,
-    autoplayHoverPause: true,
-    responsive:{
-      0:{
-        items: 2,
-        margin: 15
-      },
-      479:{
-        items: 2,
-        margin: 15
-      },
-      768:{
-        items: 3
-      },
-      979:{
-        items: 3
-      },
-      1199:{
-        items: {{ section.settings.category_special_product_limit }}
-      }
-    }
-  });
+	$('#pro-special').owlCarousel({
+	  loop: false,
+	  rewind: true,
+	  margin: 30,
+	  nav: true,
+	  navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+	  dots: false,
+	  {%- if settings.enable_rtl -%}
+	  rtl: true,
+	  {%- endif -%}
+	  autoplay: true,
+	  sautoplayTimeout: 5000,
+	  autoplayHoverPause: true,
+	  responsive:{
+	    0:{
+	      items: 2,
+	      margin: 15
+	    },
+	    479:{
+	      items: 2,
+	      margin: 15
+	    },
+	    768:{
+	      items: 3
+	    },
+	    979:{
+	      items: 3
+	    },
+	    1199:{
+	      items: {{ section.settings.category_special_product_limit }}
+	    }
+	  }
+	});
 </script>
 
 {% schema %}
 {
-  "name": "Special Category",
-  "settings": [
-  {
-    "type" : "header",
-    "content" : "Section Padding"
-  },
-  {
-    "type": "range",
-    "id": "category_special_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "range",
-    "id": "category_special_padding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "text",
-    "id": "section_special_title",
-    "label": "Section Title",
-    "default": "Special Products"
-  },
-  {
-    "type": "text",
-    "id": "section_special_desc",
-    "label": "Section Description",
-    "default": "Something new for you!"
-  },
-  {
-    "type": "header",
-    "content": "Product"
-  },
-  {
-    "type": "select",
-    "id": "category_special_product_limit",
-    "label": "slides Per View",
-    "options":[
-    {
-      "label": "2 Products",
-      "value": "2"
-    },
-    {
-      "label": "3 Products",
-      "value": "3"
-    },
-    {
-      "label": "4 Products",
-      "value": "4"
-    }
-    ],
-    "default": "4"
-  },
-  {
-    "type": "text",
-    "id": "category_special_product_limit_handle",
-    "label": "Product Limit",
-    "default": "10"
-  },
-  {
-    "type" : "collection",
-    "id" : "special_label_product",
-    "label" : "Special Product"
-  }
-  ],
-  "presets":[
-  {
-    "name": "Special Product"
-  }
-  ]
+	"name": "Special Category",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "category_special_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "range",
+			"id": "category_special_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "text",
+			"id": "section_special_title",
+			"label": "Section Title",
+			"default": "Special Products"
+		},
+		{
+			"type": "text",
+			"id": "section_special_desc",
+			"label": "Section Description",
+			"default": "Something new for you!"
+		},
+		{
+			"type": "header",
+			"content": "Product"
+		},
+		{
+			"type": "select",
+			"id": "category_special_product_limit",
+			"label": "slides Per View",
+			"options": [
+				{
+					"label": "2 Products",
+					"value": "2"
+				},
+				{
+					"label": "3 Products",
+					"value": "3"
+				},
+				{
+					"label": "4 Products",
+					"value": "4"
+				}
+			],
+			"default": "4"
+		},
+		{
+			"type": "text",
+			"id": "category_special_product_limit_handle",
+			"label": "Product Limit",
+			"default": "10"
+		},
+		{
+			"type": "collection",
+			"id": "special_label_product",
+			"label": "Special Product"
+		}
+	],
+	"presets": [
+		{
+			"name": "Special Product"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .collection-category{
-    padding-top:{{ section.settings.category_special_padding_top }}px;
-    padding-bottom:{{ section.settings.category_special_padding_bottom }}px;
-  }
-  @media (max-width: 767px){
-    .collection-category {
-      padding-top: 40px;
-    }
-  }
+	.collection-category{
+	  padding-top:{{ section.settings.category_special_padding_top }}px;
+	  padding-bottom:{{ section.settings.category_special_padding_bottom }}px;
+	}
+	@media (max-width: 767px){
+	  .collection-category {
+	    padding-top: 40px;
+	  }
+	}
 </style>

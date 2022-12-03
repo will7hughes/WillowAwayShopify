@@ -1,226 +1,231 @@
 <section class="lazyload deal-banner-ptb">
-    <div class="container">
-      <div class="row">
-        <div class="col deal-products-content">
-            <div class="deal-bg lazyload" style="background-image: url('{% if section.settings.deal_bg_img %}{{ section.settings.deal_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x1024{% endif %}');">
-          <div class="block-deal">
-            <div class="section-title">
-              {% if section.settings.section_ttsub !='' %}
-              <span class="deal-ttsub">{{ section.settings.section_ttsub }}</span>
-              {% endif %}
-              {% if section.settings.section_title !='' %}
-              <h2 class="text-color">{{ section.settings.section_title }}</h2>
-              {% endif %}
-            </div>
-            <ul class="contdown_row">
-              <li class="countdown_section">
-                <span id="days" class="countdown_timer"></span>
-                <span class="countdown_title">Days</span>
-              </li>
-              <li class="countdown_section">
-                <span id="hours" class="countdown_timer"></span>
-                <span class="countdown_title">Hours</span>
-              </li>
-              <li class="countdown_section">
-                <span id="minutes" class="countdown_timer"></span>
-                <span class="countdown_title">Minutes</span>
-              </li>
-              <li class="countdown_section">
-                <span id="seconds" class="countdown_timer"></span>
-                <span class="countdown_title">Seconds</span>
-              </li>
-            </ul>
-            <div class="deal-offer-btn">
-              <a href="{{ section.settings.collection_url }}" class="btbn btn-style1">Shop collection</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col deal-products-content">
+				<div
+					class="deal-bg lazyload"
+					style="background-image: url('{% if section.settings.deal_bg_img %}{{ section.settings.deal_bg_img | img_url: 'master' }}{% else %}https://via.placeholder.com/1920x1024{% endif %}');"
+				>
+					<div class="block-deal">
+						<div class="section-title">
+							{% if section.settings.section_ttsub != '' %}
+								<span class="deal-ttsub">{{ section.settings.section_ttsub }}</span>
+							{% endif %}
+							{% if section.settings.section_title != '' %}
+								<h2 class="text-color">{{ section.settings.section_title }}</h2>
+							{% endif %}
+						</div>
+						<ul class="contdown_row">
+							<li class="countdown_section">
+								<span id="days" class="countdown_timer"></span>
+								<span class="countdown_title">Days</span>
+							</li>
+							<li class="countdown_section">
+								<span id="hours" class="countdown_timer"></span>
+								<span class="countdown_title">Hours</span>
+							</li>
+							<li class="countdown_section">
+								<span id="minutes" class="countdown_timer"></span>
+								<span class="countdown_title">Minutes</span>
+							</li>
+							<li class="countdown_section">
+								<span id="seconds" class="countdown_timer"></span>
+								<span class="countdown_title">Seconds</span>
+							</li>
+						</ul>
+						<div class="deal-offer-btn">
+							<a href="{{ section.settings.collection_url }}" class="btbn btn-style1">Shop collection</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 {% schema %}
 {
-  "name": "Home Deal Banner",
-  "settings": [
-  {
-    "type" : "header",
-    "content" : "Section Padding"
-  },
-  {
-    "type": "range",
-    "id": "deal_banner_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 150,
-    "step": 5,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "range",
-    "id": "deal_banner_padding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 150,
-    "step": 5,
-    "unit": "px",
-    "default": 60
-  },
-    {
-    "type" : "checkbox",
-    "id" : "our_ser_check",
-    "label" : "With Backgorund",
-    "default" : true
-  },
-  {
-    "type" : "color",
-    "id" : "our_ser_bgcolor",
-    "label" : "Background Color",
-    "default" : "#fff"
-  },
-  {
-    "type": "header",
-    "content": "Section Heading"
-  },
-   {
-    "type" : "color",
-    "id" : "text_color",
-    "label" : "Text Color",
-    "default" : "#fff"
-  },
-  {
-    "type": "text",
-    "id": "section_ttsub",
-    "label": "Section Title",
-    "default": "We offer a hot deal offer every festival"
-  },
-  {
-    "type": "text",
-    "id": "section_title",
-    "label": "Section Title",
-    "default": "Deal of the day!"
-  },
-  {
-     "type": "image_picker",
-      "id": "deal_bg_img",
-      "label": "Deal images",
-      "info": "Recommended Size: 1920 x 450px"
-  },
-  {
-    "type": "header",
-    "content": "Product Countdown"
-  },
-  {
-    "type": "select",
-    "id": "product_mont",
-    "label": "Countdown month",
-    "options": [
-    {
-      "label": "January",
-      "value": "January"
-    },
-    {
-      "label": "February",
-      "value": "February"
-    },
-    {
-      "label": "March",
-      "value": "March"
-    },
-    {
-      "label": "April",
-      "value": "April"
-    },
-    {
-      "label": "May",
-      "value": "May"
-    },
-    {
-      "label": "June",
-      "value": "June"
-    },
-    {
-      "label": "July",
-      "value": "July"
-    },
-    {
-      "label": "August",
-      "value": "August"
-    },
-    {
-      "label": "September",
-      "value": "September"
-    },
-    {
-      "label": "October",
-      "value": "October"
-    },
-    {
-      "label": "November",
-      "value": "November"
-    },
-    {
-      "label": "December",
-      "value": "December"
-    }
-    ]
-  },
-  {
-    "type": "text",
-    "id": "product_year",
-    "label": "Countdown year",
-    "default": "2020"
-  },
-  {
-    "type": "text",
-    "id": "product_date",
-    "label": "Countdown date",
-    "default": "30"
-  },
-  {
-    "type": "url",
-    "id": "collection_url",
-    "label": "show collection url"
-  }
-  ],
-  "presets": [
-  {
-    "name": "Home deal banner"
-  }
-  ]
+	"name": "Home Deal Banner",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "deal_banner_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 150,
+			"step": 5,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "range",
+			"id": "deal_banner_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 150,
+			"step": 5,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "checkbox",
+			"id": "our_ser_check",
+			"label": "With Backgorund",
+			"default": true
+		},
+		{
+			"type": "color",
+			"id": "our_ser_bgcolor",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "header",
+			"content": "Section Heading"
+		},
+		{
+			"type": "color",
+			"id": "text_color",
+			"label": "Text Color",
+			"default": "#fff"
+		},
+		{
+			"type": "text",
+			"id": "section_ttsub",
+			"label": "Section Title",
+			"default": "We offer a hot deal offer every festival"
+		},
+		{
+			"type": "text",
+			"id": "section_title",
+			"label": "Section Title",
+			"default": "Deal of the day!"
+		},
+		{
+			"type": "image_picker",
+			"id": "deal_bg_img",
+			"label": "Deal images",
+			"info": "Recommended Size: 1920 x 450px"
+		},
+		{
+			"type": "header",
+			"content": "Product Countdown"
+		},
+		{
+			"type": "select",
+			"id": "product_mont",
+			"label": "Countdown month",
+			"options": [
+				{
+					"label": "January",
+					"value": "January"
+				},
+				{
+					"label": "February",
+					"value": "February"
+				},
+				{
+					"label": "March",
+					"value": "March"
+				},
+				{
+					"label": "April",
+					"value": "April"
+				},
+				{
+					"label": "May",
+					"value": "May"
+				},
+				{
+					"label": "June",
+					"value": "June"
+				},
+				{
+					"label": "July",
+					"value": "July"
+				},
+				{
+					"label": "August",
+					"value": "August"
+				},
+				{
+					"label": "September",
+					"value": "September"
+				},
+				{
+					"label": "October",
+					"value": "October"
+				},
+				{
+					"label": "November",
+					"value": "November"
+				},
+				{
+					"label": "December",
+					"value": "December"
+				}
+			]
+		},
+		{
+			"type": "text",
+			"id": "product_year",
+			"label": "Countdown year",
+			"default": "2020"
+		},
+		{
+			"type": "text",
+			"id": "product_date",
+			"label": "Countdown date",
+			"default": "30"
+		},
+		{
+			"type": "url",
+			"id": "collection_url",
+			"label": "show collection url"
+		}
+	],
+	"presets": [
+		{
+			"name": "Home deal banner"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .deal-banner-ptb{
-    {% if section.settings.our_ser_check %}
-    background-color: {{ section.settings.our_ser_bgcolor }};
-    {% endif %}
-    padding-top:{{ section.settings.deal_banner_padding_top }}px;
-    padding-bottom:{{ section.settings.deal_banner_padding_bottom }}px;
-  }
-  @media (max-width: 767px){
-    .deal-banner-ptb {
-      padding-top: 40px;
-    }
-  }
-  .text-color,
-  .block-deal{
-    color: {{ section.settings.text_color }};
-  }
+	.deal-banner-ptb{
+	  {% if section.settings.our_ser_check %}
+	  background-color: {{ section.settings.our_ser_bgcolor }};
+	  {% endif %}
+	  padding-top:{{ section.settings.deal_banner_padding_top }}px;
+	  padding-bottom:{{ section.settings.deal_banner_padding_bottom }}px;
+	}
+	@media (max-width: 767px){
+	  .deal-banner-ptb {
+	    padding-top: 40px;
+	  }
+	}
+	.text-color,
+	.block-deal{
+	  color: {{ section.settings.text_color }};
+	}
 </style>
-<script>  
-  const second = 1000,
-  minute = second * 60,
-  hour = minute * 60,
-  day = hour * 24;
-  let countDown = new Date('{{ section.settings.product_mont }} {{ section.settings.product_date }}, {{ section.settings.product_year }} 00:00:00').getTime(),
-  x = setInterval(function() {
-    let now = new Date().getTime(),
-    distance = countDown - now;
-    document.getElementById('days').innerText = Math.floor(distance / (day)),
-    document.getElementById('hours').innerText = Math.floor((distance % (day)) / (hour)),
-    document.getElementById('minutes').innerText = Math.floor((distance % (hour)) / (minute)),
-    document.getElementById('seconds').innerText = Math.floor((distance % (minute)) / second);
-  }, second)
-</script> 
+<script>
+	const second = 1000,
+		minute = second * 60,
+		hour = minute * 60,
+		day = hour * 24;
+	let countDown = new Date(
+			'{{ section.settings.product_mont }} {{ section.settings.product_date }}, {{ section.settings.product_year }} 00:00:00'
+		).getTime(),
+		x = setInterval(function () {
+			let now = new Date().getTime(),
+				distance = countDown - now;
+			(document.getElementById('days').innerText = Math.floor(distance / day)),
+				(document.getElementById('hours').innerText = Math.floor((distance % day) / hour)),
+				(document.getElementById('minutes').innerText = Math.floor((distance % hour) / minute)),
+				(document.getElementById('seconds').innerText = Math.floor((distance % minute) / second));
+		}, second);
+</script>

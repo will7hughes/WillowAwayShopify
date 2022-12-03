@@ -1,4 +1,4 @@
-{% assign certificate_enabled_values = "TRUE,CERTIFICATE,NFT" | split: "," %}
+{% assign certificate_enabled_values = 'TRUE,CERTIFICATE,NFT' | split: ',' %}
 {% assign computed_certified_enabled = false %}
 {% for collection in product.collections %}
 	{% if certificate_enabled_values contains collection.metafields.verisart._certificate_enabled %}
@@ -7,12 +7,15 @@
 	{% endif %}
 {% endfor %}
 
-{% if shop.metafields.verisart.enabled == 'TRUE' and certificate_enabled_values contains product.metafields.verisart._certificate_enabled or computed_certified_enabled  %}
-  <div style="display:flex;align-items:center;margin: 5px 0;" >
- 	<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2.8 3.23035L0 10.2303L3 17.2303L10 20.0303L17 17.1303L19.8 10.0303L16.9 3.03035L9.8 0.230347L2.8 3.23035Z" stroke="black"></path>
-        <path d="M6.1 10.2304L8.5 15.2304L9 15.1304L13.8 5.0304H12.6L8.7 13.3304L7.2 10.1304L6.1 10.2304Z" fill="black" stroke="black" stroke-width="0.7232" stroke-miterlimit="10"></path>
-    </svg>
-  	<p style="margin:0 0 0 8px ">Verisart Certificate of Authenticity</p>
-  </div>
+{% if shop.metafields.verisart.enabled == 'TRUE'
+	and certificate_enabled_values contains product.metafields.verisart._certificate_enabled
+	or computed_certified_enabled
+%}
+	<div style="display:flex;align-items:center;margin: 5px 0;">
+		<svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M2.8 3.23035L0 10.2303L3 17.2303L10 20.0303L17 17.1303L19.8 10.0303L16.9 3.03035L9.8 0.230347L2.8 3.23035Z" stroke="black"></path>
+			<path d="M6.1 10.2304L8.5 15.2304L9 15.1304L13.8 5.0304H12.6L8.7 13.3304L7.2 10.1304L6.1 10.2304Z" fill="black" stroke="black" stroke-width="0.7232" stroke-miterlimit="10"></path>
+		</svg>
+		<p style="margin:0 0 0 8px ">Verisart Certificate of Authenticity</p>
+	</div>
 {% endif %}

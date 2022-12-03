@@ -1,69 +1,69 @@
 <section class="section-ptb other-page">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <div class="content-main-title">
-          {% if section.settings.pay_policy_title != '' %}
-          <h2>{{ section.settings.pay_policy_title }}</h2>
-          {% endif %}
-        </div>
-        <div class="que-ans">
-          <ul>
-            {% for block in section.blocks %}
-            <li>
-              <h6>{{ block.settings.pay_policy_que }}</h6>
-              <p>{{ block.settings.pay_policy_ans1 }}</p>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="content-main-title">
+					{% if section.settings.pay_policy_title != '' %}
+						<h2>{{ section.settings.pay_policy_title }}</h2>
+					{% endif %}
+				</div>
+				<div class="que-ans">
+					<ul>
+						{% for block in section.blocks %}
+							<li>
+								<h6>{{ block.settings.pay_policy_que }}</h6>
+								<p>{{ block.settings.pay_policy_ans1 }}</p>
 
-              {% if block.settings.pay_policy_ans2 != '' %}
-              <p>{{ block.settings.pay_policy_ans2 }}</p>
-              {% endif %}
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+								{% if block.settings.pay_policy_ans2 != '' %}
+									<p>{{ block.settings.pay_policy_ans2 }}</p>
+								{% endif %}
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 {% schema %}
 {
-  "name": "Payment Policy",
-  "settings": [
-  {
-    "type": "header",
-    "content": "Page Title"
-  },
-  {
-    "type": "text",
-    "id": "pay_policy_title",
-    "label": "Title",
-    "default": "Payment Policy"
-  }
-  ],
-  "blocks":[
-  {
-    "type": "payment-policy",
-    "name": "Payment Policy",
-    "settings": [
-    {
-      "type": "text",
-      "id": "pay_policy_que",
-      "label": "Question",
-      "info": "Type Here For Question?"
-    },
-    {
-      "type": "textarea",
-      "id": "pay_policy_ans1",
-      "label": "Answer1",
-      "default": "Type In SideBox For Ans"
-    },
-    {
-      "type": "textarea",
-      "id": "pay_policy_ans2",
-      "label": "Answer2"
-    }
-    ]
-  }
-  ]
+	"name": "Payment Policy",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Page Title"
+		},
+		{
+			"type": "text",
+			"id": "pay_policy_title",
+			"label": "Title",
+			"default": "Payment Policy"
+		}
+	],
+	"blocks": [
+		{
+			"type": "payment-policy",
+			"name": "Payment Policy",
+			"settings": [
+				{
+					"type": "text",
+					"id": "pay_policy_que",
+					"label": "Question",
+					"info": "Type Here For Question?"
+				},
+				{
+					"type": "textarea",
+					"id": "pay_policy_ans1",
+					"label": "Answer1",
+					"default": "Type In SideBox For Ans"
+				},
+				{
+					"type": "textarea",
+					"id": "pay_policy_ans2",
+					"label": "Answer2"
+				}
+			]
+		}
+	]
 }
 {% endschema %}

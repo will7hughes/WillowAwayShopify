@@ -1,249 +1,271 @@
 <div class="shop-sidebar-inner">
-  <div class="shop-sidebar sidebar-filter">
-    <div class="clear-content">
-      <h4 class="title">Filter:</h4>
-      <a href="/collections/all">Clear All</a>  
-    </div>
-    <ul class="filter-selected">
-      <li class="tag-selected-filter"></li>
-    </ul>
-  </div>
-  <div class="shop-sidebar sidebar-wedget">
-    {%- if settings.categories_title != '' -%}
-    <h4 class="title">{{ settings.categories_title }}</h4>
-    <a class="accord" data-toggle="collapse" href="#collapse-{{ settings.categories_title }}">{{ settings.categories_title }}</a>
-    {%- endif -%}
-    <div class="collapse" id="collapse-{{ settings.categories_title }}">
-      <ul class="scrollbar mCustomScrollbar" data-mcs-theme="dark">
-        {% for c in collections %}
-        {% if c.products_count >= 1 %}
-        <li class="{% if collection and collection.handle == c.handle %}active{% endif %}">
-          {% if collection and collection.handle == c.handle %}
-          <input type="checkbox" checked="checked" name="{{ c.title }}" class="cust-checkbox">
-          {% else %}
-          <input type="checkbox" class="cust-checkbox" name="{{ c.title }}">
-          {% endif %}
-          <a href="{{ c.url }}" class="cust-checkbox-label" title="{{ c.title }}">
-            {{ c.title | truncate: 20 }}
-            <span class="count-check">({{ c.products_count }})</span>
-            <span class="cust-check"></span>
-          </a>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-  {% if collection.all_tags.size > 1 %}
-  {% for tag in collection.all_tags %}
-  {% if tag contains '_' %}
-  {% assign splitTag = tag | split: '_' %}
-  {% unless filterTags contains splitTag.first %}
-  {% capture filterTags %}{{ filterTags }}+{{ splitTag.first }}{% endcapture %}
-  {% endunless %}
-  {% endif %}
-  {% endfor %}
-  {% assign filterTags = filterTags | slice: 1, filterTags.size | split: '+' %}
-  
-  <form id="custom-collection-filter" action="/collections/{{ collection.handle }}">
-    {% assign i = 0 %}
-    {% for tag in filterTags %}
-    <div class="shop-sidebar sidebar-wedget {{ tag | capitalize }}">
-      {% assign i = i | plus:1 %}
-      <h4>Filter by {{ tag | capitalize }}</h4>
-      <a class="accord" data-toggle="collapse" href="#collapse{{ i }}">Filter by {{ tag | capitalize }}</a>
-      <div class="collapse" id="collapse{{ i }}">
-        <ul class="multiple-filters scrollbar mCustomScrollbar" data-mcs-theme="dark">
-          {% for aTag in collection.all_tags %}
-          {% assign tempTag = aTag | split: '_' %}
-          {% if tag == tempTag.first %}
-          <li class="{{ tag }}">
-            <label class="cust-checkbox-label {{ tag }}">
-              
-                {{ tempTag.last | truncate: 20}}
-              {% if current_tags contains aTag %}
-              <input type="checkbox" checked="checked" data-tag="{{aTag}}" data-remove-tag="{{tempTag.last}}" name="{{ tempTag.first }}" value="{{ aTag }}" class="cust-checkbox active-filter">
-              {% else %}
-              <input type="checkbox" data-tag="{{aTag}}" data-remove-tag="{{tempTag.last}}" name="{{ tempTag.first }}" value="{{ aTag }}" class="cust-checkbox">
-              {% endif %}
-              <span class="cust-check" data-tag="{{aTag}}" data-remove-tag="{{tempTag.last}}"  style="background: {{ tempTag.last | truncate: 20}} no-repeat center; background-size: initial;"></span>
-            </label>
-          </li>
-          {% endif %}
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
-    {% endfor %}
-  </form>
-<!--   Willow: Disabled sidebar_banner -->
-<!--   <div class="shop-sidebar widget_media_image">
-    <a href="{{ section.settings.sidebar_banner_url }}" class="banner-hover">
-      <img class="img-fluid" src="{% if section.settings.sidebar_banner %}{{ section.settings.sidebar_banner | img_url: 'master' }}{% else %}https://via.placeholder.com/443x512{% endif %}">
-    </a>
-  </div> -->
-  <script>
-    var arr=[];
-    $('.multiple-filters li input').each(function() {
-        
-        $(this).on('click',function(i) {
-          $('.ajax-filter-loader').css('display','block');
-           
+	<div class="shop-sidebar sidebar-filter">
+		<div class="clear-content">
+			<h4 class="title">Filter:</h4>
+			<a href="/collections/all">Clear All</a>
+		</div>
+		<ul class="filter-selected">
+			<li class="tag-selected-filter"></li>
+		</ul>
+	</div>
+	<div class="shop-sidebar sidebar-wedget">
+		{%- if settings.categories_title != '' -%}
+			<h4 class="title">{{ settings.categories_title }}</h4>
+			<a class="accord" data-toggle="collapse" href="#collapse-{{ settings.categories_title }}">
+				{{- settings.categories_title -}}
+			</a>
+		{%- endif -%}
+		<div class="collapse" id="collapse-{{ settings.categories_title }}">
+			<ul class="scrollbar mCustomScrollbar" data-mcs-theme="dark">
+				{% for c in collections %}
+					{% if c.products_count >= 1 %}
+						<li class="{% if collection and collection.handle == c.handle %}active{% endif %}">
+							{% if collection and collection.handle == c.handle %}
+								<input type="checkbox" checked="checked" name="{{ c.title }}" class="cust-checkbox">
+							{% else %}
+								<input type="checkbox" class="cust-checkbox" name="{{ c.title }}">
+							{% endif %}
+							<a href="{{ c.url }}" class="cust-checkbox-label" title="{{ c.title }}">
+								{{ c.title | truncate: 20 }}
+								<span class="count-check">({{ c.products_count }})</span>
+								<span class="cust-check"></span>
+							</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	{% if collection.all_tags.size > 1 %}
+		{% for tag in collection.all_tags %}
+			{% if tag contains '_' %}
+				{% assign splitTag = tag | split: '_' %}
+				{% unless filterTags contains splitTag.first %}
+					{% capture filterTags %}{{ filterTags }}+{{ splitTag.first }}{% endcapture %}
+				{% endunless %}
+			{% endif %}
+		{% endfor %}
+		{% assign filterTags = filterTags | slice: 1, filterTags.size | split: '+' %}
 
-          if($(this).hasClass('active-filter')){
-            var remove_elements = $(this).attr('data-tag');
-            var new_url = removeItemAll(arr,remove_elements);
-            $(this).removeClass('active-filter');
-            $(this).next('span').removeClass('active-filter');
-            $('#'+remove_elements).remove();
-          }else{
-            arr.push($(this).attr('data-tag'));
-            $(this).addClass('active-filter');
-            $(this).next('span').addClass('active-filter');
-            var new_url = arr.join("+");
-            var new_data_tag = $(this).attr('data-tag');
-            var remove_ele = $(this).attr('data-remove-tag');
-            $('.tag-selected-filter').append('<a href="javascript:void(0);" class="remove-filter" id='+new_data_tag+' data-tag='+new_data_tag+'><span class="remove-filter-selected">'+remove_ele+'<i class="ion-close-round"></i></span></a>');
-          }
-          
-          {% if collection.handle %}
-            var shop = '/collections/{{ collection.handle }}/';
-          {% elsif collection.products.first.type == collection.title %}
-            var shop = '{{ collection.title | url_for_type }}';
-          {% elsif collection.products.first.vendor == collection.title %}
-            var shop = '{{ collection.title | url_for_vendor }}';
-          {% endif %}
-            
-          if(typeof new_url === "undefined" ){
-            var redirect_url =  shop;
-            
-          }else{
-            var redirect_url =  shop + new_url;
-          }
-          
-            $.get({
-              url: redirect_url,
-              success: function (data) {
-            setTimeout(function(){ 
-                  var get_data = $(data).find('.shop-grid').html();
-                  ///console.log(get_data);
-                  $('.get-data-products').html(get_data);
-                  $('.st-col-item').css('display','block');
-                  $('.ajax-filter-loader').css('display','none');
-                  SPR.registerCallbacks();
-                  SPR.initRatingHandler();
-                  SPR.initDomEls();
-                  SPR.loadProducts();
-                  SPR.loadBadges();
-                }, 300);
+		<form id="custom-collection-filter" action="/collections/{{ collection.handle }}">
+			{% assign i = 0 %}
+			{% for tag in filterTags %}
+				<div class="shop-sidebar sidebar-wedget {{ tag | capitalize }}">
+					{% assign i = i | plus: 1 %}
+					<h4>Filter by {{ tag | capitalize }}</h4>
+					<a class="accord" data-toggle="collapse" href="#collapse{{ i }}">Filter by {{ tag | capitalize }}</a>
+					<div class="collapse" id="collapse{{ i }}">
+						<ul class="multiple-filters scrollbar mCustomScrollbar" data-mcs-theme="dark">
+							{% for aTag in collection.all_tags %}
+								{% assign tempTag = aTag | split: '_' %}
+								{% if tag == tempTag.first %}
+									<li class="{{ tag }}">
+										<label class="cust-checkbox-label {{ tag }}">
+											{{ tempTag.last | truncate: 20 }}
+											{% if current_tags contains aTag %}
+												<input
+													type="checkbox"
+													checked="checked"
+													data-tag="{{aTag}}"
+													data-remove-tag="{{tempTag.last}}"
+													name="{{ tempTag.first }}"
+													value="{{ aTag }}"
+													class="cust-checkbox active-filter"
+												>
+											{% else %}
+												<input
+													type="checkbox"
+													data-tag="{{aTag}}"
+													data-remove-tag="{{tempTag.last}}"
+													name="{{ tempTag.first }}"
+													value="{{ aTag }}"
+													class="cust-checkbox"
+												>
+											{% endif %}
+											<span
+												class="cust-check"
+												data-tag="{{aTag}}"
+												data-remove-tag="{{tempTag.last}}"
+												style="background: {{ tempTag.last | truncate: 20}} no-repeat center; background-size: initial;"
+											></span>
+										</label>
+									</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			{% endfor %}
+		</form>
+		<!-- Willow: Disabled sidebar_banner -->
+		<!--
+			<div class="shop-sidebar widget_media_image">
+			  <a href="{{ section.settings.sidebar_banner_url }}" class="banner-hover">
+			    <img class="img-fluid" src="{% if section.settings.sidebar_banner %}{{ section.settings.sidebar_banner | img_url: 'master' }}{% else %}https://via.placeholder.com/443x512{% endif %}">
+			  </a>
+			</div>
+		-->
+		<script>
+			var arr=[];
+			$('.multiple-filters li input').each(function() {
 
-              }
-           });
-           window.history.pushState({path:redirect_url},'',redirect_url);
-           
-            
-          
-           
-          
-        });
-        
-     });
-      
-     $(document).on("click",".remove-filter",function() {
-         
-        $('.ajax-filter-loader').css('display','block');
-         var remove_elements = $(this).attr('data-tag');
-         var url = location.href
-         var lastURLSegment = url.substr(url.lastIndexOf('/') + 1);
-         var new_url = removeItemAll(arr,remove_elements);
-         var  redirect_url = new_url.join("+");
-         //console.log(redirect_url)
-         {% if collection.handle %}
-            var shop = '/collections/{{ collection.handle }}/';
-          {% elsif collection.products.first.type == collection.title %}
-            var shop = '{{ collection.title | url_for_type }}';
-          {% elsif collection.products.first.vendor == collection.title %}
-            var shop = '{{ collection.title | url_for_vendor }}';
-          {% endif %}
-          
-          if(typeof new_url === "undefined" ){
-            var redirect_new_url =  shop;
-            
-          }else{
-            var redirect_url =  shop + redirect_url;
-          }
-            
-         $.get({
-              url: redirect_url,
-              success: function (data) {
-            setTimeout(function(){ 
-                  var get_data = $(data).find('.shop-grid').html();
-                  ///console.log(get_data);
-                  $('.get-data-products').html(get_data);
-                  $('.st-col-item').css('display','block');
-                $('.ajax-filter-loader').css('display','none');
-                  SPR.registerCallbacks();
-                  SPR.initRatingHandler();
-                  SPR.initDomEls();
-                  SPR.loadProducts();
-                  SPR.loadBadges();
-                }, 300);
-              }
-           });
-           window.history.pushState({path:redirect_url},'',redirect_url);
-           $(this).remove();
-           $('.active-filter').each(function(){
-              //console.log($(this).val());
-             if($(this).val() == remove_elements){
-                  $(this).removeClass('active-filter');
-                  $(this).next('span').removeClass('active-filter');
-             }
-           });
-     });
-    
+			    $(this).on('click',function(i) {
+			      $('.ajax-filter-loader').css('display','block');
 
-    (function($){
-      //alert('sfsfrer');
-      $(window).on("load",function(){
-        $(".scrollbar").mCustomScrollbar({theme:"dark-3"});
-      });
-        
-      var url = location.href;
-      var lastURLSegment = url.substr(url.lastIndexOf('/') + 1);
-      var active_filter = lastURLSegment.split("+");
-      //console.log(active_filter);
-    if(active_filter.length != null){
-        
-        $(active_filter).each(function(){
-          $('.cust-checkbox').each(function(){
-            if($(this).val() == active_filter){
-                var remove_ele = $(this).val().split("_");
-               //console.log(remove_ele[1]);
-                $(this).addClass('active-filter');
-                $(this).next('span').addClass('active-filter');
-                $('.tag-selected-filter').append('<a href="javascript:void(0);" class="remove-filter" id='+active_filter+' data-tag='+active_filter+'><span class="remove-filter-selected">'+remove_ele[1]+'<i class="ion-close-round"></i></span></a>');
-            }
-          });
-        });
-      }
-      
-    })(jQuery);
-  
-    function removeItemAll(arr, value) {
-      var i = 0;
-      while (i < arr.length) {
-        if (arr[i] === value) {
-          arr.splice(i, 1);
-        } else {
-          ++i;
-        }
-      }
-      return arr;
-    }
 
-  </script>
-  {% endif %}
+			      if($(this).hasClass('active-filter')){
+			        var remove_elements = $(this).attr('data-tag');
+			        var new_url = removeItemAll(arr,remove_elements);
+			        $(this).removeClass('active-filter');
+			        $(this).next('span').removeClass('active-filter');
+			        $('#'+remove_elements).remove();
+			      }else{
+			        arr.push($(this).attr('data-tag'));
+			        $(this).addClass('active-filter');
+			        $(this).next('span').addClass('active-filter');
+			        var new_url = arr.join("+");
+			        var new_data_tag = $(this).attr('data-tag');
+			        var remove_ele = $(this).attr('data-remove-tag');
+			        $('.tag-selected-filter').append('<a href="javascript:void(0);" class="remove-filter" id='+new_data_tag+' data-tag='+new_data_tag+'><span class="remove-filter-selected">'+remove_ele+'<i class="ion-close-round"></i></span></a>');
+			      }
+
+			      {% if collection.handle %}
+			        var shop = '/collections/{{ collection.handle }}/';
+			      {% elsif collection.products.first.type == collection.title %}
+			        var shop = '{{ collection.title | url_for_type }}';
+			      {% elsif collection.products.first.vendor == collection.title %}
+			        var shop = '{{ collection.title | url_for_vendor }}';
+			      {% endif %}
+
+			      if(typeof new_url === "undefined" ){
+			        var redirect_url =  shop;
+
+			      }else{
+			        var redirect_url =  shop + new_url;
+			      }
+
+			        $.get({
+			          url: redirect_url,
+			          success: function (data) {
+			        setTimeout(function(){
+			              var get_data = $(data).find('.shop-grid').html();
+			              ///console.log(get_data);
+			              $('.get-data-products').html(get_data);
+			              $('.st-col-item').css('display','block');
+			              $('.ajax-filter-loader').css('display','none');
+			              SPR.registerCallbacks();
+			              SPR.initRatingHandler();
+			              SPR.initDomEls();
+			              SPR.loadProducts();
+			              SPR.loadBadges();
+			            }, 300);
+
+			          }
+			       });
+			       window.history.pushState({path:redirect_url},'',redirect_url);
+
+
+
+
+
+			    });
+
+			 });
+
+			 $(document).on("click",".remove-filter",function() {
+
+			    $('.ajax-filter-loader').css('display','block');
+			     var remove_elements = $(this).attr('data-tag');
+			     var url = location.href
+			     var lastURLSegment = url.substr(url.lastIndexOf('/') + 1);
+			     var new_url = removeItemAll(arr,remove_elements);
+			     var  redirect_url = new_url.join("+");
+			     //console.log(redirect_url)
+			     {% if collection.handle %}
+			        var shop = '/collections/{{ collection.handle }}/';
+			      {% elsif collection.products.first.type == collection.title %}
+			        var shop = '{{ collection.title | url_for_type }}';
+			      {% elsif collection.products.first.vendor == collection.title %}
+			        var shop = '{{ collection.title | url_for_vendor }}';
+			      {% endif %}
+
+			      if(typeof new_url === "undefined" ){
+			        var redirect_new_url =  shop;
+
+			      }else{
+			        var redirect_url =  shop + redirect_url;
+			      }
+
+			     $.get({
+			          url: redirect_url,
+			          success: function (data) {
+			        setTimeout(function(){
+			              var get_data = $(data).find('.shop-grid').html();
+			              ///console.log(get_data);
+			              $('.get-data-products').html(get_data);
+			              $('.st-col-item').css('display','block');
+			            $('.ajax-filter-loader').css('display','none');
+			              SPR.registerCallbacks();
+			              SPR.initRatingHandler();
+			              SPR.initDomEls();
+			              SPR.loadProducts();
+			              SPR.loadBadges();
+			            }, 300);
+			          }
+			       });
+			       window.history.pushState({path:redirect_url},'',redirect_url);
+			       $(this).remove();
+			       $('.active-filter').each(function(){
+			          //console.log($(this).val());
+			         if($(this).val() == remove_elements){
+			              $(this).removeClass('active-filter');
+			              $(this).next('span').removeClass('active-filter');
+			         }
+			       });
+			 });
+
+
+			(function($){
+			  //alert('sfsfrer');
+			  $(window).on("load",function(){
+			    $(".scrollbar").mCustomScrollbar({theme:"dark-3"});
+			  });
+
+			  var url = location.href;
+			  var lastURLSegment = url.substr(url.lastIndexOf('/') + 1);
+			  var active_filter = lastURLSegment.split("+");
+			  //console.log(active_filter);
+			if(active_filter.length != null){
+
+			    $(active_filter).each(function(){
+			      $('.cust-checkbox').each(function(){
+			        if($(this).val() == active_filter){
+			            var remove_ele = $(this).val().split("_");
+			           //console.log(remove_ele[1]);
+			            $(this).addClass('active-filter');
+			            $(this).next('span').addClass('active-filter');
+			            $('.tag-selected-filter').append('<a href="javascript:void(0);" class="remove-filter" id='+active_filter+' data-tag='+active_filter+'><span class="remove-filter-selected">'+remove_ele[1]+'<i class="ion-close-round"></i></span></a>');
+			        }
+			      });
+			    });
+			  }
+
+			})(jQuery);
+
+			function removeItemAll(arr, value) {
+			  var i = 0;
+			  while (i < arr.length) {
+			    if (arr[i] === value) {
+			      arr.splice(i, 1);
+			    } else {
+			      ++i;
+			    }
+			  }
+			  return arr;
+			}
+		</script>
+	{% endif %}
 </div>
 <script>
-  $(".sidebar-wedget li.active a").removeAttr("href");
+	$('.sidebar-wedget li.active a').removeAttr('href');
 </script>

@@ -1,17 +1,15 @@
 {{ '//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js' | script_tag }}
 {{ 'jquery.products.min.js' | asset_url | script_tag }}
 
-
 <aside class="widget widget-product mb-30">
-  <div id="recently-viewed-products-area " class="">
-    <div class="widget-title">
-      {% if section.settings.recent_view_product_title != '' %}
-      <h4 class="">{{ section.settings.recent_view_product_title }}</h4>
-      {% endif %}
-    </div>  
-    <div class="widget-info sidebar-product clearfix" id="recently-viewed-products">
-    </div>  
-  </div>
+	<div id="recently-viewed-products-area " class="">
+		<div class="widget-title">
+			{% if section.settings.recent_view_product_title != '' %}
+				<h4 class="">{{ section.settings.recent_view_product_title }}</h4>
+			{% endif %}
+		</div>
+		<div class="widget-info sidebar-product clearfix" id="recently-viewed-products"></div>
+	</div>
 </aside>
 {% raw %}
 <script id="recently-viewed-product-template" type="text/x-jquery-tmpl">
@@ -41,30 +39,28 @@
 {% endraw %}
 
 <script>
+	{% comment %}
+	/* this code for currency support */
+	window.show_multiple_currencies = {{settings.show_multiple_currencies}};
+	window.shop_currency = "{{ shop.currency }}";
+	window.money_format = "{{shop.money_with_currency_format}}";
+	{% endcomment %}
 
-  {% comment %}
-  /* this code for currency support */
-  window.show_multiple_currencies = {{settings.show_multiple_currencies}};
-  window.shop_currency = "{{ shop.currency }}";
-  window.money_format = "{{shop.money_with_currency_format}}";
-  {% endcomment %}
-  
-  
-  /* recently viewed plugin api start */
-  Shopify.Products.showRecentlyViewed( {
-    howManyToShow:{{ section.settings.recent_view_product_limit_hanlde }},
-    howManyToStoreInMemory:{{ section.settings.recent_view_product_memory_limit_hanlde }},
-    wrapperId: 'recently-viewed-products', 
-    templateId: 'recently-viewed-product-template', 
-    onComplete: function() {
 
-    if (window.show_multiple_currencies) {
-    /* this section ID to be your currency picker (Select) ID */
-    Currency.convertAll(window.shop_currency, jQuery('#currencies').val(), 'span.money', 'money_format');
-  }
-                                      }
+	/* recently viewed plugin api start */
+	Shopify.Products.showRecentlyViewed( {
+	  howManyToShow:{{ section.settings.recent_view_product_limit_hanlde }},
+	  howManyToStoreInMemory:{{ section.settings.recent_view_product_memory_limit_hanlde }},
+	  wrapperId: 'recently-viewed-products',
+	  templateId: 'recently-viewed-product-template',
+	  onComplete: function() {
 
-                                      } );
-  /* recently viewed plugin api end */
+	  if (window.show_multiple_currencies) {
+	  /* this section ID to be your currency picker (Select) ID */
+	  Currency.convertAll(window.shop_currency, jQuery('#currencies').val(), 'span.money', 'money_format');
+	}
+	                                    }
 
+	                                    } );
+	/* recently viewed plugin api end */
 </script>

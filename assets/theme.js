@@ -1,18 +1,9 @@
-(function($) {
-    "use strict";
+(function ($) {
+	"use strict";
 
-	jQuery(document).ready(function(){
-
-	
-      
-    /* Match Heigh   
+	jQuery(document).ready(function () {
+		/* Match Heigh   
 	$('.item').matchHeight();
     */
-      
-      
-    });
-
+	});
 })(jQuery);
-
-
-

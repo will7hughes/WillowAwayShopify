@@ -11,19 +11,16 @@
 {{ 'plugins.css' | asset_url | stylesheet_tag }}
 {{ 'magnific-popup.css' | asset_url | stylesheet_tag }}
 
-
 {%- if settings.enable_preloader -%}
-{{ 'preloader.css' | asset_url | stylesheet_tag }}
+	{{ 'preloader.css' | asset_url | stylesheet_tag }}
 {% endif %}
 {{ 'theme-default.css' | asset_url | stylesheet_tag }}
 {%- if settings.enable_rtl -%}
-{{ 'style-rtl.css' | asset_url | stylesheet_tag }}
+	{{ 'style-rtl.css' | asset_url | stylesheet_tag }}
 {%- else -%}
-{{ 'style.css' | asset_url | stylesheet_tag }}
+	{{ 'style.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 {{ 'theme-custom.css' | asset_url | stylesheet_tag }}
 {{ 'theme-responsive.css' | asset_url | stylesheet_tag }}
 {{ 'skin-theme.css' | asset_url | stylesheet_tag }}
 {{ 'theme-color.css' | asset_url | stylesheet_tag }}
-
-

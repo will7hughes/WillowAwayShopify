@@ -1,6 +1,14 @@
 {
-  "devDependencies": {
-    "@shopify/prettier-plugin-liquid": "^1.0.0-rc.1",
-    "prettier": "^2.8.0"
-  }
+	"devDependencies": {
+		"@shopify/prettier-plugin-liquid": "^1.0.0-rc.1",
+		"prettier": "2.8.0"
+	},
+	"shopifyLiquid.formatterDevPreview": true,
+	"[liquid]": {
+		"editor.defaultFormatter": "Shopify.theme-check-vscode",
+		"editor.formatOnSave": true
+	},
+	"scripts": {
+		"prettier": "prettier"
+	}
 }

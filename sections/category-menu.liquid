@@ -1,64 +1,64 @@
 <section class="category-menu">
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-        <div class="category-menu-area">
-          {% include 'category-main-menu' %}
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+				<div class="category-menu-area">
+					{% include 'category-main-menu' %}
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- header-area end -->
 {% schema %}
 {
-  "name": "Category Menu",
-  "settings": [
-  {
-    "type": "header",
-    "content": "desktop"
-  },
-  {
-    "type" : "checkbox",
-    "id" : "desk_cat_menu_check",
-    "label" : "Show In Desktop",
-    "default" : false
-  },
-  {
-    "type": "header",
-    "content": "mobile"
-  },
-  {
-    "type" : "checkbox",
-    "id" : "xs_cat_menu_check",
-    "label" : "Show In Mobile",
-    "default" : true
-  }
-  ],
-  "presets":[
-  {
-    "name": "Category Menu",
-    "category": "category menu"
-  }
-  ]
+	"name": "Category Menu",
+	"settings": [
+		{
+			"type": "header",
+			"content": "desktop"
+		},
+		{
+			"type": "checkbox",
+			"id": "desk_cat_menu_check",
+			"label": "Show In Desktop",
+			"default": false
+		},
+		{
+			"type": "header",
+			"content": "mobile"
+		},
+		{
+			"type": "checkbox",
+			"id": "xs_cat_menu_check",
+			"label": "Show In Mobile",
+			"default": true
+		}
+	],
+	"presets": [
+		{
+			"name": "Category Menu",
+			"category": "category menu"
+		}
+	]
 }
 {% endschema %}
 <style>
-  {% if section.settings.desk_cat_menu_check %}
-    .category-menu{
-      display: block;
-    }
-  {% else %}
-    .category-menu{
-      display: none;
-    }
-  {% endif %}
+	{% if section.settings.desk_cat_menu_check %}
+	  .category-menu{
+	    display: block;
+	  }
+	{% else %}
+	  .category-menu{
+	    display: none;
+	  }
+	{% endif %}
 
-  @media (max-width : 767px){
-    {% if section.settings.xs_cat_menu_check %}
-    .category-menu{
-      display: block;
-    }
-    {% endif %}
-  }
+	@media (max-width : 767px){
+	  {% if section.settings.xs_cat_menu_check %}
+	  .category-menu{
+	    display: block;
+	  }
+	  {% endif %}
+	}
 </style>

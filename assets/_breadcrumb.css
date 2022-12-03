@@ -1,7 +1,9 @@
 .ht-breadcrumb-one {
-  display: block;
-  float: left;
-  position: relative;
-  z-index: 1; }
-  .ht-breadcrumb-one li {
-    float: left; }
+	display: block;
+	float: left;
+	position: relative;
+	z-index: 1;
+}
+.ht-breadcrumb-one li {
+	float: left;
+}

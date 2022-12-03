@@ -1,145 +1,151 @@
 <!-- our-brand-area start -->
 <section class="our-brand-logo">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        {% if section.settings.brand_title !='' %}
-        <div class="section-capture">
-          <div class="section-title">
-            {% if section.settings.brand_title !='' %}
-            <h2>{{ section.settings.brand_title }}</h2>
-            {% endif %}
-            {% if settings.section_title_img %}
-            <span>
-              <img src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/232x5{% endif %}" alt="{{ section.title.image.alt }}" />
-            </span>
-            {% endif %}
-          </div>
-        </div>
-        {% endif %}
-        <div class="brand-logo owl-carousel owl-theme" id="brand-logo">
-          {% for block in section.blocks %}
-          <div class="item">
-            <a href="javascript:void(0)" class="brand-img">
-              <img src="{% if block.settings.brand_image %}{{ block.settings.brand_image | img_url: 'master' }} {% else %}https://via.placeholder.com/170x82 {% endif %}" alt="{{ block.settings.brand_image.alt }}">
-            </a>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				{% if section.settings.brand_title != '' %}
+					<div class="section-capture">
+						<div class="section-title">
+							{% if section.settings.brand_title != '' %}
+								<h2>{{ section.settings.brand_title }}</h2>
+							{% endif %}
+							{% if settings.section_title_img %}
+								<span>
+									<img
+										src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/232x5{% endif %}"
+										alt="{{ section.title.image.alt }}"
+									>
+								</span>
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+				<div class="brand-logo owl-carousel owl-theme" id="brand-logo">
+					{% for block in section.blocks %}
+						<div class="item">
+							<a href="javascript:void(0)" class="brand-img">
+								<img
+									src="{% if block.settings.brand_image %}{{ block.settings.brand_image | img_url: 'master' }} {% else %}https://via.placeholder.com/170x82 {% endif %}"
+									alt="{{ block.settings.brand_image.alt }}"
+								>
+							</a>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <!-- our-brand-area end -->
 <script>
-  $('#brand-logo').owlCarousel({
-    loop: false,
-    rewind: true,
-    margin: 30,
-    nav: false,
-    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    dots: false,
-    {%- if settings.enable_rtl -%}
-    rtl: true,
-    {%- endif -%}
-    autoplay: true,
-    sautoplayTimeout: 5000,
-    autoplayHoverPause: true,
-    responsive:{
-      0:{
-        items: 2
-      },
-      479:{
-        items: 2
-      },
-      768:{
-        items: 3
-      },
-      979:{
-        items: 4
-      },
-      1199:{
-        items: 6
-      }
-    }
-  });
+	$('#brand-logo').owlCarousel({
+	  loop: false,
+	  rewind: true,
+	  margin: 30,
+	  nav: false,
+	  navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+	  dots: false,
+	  {%- if settings.enable_rtl -%}
+	  rtl: true,
+	  {%- endif -%}
+	  autoplay: true,
+	  sautoplayTimeout: 5000,
+	  autoplayHoverPause: true,
+	  responsive:{
+	    0:{
+	      items: 2
+	    },
+	    479:{
+	      items: 2
+	    },
+	    768:{
+	      items: 3
+	    },
+	    979:{
+	      items: 4
+	    },
+	    1199:{
+	      items: 6
+	    }
+	  }
+	});
 </script>
 {% schema %}
 {
-  "name": "Brand Logo",
-  "settings": [
-  {
-    "type": "range",
-    "id": "brand_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 0
-  },
-  {
-    "type": "range",
-    "id": "brand_padding_bottom",
-    "label": "Section Padding bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 0
-  },
-  {
-    "type" : "header",
-    "content" : "Background Color"
-  },
-  {
-    "type" : "checkbox",
-    "id" : "brand_check",
-    "label" : "With Backgorund",
-    "default" : true
-  },
-  {
-    "type" : "color",
-    "id" : "brand_bgcolor",
-    "label" : "Background Color",
-    "default" : "#fff"
-  },
-  {
-    "type": "text",
-    "id": "brand_title",
-    "label": "Section Title",
-    "default": "Brand Logo"
-  }
-  ],
-  "blocks":[
-  {
-    "type": "single_brand",
-    "name": "Single Brand Logo",
-    "settings": [
-    {
-      "type": "image_picker",
-      "id": "brand_image",
-      "label": "Brand Image",
-      "info": "Recommended Size: 170 x 82px"
-    }
-    ]
-  }
-  ]
+	"name": "Brand Logo",
+	"settings": [
+		{
+			"type": "range",
+			"id": "brand_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 0
+		},
+		{
+			"type": "range",
+			"id": "brand_padding_bottom",
+			"label": "Section Padding bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 0
+		},
+		{
+			"type": "header",
+			"content": "Background Color"
+		},
+		{
+			"type": "checkbox",
+			"id": "brand_check",
+			"label": "With Backgorund",
+			"default": true
+		},
+		{
+			"type": "color",
+			"id": "brand_bgcolor",
+			"label": "Background Color",
+			"default": "#fff"
+		},
+		{
+			"type": "text",
+			"id": "brand_title",
+			"label": "Section Title",
+			"default": "Brand Logo"
+		}
+	],
+	"blocks": [
+		{
+			"type": "single_brand",
+			"name": "Single Brand Logo",
+			"settings": [
+				{
+					"type": "image_picker",
+					"id": "brand_image",
+					"label": "Brand Image",
+					"info": "Recommended Size: 170 x 82px"
+				}
+			]
+		}
+	]
 }
 {% endschema %}
 
 <style>
-  .our-brand-logo {
-    padding-top:{{ section.settings.brand_padding_top }}px;
-    padding-bottom:{{ section.settings.brand_padding_bottom }}px;
-    {% if section.settings.brand_check %}
-    background-color: {{ section.settings.brand_bgcolor }};
-    {% endif %}
-  }
-  @media (max-width: 767px){
-    .our-brand-logo {
-      padding-top: 40px;
-    }
-  }
+	.our-brand-logo {
+	  padding-top:{{ section.settings.brand_padding_top }}px;
+	  padding-bottom:{{ section.settings.brand_padding_bottom }}px;
+	  {% if section.settings.brand_check %}
+	  background-color: {{ section.settings.brand_bgcolor }};
+	  {% endif %}
+	}
+	@media (max-width: 767px){
+	  .our-brand-logo {
+	    padding-top: 40px;
+	  }
+	}
 </style>

@@ -1,226 +1,224 @@
 <section class="about-team">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="our-team">
-                    <div class="content-main-title">
-                        {% if section.settings.about_product_title != '' %}
-                        <h2>{{ section.settings.about_product_title }}</h2>
-                        {% endif %}
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="our-team">
+					<div class="content-main-title">
+						{% if section.settings.about_product_title != '' %}
+							<h2>{{ section.settings.about_product_title }}</h2>
+						{% endif %}
 
-                        {% if section.settings.about_des != '' %}
-                        <p>{{ section.settings.about_des }}</p>
-                        {% endif %}
-                    </div>
-                    
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6 col-lg-3 nth-child">
-                                <div class="steam-img">
-                                    <img src="{% if section.settings.team_img1 %}{{ section.settings.team_img1 | img_url: 'master' }}{% else %}https://via.placeholder.com/400x450{% endif %}">
-                                </div>
-                                <div class="abt-team-desc">
-                                    <h3>{{ section.settings.team_name1 }}</h3>
-                                    <span>{{ section.settings.team_position1 }}</span>
-                                    <p>{{ section.settings.description1 }}</p>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6 col-lg-3 nth-child">
-                                <div class="steam-img">
-                                    <img src="{% if section.settings.team_img2 %}{{ section.settings.team_img2 | img_url: 'master' }}{% else %}https://via.placeholder.com/400x450{% endif %}">
-                                </div>
-                                <div class="abt-team-desc">
-                                    <h3>{{ section.settings.team_name2 }}</h3>
-                                    <span>{{ section.settings.team_position2 }}</span>
-                                    <p>{{ section.settings.description2 }}</p>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6 col-lg-3 nth-child">
-                                <div class="steam-img">
-                                    <img src="{% if section.settings.team_img3 %}{{ section.settings.team_img3 | img_url: 'master' }}{% else %}https://via.placeholder.com/400x450{% endif %}">
-                                </div>
-                                <div class="abt-team-desc">
-                                    <h3>{{ section.settings.team_name3 }}</h3>
-                                    <span>{{ section.settings.team_position3 }}</span>
-                                    <p>{{ section.settings.description3 }}</p>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6 col-lg-3 nth-child">
-                                <div class="steam-img">
-                                    <img src="{% if section.settings.team_img4 %}{{ section.settings.team_img4 | img_url: 'master' }}{% else %}https://via.placeholder.com/400x450{% endif %}">
-                                </div>
-                                <div class="abt-team-desc">
-                                    <h3>{{ section.settings.team_name4 }}</h3>
-                                    <span>{{ section.settings.team_position4 }}</span>
-                                    <p>{{ section.settings.description4 }}</p>
-                                </div>
-                            </div>
-                        </div>
+						{% if section.settings.about_des != '' %}
+							<p>{{ section.settings.about_des }}</p>
+						{% endif %}
+					</div>
 
-
-                </div>
-            </div>
-        </div>
-    </div>
+					<div class="row">
+						<div class="col-xs-12 col-md-6 col-lg-3 nth-child">
+							<div class="steam-img">
+								<img src="{% if section.settings.team_img1 %}{{ section.settings.team_img1 | img_url: 'master' }}{% else %}https://via.placeholder.com/400x450{% endif %}">
+							</div>
+							<div class="abt-team-desc">
+								<h3>{{ section.settings.team_name1 }}</h3>
+								<span>{{ section.settings.team_position1 }}</span>
+								<p>{{ section.settings.description1 }}</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6 col-lg-3 nth-child">
+							<div class="steam-img">
+								<img src="{% if section.settings.team_img2 %}{{ section.settings.team_img2 | img_url: 'master' }}{% else %}https://via.placeholder.com/400x450{% endif %}">
+							</div>
+							<div class="abt-team-desc">
+								<h3>{{ section.settings.team_name2 }}</h3>
+								<span>{{ section.settings.team_position2 }}</span>
+								<p>{{ section.settings.description2 }}</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6 col-lg-3 nth-child">
+							<div class="steam-img">
+								<img src="{% if section.settings.team_img3 %}{{ section.settings.team_img3 | img_url: 'master' }}{% else %}https://via.placeholder.com/400x450{% endif %}">
+							</div>
+							<div class="abt-team-desc">
+								<h3>{{ section.settings.team_name3 }}</h3>
+								<span>{{ section.settings.team_position3 }}</span>
+								<p>{{ section.settings.description3 }}</p>
+							</div>
+						</div>
+						<div class="col-xs-12 col-md-6 col-lg-3 nth-child">
+							<div class="steam-img">
+								<img src="{% if section.settings.team_img4 %}{{ section.settings.team_img4 | img_url: 'master' }}{% else %}https://via.placeholder.com/400x450{% endif %}">
+							</div>
+							<div class="abt-team-desc">
+								<h3>{{ section.settings.team_name4 }}</h3>
+								<span>{{ section.settings.team_position4 }}</span>
+								<p>{{ section.settings.description4 }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 {% schema %}
 {
-    "name": "Our Team",
-    "settings": [
-    {
-      "type": "header",
-      "content": "Section Padding"
-    },
-    {
-      "type": "range",
-      "id": "abt_team_padding_top",  
-      "label": "Section Padding Top",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 60
-    },           
-    {
-      "type": "range",
-      "id": "abt_team_padding_bottom", 
-      "label": "Section Padding Bottom",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "unit": "px",
-      "default": 60
-    },
-    {
-        "type": "header",
-        "content": "Content"
-    },
-    {
-        "type": "text",
-        "id": "about_product_title",
-        "label": "Title",
-        "default": "OUR TEAM"
-    },
-    {
-        "type": "textarea",
-        "id": "about_des",
-        "label": "About Description",
-        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas orci, vitae ullamcorper risus consectetur id."
-    },
-    {
-        "type": "image_picker",
-        "id": "team_img1",
-        "label": "Image",
-        "info": "Recommended Size: 1920 x 1024px"
-    },
-    {
-        "type": "text",
-        "id": "team_name1",
-        "label": "team name",
-        "default": "Johnsan D. Keyshop"
-    },
-    {
-        "type": "text",
-        "id": "team_position1",
-        "label": "team position",
-        "default": "Position"
-    },
-    {
-        "type": "text",
-        "id": "description1",
-        "label": "description",
-        "default": "Lorem ipsum dolor sit amet, adipiscing elit. Vestibulum porttitor egestas orci, vitae ullamcorper risus rutrum massa quis."
-    },
-    {
-        "type": "image_picker",
-        "id": "team_img2",
-        "label": "Image",
-        "info": "Recommended Size: 1920 x 1024px"
-    },
-    {
-        "type": "text",
-        "id": "team_name2",
-        "label": "team name",
-        "default": "Victoria P. Rayl"
-    },
-    {
-        "type": "text",
-        "id": "team_position2",
-        "label": "team position",
-        "default": "Position"
-    },
-    {
-        "type": "text",
-        "id": "description2",
-        "label": "description",
-        "default": "Lorem ipsum dolor sit amet, adipiscing elit. Vestibulum porttitor egestas orci, vitae ullamcorper risus rutrum massa quis."
-    },
-    {
-        "type": "image_picker",
-        "id": "team_img3",
-        "label": "Image",
-        "info": "Recommended Size: 1920 x 1024px"
-    },
-    {
-        "type": "text",
-        "id": "team_name3",
-        "label": "team name",
-        "default": "Paul L. Gooding"
-    },
-    {
-        "type": "text",
-        "id": "team_position3",
-        "label": "team position",
-        "default": "Position"
-    },
-    {
-        "type": "text",
-        "id": "description3",
-        "label": "description",
-        "default": "Lorem ipsum dolor sit amet, adipiscing elit. Vestibulum porttitor egestas orci, vitae ullamcorper risus rutrum massa quis."
-    },
-    {
-        "type": "image_picker",
-        "id": "team_img4",
-        "label": "Image",
-        "info": "Recommended Size: 1920 x 1024px"
-    },
-    {
-        "type": "text",
-        "id": "team_name4",
-        "label": "team name",
-        "default": "Gary D. Morgan"
-    },
-    {
-        "type": "text",
-        "id": "team_position4",
-        "label": "team position",
-        "default": "Position"
-    },
-    {
-        "type": "text",
-        "id": "description4",
-        "label": "description",
-        "default": "Lorem ipsum dolor sit amet, adipiscing elit. Vestibulum porttitor egestas orci, vitae ullamcorper risus rutrum massa quis."
-    }
-    ],
-    "presets":[
-    {
-        "name": "Our Team",
-        "category": "2. About us"
-    }
-    ]
+	"name": "Our Team",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "abt_team_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "range",
+			"id": "abt_team_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "header",
+			"content": "Content"
+		},
+		{
+			"type": "text",
+			"id": "about_product_title",
+			"label": "Title",
+			"default": "OUR TEAM"
+		},
+		{
+			"type": "textarea",
+			"id": "about_des",
+			"label": "About Description",
+			"default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum egestas orci, vitae ullamcorper risus consectetur id."
+		},
+		{
+			"type": "image_picker",
+			"id": "team_img1",
+			"label": "Image",
+			"info": "Recommended Size: 1920 x 1024px"
+		},
+		{
+			"type": "text",
+			"id": "team_name1",
+			"label": "team name",
+			"default": "Johnsan D. Keyshop"
+		},
+		{
+			"type": "text",
+			"id": "team_position1",
+			"label": "team position",
+			"default": "Position"
+		},
+		{
+			"type": "text",
+			"id": "description1",
+			"label": "description",
+			"default": "Lorem ipsum dolor sit amet, adipiscing elit. Vestibulum porttitor egestas orci, vitae ullamcorper risus rutrum massa quis."
+		},
+		{
+			"type": "image_picker",
+			"id": "team_img2",
+			"label": "Image",
+			"info": "Recommended Size: 1920 x 1024px"
+		},
+		{
+			"type": "text",
+			"id": "team_name2",
+			"label": "team name",
+			"default": "Victoria P. Rayl"
+		},
+		{
+			"type": "text",
+			"id": "team_position2",
+			"label": "team position",
+			"default": "Position"
+		},
+		{
+			"type": "text",
+			"id": "description2",
+			"label": "description",
+			"default": "Lorem ipsum dolor sit amet, adipiscing elit. Vestibulum porttitor egestas orci, vitae ullamcorper risus rutrum massa quis."
+		},
+		{
+			"type": "image_picker",
+			"id": "team_img3",
+			"label": "Image",
+			"info": "Recommended Size: 1920 x 1024px"
+		},
+		{
+			"type": "text",
+			"id": "team_name3",
+			"label": "team name",
+			"default": "Paul L. Gooding"
+		},
+		{
+			"type": "text",
+			"id": "team_position3",
+			"label": "team position",
+			"default": "Position"
+		},
+		{
+			"type": "text",
+			"id": "description3",
+			"label": "description",
+			"default": "Lorem ipsum dolor sit amet, adipiscing elit. Vestibulum porttitor egestas orci, vitae ullamcorper risus rutrum massa quis."
+		},
+		{
+			"type": "image_picker",
+			"id": "team_img4",
+			"label": "Image",
+			"info": "Recommended Size: 1920 x 1024px"
+		},
+		{
+			"type": "text",
+			"id": "team_name4",
+			"label": "team name",
+			"default": "Gary D. Morgan"
+		},
+		{
+			"type": "text",
+			"id": "team_position4",
+			"label": "team position",
+			"default": "Position"
+		},
+		{
+			"type": "text",
+			"id": "description4",
+			"label": "description",
+			"default": "Lorem ipsum dolor sit amet, adipiscing elit. Vestibulum porttitor egestas orci, vitae ullamcorper risus rutrum massa quis."
+		}
+	],
+	"presets": [
+		{
+			"name": "Our Team",
+			"category": "2. About us"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .about-team{
-    padding-top: {{ section.settings.abt_team_padding_top }}px;
-    padding-bottom: {{ section.settings.abt_team_padding_bottom }}px;
-  }
-   @media (max-width: 767px){
-        .about-team{
-            padding-top: 40px;
-            padding-bottom: 40px;
-        }
-    }
+	.about-team{
+	  padding-top: {{ section.settings.abt_team_padding_top }}px;
+	  padding-bottom: {{ section.settings.abt_team_padding_bottom }}px;
+	}
+	 @media (max-width: 767px){
+	      .about-team{
+	          padding-top: 40px;
+	          padding-bottom: 40px;
+	      }
+	  }
 </style>

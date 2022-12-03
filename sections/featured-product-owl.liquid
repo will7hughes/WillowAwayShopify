@@ -1,214 +1,230 @@
 <!-- product-area start -->
 <section class="product-area product-tab-owl">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-        <!-- section-title start -->
-        <div class="section-capture">
-          <div class="section-title">
-            {% if section.settings.section_owl_title !='' %}
-            <h2>{{ section.settings.section_owl_title }}</h2>
-            {% endif %}
-            {% if section.settings.section_owl_desc !='' %}
-            <p>{{ section.settings.section_owl_desc }}</p>
-            {% endif %}
-            {% if settings.section_title_img %}
-            <span>
-              <img src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/131x22{% endif %}" alt="{{ section.title.image.alt }}" />
-            </span>
-            {% endif %}
-          </div>
-        </div>
-        <!-- section-title end -->
-        <div class="tab">
-          <ul class="nav nav-tabs" role="tablist">
-            {% for block in section.blocks %}
-            {% case block.type %}
-            {% when 'product_tab_owl' %}
-            {% assign category_product = collections[block.settings.tab_owl_product] %}
-            <li role="presentation">
-              <a class="{% if forloop.first == true %}active show{% endif %}" role="tab" data-toggle="tab" href="#tab-{{ block.id }}">{{ category_product.title }}</a>
-            </li>
-            {% endcase %}
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="tab-content tabs">
-          {% for block in section.blocks %}
-          {% case block.type %}
-          {% when 'product_tab_owl' %}
-          <div class="tab-pane fade{% if forloop.first == true %} active show{% endif %}" id="tab-{{ block.id }}" role="tabpanel">
-            <div class="feature-pro-owl owl-carousel owl-theme" id="feature_pro_tab_owl">
-              {% assign featured_owl_product_limit = section.settings.featured_owl_product_limit_handle %}
-              {% for product in collections[block.settings.tab_owl_product].products limit: featured_owl_product_limit %}
-              <div class="item">
-                {% include 'product-grid-item' %}
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-          {% endcase %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+				<!-- section-title start -->
+				<div class="section-capture">
+					<div class="section-title">
+						{% if section.settings.section_owl_title != '' %}
+							<h2>{{ section.settings.section_owl_title }}</h2>
+						{% endif %}
+						{% if section.settings.section_owl_desc != '' %}
+							<p>{{ section.settings.section_owl_desc }}</p>
+						{% endif %}
+						{% if settings.section_title_img %}
+							<span>
+								<img
+									src="{% if settings.section_title_img %}{{ settings.section_title_img | img_url: 'master' }}{% else %}https://via.placeholder.com/131x22{% endif %}"
+									alt="{{ section.title.image.alt }}"
+								>
+							</span>
+						{% endif %}
+					</div>
+				</div>
+				<!-- section-title end -->
+				<div class="tab">
+					<ul class="nav nav-tabs" role="tablist">
+						{% for block in section.blocks %}
+							{% case block.type %}
+								{% when 'product_tab_owl' %}
+									{% assign category_product = collections[block.settings.tab_owl_product] %}
+									<li role="presentation">
+										<a
+											class="{% if forloop.first == true %}active show{% endif %}"
+											role="tab"
+											data-toggle="tab"
+											href="#tab-{{ block.id }}"
+										>
+											{{- category_product.title -}}
+										</a>
+									</li>
+							{% endcase %}
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="tab-content tabs">
+					{% for block in section.blocks %}
+						{% case block.type %}
+							{% when 'product_tab_owl' %}
+								<div
+									class="tab-pane fade{% if forloop.first == true %} active show{% endif %}"
+									id="tab-{{ block.id }}"
+									role="tabpanel"
+								>
+									<div class="feature-pro-owl owl-carousel owl-theme" id="feature_pro_tab_owl">
+										{% assign featured_owl_product_limit = section.settings.featured_owl_product_limit_handle %}
+										{% for product in collections[block.settings.tab_owl_product].products
+											limit: featured_owl_product_limit
+										%}
+											<div class="item">
+												{% include 'product-grid-item' %}
+											</div>
+										{% endfor %}
+									</div>
+								</div>
+						{% endcase %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- product-area end -->
 <script>
-  $('.feature-pro-owl').owlCarousel({
-    rewind: true,
-    margin: 10,
-    nav: true,
-    center:true,
-    loop: true,
-    lazyLoad: true,
-    stagePadding: 200,
-    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
-    dots: false,
-    {%- if settings.enable_rtl -%}
-    rtl: true,
-    {%- endif -%}
-    autoplay: true,
-    autoplayTimeout: 5000,
-    autoplayHoverPause: true,
-    autoplaySpeed: 200,
-    responsive:{
-      0:{
-        items: 1,
-        margin: 15,
-        stagePadding: 75
-      },
-      479:{
-        items: 1,
-        margin: 15,
-        stagePadding: 75
-      },
-      768:{
-        items: 1
-      },
-      979:{
-        items: 2,
-        stagePadding: 240
-      },
-      1199:{
-        items: {{ section.settings.slide_owl_product_limit }},
-      }
-    }
-    });
+	$('.feature-pro-owl').owlCarousel({
+	  rewind: true,
+	  margin: 10,
+	  nav: true,
+	  center:true,
+	  loop: true,
+	  lazyLoad: true,
+	  stagePadding: 200,
+	  navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+	  dots: false,
+	  {%- if settings.enable_rtl -%}
+	  rtl: true,
+	  {%- endif -%}
+	  autoplay: true,
+	  autoplayTimeout: 5000,
+	  autoplayHoverPause: true,
+	  autoplaySpeed: 200,
+	  responsive:{
+	    0:{
+	      items: 1,
+	      margin: 15,
+	      stagePadding: 75
+	    },
+	    479:{
+	      items: 1,
+	      margin: 15,
+	      stagePadding: 75
+	    },
+	    768:{
+	      items: 1
+	    },
+	    979:{
+	      items: 2,
+	      stagePadding: 240
+	    },
+	    1199:{
+	      items: {{ section.settings.slide_owl_product_limit }},
+	    }
+	  }
+	  });
 </script>
 {% schema %}
 {
-  "name": "Product Tab Owl-Slider",
-  "settings": [
-  {
-    "type" : "header",
-    "content" : "Section Padding"
-  },
-  {
-    "type": "range",
-    "id": "pro_tab_owl_padding_top",
-    "label": "Section Padding Top",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "range",
-    "id": "pro_tab_owl_padding_bottom",
-    "label": "Section Padding Bottom",
-    "min": 0,
-    "max": 100,
-    "step": 1,
-    "unit": "px",
-    "default": 60
-  },
-  {
-    "type": "header",
-    "content": "Section Heading"
-  },
-  {
-    "type": "text",
-    "id": "section_owl_title",
-    "label": "Section Title",
-    "default": "Featured Products"
-  },
-  {
-    "type": "text",
-    "id": "section_owl_desc",
-    "label": "Section Description",
-    "default": "New popular in accesories store"
-  },
-  {
-    "type": "header",
-    "content": "Product"
-  },
-  {
-    "type": "select",
-    "id": "slide_owl_product_limit",
-    "label": "slides Per View",
-    "options":[
-    {
-      "label": "2 Products",
-      "value": "2"
-    },
-    {
-      "label": "3 Products",
-      "value": "3"
-    },
-    {
-      "label": "4 Products",
-      "value": "4"
-    }
-    ],
-    "default": "3"
-  },
-  {
-    "type": "text",
-    "id": "featured_owl_product_limit_handle",
-    "label": "Product Limit",
-    "default": "10"
-  },
-  {
-    "type": "color",
-    "id": "pro_tab_owl_bg_color", 
-    "label": "Background Color",
-    "default":   "#fff"
-  }
-  ],
-  "blocks" : [
-  {
-    "type" : "product_tab_owl",
-    "name" : "Our Product",
-    "limit" : 3,
-    "settings" : [
-    {
-      "type" : "collection",
-      "id" : "tab_owl_product",
-      "label" : "Tab With Product"
-    }
-    ]
-  }
-  ],
-  "presets": [
-  {
-    "name": "Featured Product Tab Owl-Slider",
-    "category": "Product Tab Owl-Slider"
-  }
-  ]
+	"name": "Product Tab Owl-Slider",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Section Padding"
+		},
+		{
+			"type": "range",
+			"id": "pro_tab_owl_padding_top",
+			"label": "Section Padding Top",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "range",
+			"id": "pro_tab_owl_padding_bottom",
+			"label": "Section Padding Bottom",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "px",
+			"default": 60
+		},
+		{
+			"type": "header",
+			"content": "Section Heading"
+		},
+		{
+			"type": "text",
+			"id": "section_owl_title",
+			"label": "Section Title",
+			"default": "Featured Products"
+		},
+		{
+			"type": "text",
+			"id": "section_owl_desc",
+			"label": "Section Description",
+			"default": "New popular in accesories store"
+		},
+		{
+			"type": "header",
+			"content": "Product"
+		},
+		{
+			"type": "select",
+			"id": "slide_owl_product_limit",
+			"label": "slides Per View",
+			"options": [
+				{
+					"label": "2 Products",
+					"value": "2"
+				},
+				{
+					"label": "3 Products",
+					"value": "3"
+				},
+				{
+					"label": "4 Products",
+					"value": "4"
+				}
+			],
+			"default": "3"
+		},
+		{
+			"type": "text",
+			"id": "featured_owl_product_limit_handle",
+			"label": "Product Limit",
+			"default": "10"
+		},
+		{
+			"type": "color",
+			"id": "pro_tab_owl_bg_color",
+			"label": "Background Color",
+			"default": "#fff"
+		}
+	],
+	"blocks": [
+		{
+			"type": "product_tab_owl",
+			"name": "Our Product",
+			"limit": 3,
+			"settings": [
+				{
+					"type": "collection",
+					"id": "tab_owl_product",
+					"label": "Tab With Product"
+				}
+			]
+		}
+	],
+	"presets": [
+		{
+			"name": "Featured Product Tab Owl-Slider",
+			"category": "Product Tab Owl-Slider"
+		}
+	]
 }
 {% endschema %}
 <style>
-  .product-tab-owl{
-    padding-top:{{ section.settings.pro_tab_owl_padding_top }}px;
-    padding-bottom:{{ section.settings.pro_tab_owl_padding_bottom }}px;
-    background-color:{{ section.settings.pro_tab_owl_bg_color }};
-  }
-  @media (max-width: 767px) {
-    .product-tab-owl{
-      padding-top: 40px;
-    }
-  }
+	.product-tab-owl{
+	  padding-top:{{ section.settings.pro_tab_owl_padding_top }}px;
+	  padding-bottom:{{ section.settings.pro_tab_owl_padding_bottom }}px;
+	  background-color:{{ section.settings.pro_tab_owl_bg_color }};
+	}
+	@media (max-width: 767px) {
+	  .product-tab-owl{
+	    padding-top: 40px;
+	  }
+	}
 </style>

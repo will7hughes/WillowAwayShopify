@@ -1,63 +1,63 @@
 <ul class="text-offer">
-    <li class="offer-sale">
-        <p class="p">Get every day up 45% off</p>
-        <p class="p">End of seasons big-sale</p>
-        <p class="p">Get 50% off on dewalt tools</p>
-    </li>
+	<li class="offer-sale">
+		<p class="p">Get every day up 45% off</p>
+		<p class="p">End of seasons big-sale</p>
+		<p class="p">Get 50% off on dewalt tools</p>
+	</li>
 </ul>
 <script>
-    var slides = document.querySelectorAll('.text-offer .offer-sale p');
-    var currentSlide = 0;
-    var slideInterval = setInterval(nextSlide,3000);
-    function nextSlide(){
-      slides[currentSlide].className = 'p';
-      currentSlide = (currentSlide+1)%slides.length;
-      slides[currentSlide].className = 'p showing';
-    }
+	var slides = document.querySelectorAll('.text-offer .offer-sale p');
+	var currentSlide = 0;
+	var slideInterval = setInterval(nextSlide, 3000);
+	function nextSlide() {
+		slides[currentSlide].className = 'p';
+		currentSlide = (currentSlide + 1) % slides.length;
+		slides[currentSlide].className = 'p showing';
+	}
 </script>
 <style>
-    .text-offer{
-        position: relative;
-    }
-    .text-offer li.offer-sale{
-        background-color: #20262d;
-        padding: 24px;
-        text-align: center;
-    }
-    .text-offer li.offer-sale p{
-        font-size: 16px;
-        color: {{ settings.color_secondary }};
-        position: absolute;
-        {% if settings.enable_rtl %}
-        right: 0;
-        {% else %}
-        left: 0;
-        {% endif %}
-        bottom: 50%;
-        transform: translateY(49%);
-        width: 100%;
-        text-transform: uppercase;
-        font-weight: 500;
-        font-style: italic;
-        opacity: 0;
-        visibility: hidden;
-        -webkit-transition: opacity 0.3s ease-in-out 0s;
-        -o-transition: opacity 0.3s ease-in-out 0s;
-        transition: opacity 0.3s ease-in-out 0s;
-    }
-    .text-offer li.offer-sale p.showing{
-        opacity: 1;
-        visibility: visible;
-        -webkit-transition: all 0.3s ease-in-out 0.3s;
-        -o-transition: all 0.3s ease-in-out 0.3s;
-        transition: all 0.3s ease-in-out 0.3s;
-    }
-    @media (max-width: 1199px){
-        .text-offer li.offer-sale{
-            padding: 20px;
-        }
-        .text-offer li.offer-sale p{
-            font-size: 14px;
-        }
-    }
+	.text-offer{
+	    position: relative;
+	}
+	.text-offer li.offer-sale{
+	    background-color: #20262d;
+	    padding: 24px;
+	    text-align: center;
+	}
+	.text-offer li.offer-sale p{
+	    font-size: 16px;
+	    color: {{ settings.color_secondary }};
+	    position: absolute;
+	    {% if settings.enable_rtl %}
+	    right: 0;
+	    {% else %}
+	    left: 0;
+	    {% endif %}
+	    bottom: 50%;
+	    transform: translateY(49%);
+	    width: 100%;
+	    text-transform: uppercase;
+	    font-weight: 500;
+	    font-style: italic;
+	    opacity: 0;
+	    visibility: hidden;
+	    -webkit-transition: opacity 0.3s ease-in-out 0s;
+	    -o-transition: opacity 0.3s ease-in-out 0s;
+	    transition: opacity 0.3s ease-in-out 0s;
+	}
+	.text-offer li.offer-sale p.showing{
+	    opacity: 1;
+	    visibility: visible;
+	    -webkit-transition: all 0.3s ease-in-out 0.3s;
+	    -o-transition: all 0.3s ease-in-out 0.3s;
+	    transition: all 0.3s ease-in-out 0.3s;
+	}
+	@media (max-width: 1199px){
+	    .text-offer li.offer-sale{
+	        padding: 20px;
+	    }
+	    .text-offer li.offer-sale p{
+	        font-size: 14px;
+	    }
+	}
 </style>

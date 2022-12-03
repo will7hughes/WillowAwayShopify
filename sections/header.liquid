@@ -1,123 +1,122 @@
 <!-- header-area start -->
 <div class="header-transparent">
-  {% include 'top-nocification-bar' %}
-  <div class="header-kaj">
-    <div class="header-area">
-      <div class="header-main-area">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col">
-              <div class="header-main">
-                <button class="navbar-toggler" type="button">
-                  <span class="line"></span>
-                </button>
-                <div class="header-element logo">
-                  {%- include 'company-logo' -%}
-                </div>
-                <div class="header-element main-menu-area">
-                  <nav class="main-navigation navbar-expand-xl">
-                    <div class="container">
-                      <div class="box-header">
-                        <button class="close-box" aria-label="Close" type="button"><i class="ti-close"></i></button>
-                      </div>
-                    </div>
-                    <div class="navbar-collapse" id="navbarContent">
-                      <div class="megamenu-content">
-                        <a href="#main-collapse" class="browse-cat" data-toggle="collapse">
-                          <i class="ti-menu"></i>
-                          <span>Menu</span>
-                        </a>
-                        <div class="mainwrap collapse show" id="main-collapse">
-                        {% include 'main-menu' %}
-                        </div>
-                      </div>
-                    </div>
-                  </nav>
-                </div>
-                <div class="header-element right-block-box">
-                  <ul class="shop-element">
-                    <li class="side-wrap cart-wrap">
-                      {% include 'mini-cart' %}
-                    </li>
-                    <li class="side-wrap wishlist-wrap">
-                      {% include 'wishlist-button-2' %}
-                    </li>
-                    <li class="side-wrap account-wrap">
-                      {% include 'account-button' %}
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="header-bottom-area">
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="search-wrap">
-              {%- include 'search-bar' -%}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+	{% include 'top-nocification-bar' %}
+	<div class="header-kaj">
+		<div class="header-area">
+			<div class="header-main-area">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col">
+							<div class="header-main">
+								<button class="navbar-toggler" type="button">
+									<span class="line"></span>
+								</button>
+								<div class="header-element logo">
+									{%- include 'company-logo' -%}
+								</div>
+								<div class="header-element main-menu-area">
+									<nav class="main-navigation navbar-expand-xl">
+										<div class="container">
+											<div class="box-header">
+												<button class="close-box" aria-label="Close" type="button"><i class="ti-close"></i></button>
+											</div>
+										</div>
+										<div class="navbar-collapse" id="navbarContent">
+											<div class="megamenu-content">
+												<a href="#main-collapse" class="browse-cat" data-toggle="collapse">
+													<i class="ti-menu"></i>
+													<span>Menu</span>
+												</a>
+												<div class="mainwrap collapse show" id="main-collapse">
+													{% include 'main-menu' %}
+												</div>
+											</div>
+										</div>
+									</nav>
+								</div>
+								<div class="header-element right-block-box">
+									<ul class="shop-element">
+										<li class="side-wrap cart-wrap">
+											{% include 'mini-cart' %}
+										</li>
+										<li class="side-wrap wishlist-wrap">
+											{% include 'wishlist-button-2' %}
+										</li>
+										<li class="side-wrap account-wrap">
+											{% include 'account-button' %}
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header-bottom-area">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="search-wrap">
+							{%- include 'search-bar' -%}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- header-area end -->
 <script>
-  $(window).scroll(function() {
-    var sticky = $('.header-kaj'),
-    scroll = $(window).scrollTop();
-    if (scroll >= 150) {
-      sticky.addClass('is-sticky');
-    }
-    else {
-      sticky.removeClass('is-sticky');
-    }
-  });
+	$(window).scroll(function () {
+		var sticky = $('.header-kaj'),
+			scroll = $(window).scrollTop();
+		if (scroll >= 150) {
+			sticky.addClass('is-sticky');
+		} else {
+			sticky.removeClass('is-sticky');
+		}
+	});
 </script>
 <style>
-  .header-transparent{
-    {%- if template == 'index' -%}
-    position: absolute;
-    width: 100%;
-    z-index: 2;
-    background-color: transparent;
-    {%- else -%}
-    background-color: {{ settings.color_secondary }};
-    {%- endif -%}
-  }
-  @media (max-width: 1199px) {
-    .header-transparent{
-      position: unset;
-      background-color: {{ settings.color_secondary }};
-    }
-  }
-  /* sticky menu css */
-  .is-sticky{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 3;
-    background-color: {{ settings.color_secondary }};
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-  }
-  .header-kaj.is-sticky{
-    animation: smoothScroll 1s forwards;
-  }
-  @keyframes smoothScroll {
-    0% {
-      transform: translateY(-150px);
-    }
-    100% {
-      transform: translateY(0px);
-    }
-  }
-  .megamenu-content .mainwrap ul.main-menu li.menu-link a.link-title span::after{
-    background-color: {{ settings.color_secondary }};
-  }
+	.header-transparent{
+	  {%- if template == 'index' -%}
+	  position: absolute;
+	  width: 100%;
+	  z-index: 2;
+	  background-color: transparent;
+	  {%- else -%}
+	  background-color: {{ settings.color_secondary }};
+	  {%- endif -%}
+	}
+	@media (max-width: 1199px) {
+	  .header-transparent{
+	    position: unset;
+	    background-color: {{ settings.color_secondary }};
+	  }
+	}
+	/* sticky menu css */
+	.is-sticky{
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 100%;
+	  z-index: 3;
+	  background-color: {{ settings.color_secondary }};
+	  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+	}
+	.header-kaj.is-sticky{
+	  animation: smoothScroll 1s forwards;
+	}
+	@keyframes smoothScroll {
+	  0% {
+	    transform: translateY(-150px);
+	  }
+	  100% {
+	    transform: translateY(0px);
+	  }
+	}
+	.megamenu-content .mainwrap ul.main-menu li.menu-link a.link-title span::after{
+	  background-color: {{ settings.color_secondary }};
+	}
 </style>

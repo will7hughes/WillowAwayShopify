@@ -1,88 +1,85 @@
 /* Newsletter popup css */
 .close:not(:disabled):not(.disabled):focus,
-.close:not(:disabled):not(.disabled):hover{
-  opacity: 1;
+.close:not(:disabled):not(.disabled):hover {
+	opacity: 1;
 }
 .close {
-  cursor: pointer;
-  float: none;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 0;
-  color: #000;
-  text-shadow: none;
-  opacity: 1;
-  position: absolute;
-  right: 10px;
-  top: 10px;
+	cursor: pointer;
+	float: none;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 0;
+	color: #000;
+	text-shadow: none;
+	opacity: 1;
+	position: absolute;
+	right: 10px;
+	top: 10px;
 }
-.newsletter_popup_inner::before{
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+.newsletter_popup_inner::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 /* Breadcrumb Banner */
 .breadcrumbs {
-  position: relative;
+	position: relative;
 }
-.breadcrumb-area{
-  position: relative;
+.breadcrumb-area {
+	position: relative;
 }
 .breadcrumb-area::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  opacity: 0.6;
-  transition: all 0.3s ease 0s;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #000;
+	opacity: 0.6;
+	transition: all 0.3s ease 0s;
 }
 .breadcrumb-list {
-
 }
 /* End Breadcrumb Banner */
 /* Collection Sidebar Color */
 .product-sidebar-color li {
- border: 1px solid #dadada;
-    cursor: pointer;
-    float: left;
-    margin: 0 15px 15px 0;
-    width: 17px;
-    height: 17px;
-    border-radius: 100%;
-    overflow: hidden;
-    padding: 1px 2px;
-    position: relative;
-    text-align: center;
-    text-overflow: ellipsis;
-    display: inline-block;
+	border: 1px solid #dadada;
+	cursor: pointer;
+	float: left;
+	margin: 0 15px 15px 0;
+	width: 17px;
+	height: 17px;
+	border-radius: 100%;
+	overflow: hidden;
+	padding: 1px 2px;
+	position: relative;
+	text-align: center;
+	text-overflow: ellipsis;
+	display: inline-block;
 }
 
 /* End Collection Sidebar Color */
 /* Product Swatch Variant */
 
 .swatch-element > input {
-  display: none;
+	display: none;
 }
 /* End Product Swatch Variant */
 /* Product Select Variant */
 .product-variant-option .selector-wrapper label {
-
 }
 .product-variant-option .selector-wrapper select {
-
 }
 .product-variant-option .selector-wrapper + .selector-wrapper {
 }
 /* End Product Select Variant */
 /* Cart Disable Button */
 .cart-disable {
-  cursor: not-allowed;
+	cursor: not-allowed;
 }
 /* End Cart Disable Button */
 /* Cart Template */
@@ -130,79 +127,78 @@
 }
 .shipping-info {
 }
-.cart-buttons{
+.cart-buttons {
 }
-.cart-payment{
+.cart-payment {
 }
-.proceed-to-checkout .theme-default-button{
+.proceed-to-checkout .theme-default-button {
 }
-.culculate-shipping select, .culculate-shipping input  {
+.culculate-shipping select,
+.culculate-shipping input {
 }
 .cart-coupon textarea {
 }
 .theme-default-button {
-    border: medium none;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    height: 40px;
-    line-height: 24px;
-    margin-bottom: 0;
-    padding: 8px 25px;
-    border-radius: 0;
-    text-align: center;
+	border: medium none;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 14px;
+	font-family: "Poppins", sans-serif;
+	font-weight: 500;
+	height: 40px;
+	line-height: 24px;
+	margin-bottom: 0;
+	padding: 8px 25px;
+	border-radius: 0;
+	text-align: center;
 }
-.theme-default-button + .theme-default-button{
+.theme-default-button + .theme-default-button {
 }
 .theme-default-button:hover {
-  background-color: #666666;
-  color: #fff;
+	background-color: #666666;
+	color: #fff;
 }
 /* End Theme Default Button */
 /* Customer Page */
 .login-form-container {
-  background-color: #f3f3f3 none repeat scroll 0 0;
-  padding: 30px;
-  text-align: left;
-  overflow: hidden;
+	background-color: #f3f3f3 none repeat scroll 0 0;
+	padding: 30px;
+	text-align: left;
+	overflow: hidden;
 }
 .title-text {
-  text-align: center;
+	text-align: center;
 }
 .title-text h2 {
-  font-weight: 600;
+	font-weight: 600;
 }
 .title-text p {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .login-form-container input {
-  background-color: #ffffff none repeat scroll 0 0;
-  border: medium none rgba(0, 0, 0, 0);
-  border-radius: 0;
-  box-shadow: none;
+	background-color: #ffffff none repeat scroll 0 0;
+	border: medium none rgba(0, 0, 0, 0);
+	border-radius: 0;
+	box-shadow: none;
 }
 .login-form-container input::-moz-placeholder {
-
-  opacity: 1;
+	opacity: 1;
 }
 .login-form-container input::-webkit-input-placeholder {
-
-  opacity: 1;
+	opacity: 1;
 }
 .login-actions {
 }
 .login-form-container input[type="checkbox"] {
-  height: 15px;
-  margin: 0;
-  position: relative;
-  top: 1px;
-  width: 17px;
+	height: 15px;
+	margin: 0;
+	position: relative;
+	top: 1px;
+	width: 17px;
 }
 .login-form-container label {
-  font-weight: 400;
+	font-weight: 400;
 }
 .login-toggle-btn a {
 }
@@ -214,19 +210,20 @@
 }
 .guest-form-container {
 }
-.guest-form-container{
+.guest-form-container {
 }
-.form-action-button{
+.form-action-button {
 }
-.account-optional-action a{
+.account-optional-action a {
 }
-.form-action-button{
+.form-action-button {
 }
 /* End Customer Page */
 /* My Account Page */
 .my-account-page {
 }
-.my-account-page table th, .my-account-page table td {
+.my-account-page table th,
+.my-account-page table td {
 }
 a.button.another-button {
 }
@@ -234,7 +231,11 @@ a.button.another-button {
 }
 #AddAddress > h2 {
 }
-#AddAddress > input, .my-address .grid__item .grid__item input, .my-address textarea, .my-address select, .my-address .form-vertical > input {
+#AddAddress > input,
+.my-address .grid__item .grid__item input,
+.my-address textarea,
+.my-address select,
+.my-address .form-vertical > input {
 }
 .my-account-checkbox input {
 }
@@ -243,191 +244,174 @@ a.button.another-button {
 .my-account-page h1 {
 }
 .my-account-page h2 {
-
 }
 .my-account-page table th {
 }
-.my-account-page table th, .my-account-page table td, .my-account-page table th {
+.my-account-page table th,
+.my-account-page table td,
+.my-account-page table th {
 }
 
-.edit-address-title, .edit-address-button {
+.edit-address-title,
+.edit-address-button {
 }
 .my-account-checkbox {
 }
-.order-title{
+.order-title {
 }
-.order-date{
+.order-date {
 }
 .logout-title {
 }
 .logout-title > a {
 }
-.logout-title > a:hover{
+.logout-title > a:hover {
 }
-.my-account-page h1, .my-account-page h2, .my-account-page h3, 
-.my-account-page h4, .my-account-page h5, .my-account-page h6{
+.my-account-page h1,
+.my-account-page h2,
+.my-account-page h3,
+.my-account-page h4,
+.my-account-page h5,
+.my-account-page h6 {
 }
-.form__btn .btn-right{
+.form__btn .btn-right {
 }
 .my-account-page hr {
 }
-.my-account-page input, .my-account-page textarea, .my-account-page select{
-
+.my-account-page input,
+.my-account-page textarea,
+.my-account-page select {
 }
 /* End Account Page */
 /* Popup Cart */
 .ajax-popup .modal-content-text {
-  float: left;
-  margin-right: 20px;
+	float: left;
+	margin-right: 20px;
 }
 .ajax-popup .modal-button {
-  float: left;
+	float: left;
 }
 .ajax-popup .modal-close {
-  float: right;
+	float: right;
 }
 .ajax-popup .modal-content-text i {
-  font-size: 14px;
-  margin-right: 10px;
+	font-size: 14px;
+	margin-right: 10px;
 }
 .ajax-popup .modal-button > a {
-  
-  text-decoration: underline;
+	text-decoration: underline;
 }
 .ajax-popup .modal-content {
-  border: medium none rgba(0, 0, 0, 0);
-  border-radius: 0;
+	border: medium none rgba(0, 0, 0, 0);
+	border-radius: 0;
 }
 .ajax-popup .modal-content-text i {
-  float: left;
-  font-size: 24px;
-  margin-right: 10px;
+	float: left;
+	font-size: 24px;
+	margin-right: 10px;
 }
 .ajax-popup .modal-close button {
-  font-size: 24px;
+	font-size: 24px;
 }
 .error-ajax-popup .modal-content-text {
-  width: 80%;
+	width: 80%;
 }
 /* End Popup Cart */
 
-.product-tile--tile-content{
-  text-align: center;
+.product-tile--tile-content {
+	text-align: center;
 }
 .price--compare.strike-through {
-  color: #666666;
-  margin-left: 10px;
+	color: #666666;
+	margin-left: 10px;
 }
 .text--price.pro-price .price--sale {
-  color: #666666;
+	color: #666666;
 }
-.product-tile--tile-actions a{
-  color: #000000;
+.product-tile--tile-actions a {
+	color: #000000;
 }
 
 /* Quickview */
 #quickViewModal .modal-content {
-
 }
 #quickViewModal .modal-dialog {
 }
-#quickViewModal .close{
+#quickViewModal .close {
 }
 #quickViewModal .modal-body {
-
 }
 .quick-view-list a {
-
 }
 .quick-view-list a:last-child {
-
 }
 .quick-view-list {
-
 }
 .quick-view-tab-content .tab-pane > img {
 }
 .qwick-view-content > h1 {
-
 }
 .price {
-
 }
 .price span.new {
-
 }
 .price span.old {
-
 }
 .rating-number {
-
 }
 .quick-view-rating i {
-
 }
 .quick-view-number > span {
-
 }
 .qwick-view-content > p {
-
 }
 .select-option-part {
 }
 .select-option-part label {
-
 }
 .select-option-part select {
-
 }
 .quickview-plus-minus {
-
 }
 .quickview-btn-cart {
-
 }
 span.main.amount.price-box__old {
-
 }
 .product-price.product-info__price {
-
 }
 .product-rating.spr-badge-caption-none {
-
 }
-.quick-view-rating i{
-
+.quick-view-rating i {
 }
 .quick-view-rating .spr-icon.spr-icon-star-empty {
 }
-.quick-view-select .selector-wrapper + .selector-wrapper {  
+.quick-view-select .selector-wrapper + .selector-wrapper {
 }
-.variants_selects .selector-wrapper{
-
+.variants_selects .selector-wrapper {
 }
 .short-description.product-des {
-
 }
-@media (min-width: 768px) and (max-width: 1500px){
-  #quickViewModal .close {
-  }
+@media (min-width: 768px) and (max-width: 1500px) {
+	#quickViewModal .close {
+	}
 }
 @media (max-width: 767px) {
-  .qwick-view-left {
-  }
-  #quickViewModal .modal-body {
-  }
-  #quickViewModal .close {
-  }
+	.qwick-view-left {
+	}
+	#quickViewModal .modal-body {
+	}
+	#quickViewModal .close {
+	}
 }
 /* End Quickview */
 /* Pagination */
-.theme-default-pagination li.active a, 
-.theme-default-pagination li.disabled a{
-  cursor: not-allowed;
+.theme-default-pagination li.active a,
+.theme-default-pagination li.disabled a {
+	cursor: not-allowed;
 }
 /* End Pagination */
 /* 404 Page */
 .error-content > img {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 /* End 404 Page */

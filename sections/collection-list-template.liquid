@@ -1,177 +1,177 @@
 <!-- Start Shop Page -->
 <div class="main-content-wrap shop-page section-ptb">
-  <div class="container">
-    <div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}position-left{% elsif section.settings.sidebar_handle == 'right_sidebar_handle' %}position-right{% endif %}">     
-      <div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col{% else %}col-lg-9 col-md-8 col-12 pro-grli-wrap{% endif %}">
-        {%- if section.settings.tab_bar_enable or section.settings.short_by_enable -%}
-        {%- include 'collection-sorting' -%}
-        {%- endif -%}
-        <div class="get-data-products">
-          <div class="shop-list">
-            {%- assign products_limit = section.settings.products_limit_handle -%}
-            {%- paginate collection.products by products_limit -%}
-            <div class="product-list-view">
-              <div class="shop-product-list-wrap">
-                {%- for product in collection.products -%}
-                {%- include 'product-list-item' -%}
-                {%- endfor -%}
-              </div>
-              <div class="paginatoin-area">
-                <ul class="paginate">
-                  {% if section.settings.showing_product_counter_enable %}
-                  <li class="page-numerous">
-                    {%- assign paginate_checker = paginate.current_page | times: products_limit -%}
-                    {%- if paginate.items > paginate_checker -%}
-                    {%- assign paginate_final = paginate_checker -%}
-                    {%- else -%}
-                    {%- assign paginate_final = paginate.items -%}
-                    {%- endif -%}
-                    {% assign showing_title = section.settings.showing_title_handle | split: "|" %}
-                    <p>{{ showing_title | slice: 0 }}
-                      {{ paginate.current_offset | plus: 1 }} - {{ paginate_final }}
-                      {{ showing_title | slice: 1 }}
-                      {{ paginate.items }}
-                      {{ showing_title | slice: 2 }}
-                    </p>
-                  </li>
-                  {% endif %}
-                  {% if paginate.pages > 1 %}
-                  <li class="page-numerous">
-                    {%- include 'pagination' -%}
-                  </li>
-                  {% endif %}
-                </ul>
-              </div>
-            </div>          
-            {%- endpaginate -%}
-          </div>
-        </div>
-      </div>
-      {%- unless section.settings.sidebar_handle == 'without_sidebar' -%}
-      <div class="col-lg-3 col-md-4 col-12 pro-grli-wrap">
-        <div class="shop-sidebar-wrap">
-          {%- include 'collection-sidebar' -%}
-        </div>
-      </div>
-      {%- endunless -%}
-    </div>
-  </div>
+	<div class="container">
+		<div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}position-left{% elsif section.settings.sidebar_handle == 'right_sidebar_handle' %}position-right{% endif %}">
+			<div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col{% else %}col-lg-9 col-md-8 col-12 pro-grli-wrap{% endif %}">
+				{%- if section.settings.tab_bar_enable or section.settings.short_by_enable -%}
+					{%- include 'collection-sorting' -%}
+				{%- endif -%}
+				<div class="get-data-products">
+					<div class="shop-list">
+						{%- assign products_limit = section.settings.products_limit_handle -%}
+						{%- paginate collection.products by products_limit -%}
+							<div class="product-list-view">
+								<div class="shop-product-list-wrap">
+									{%- for product in collection.products -%}
+										{%- include 'product-list-item' -%}
+									{%- endfor -%}
+								</div>
+								<div class="paginatoin-area">
+									<ul class="paginate">
+										{% if section.settings.showing_product_counter_enable %}
+											<li class="page-numerous">
+												{%- assign paginate_checker = paginate.current_page | times: products_limit -%}
+												{%- if paginate.items > paginate_checker -%}
+													{%- assign paginate_final = paginate_checker -%}
+												{%- else -%}
+													{%- assign paginate_final = paginate.items -%}
+												{%- endif -%}
+												{% assign showing_title = section.settings.showing_title_handle | split: '|' %}
+												<p>
+													{{ showing_title | slice: 0 }}
+													{{ paginate.current_offset | plus: 1 }} - {{ paginate_final }}
+													{{ showing_title | slice: 1 }}
+													{{ paginate.items }}
+													{{ showing_title | slice: 2 }}
+												</p>
+											</li>
+										{% endif %}
+										{% if paginate.pages > 1 %}
+											<li class="page-numerous">
+												{%- include 'pagination' -%}
+											</li>
+										{% endif %}
+									</ul>
+								</div>
+							</div>
+						{%- endpaginate -%}
+					</div>
+				</div>
+			</div>
+			{%- unless section.settings.sidebar_handle == 'without_sidebar' -%}
+				<div class="col-lg-3 col-md-4 col-12 pro-grli-wrap">
+					<div class="shop-sidebar-wrap">
+						{%- include 'collection-sidebar' -%}
+					</div>
+				</div>
+			{%- endunless -%}
+		</div>
+	</div>
 </div>
 <!-- End Shop Page -->
 
-
 {% schema %}
 {
-  "name": "Collection List Template",
-  "settings": [
-  {
-    "type": "header",
-    "content": "Product Options"
-  },
-  {
-    "type": "text",
-    "id": "products_limit_handle",
-    "label": "Product Limit",
-    "default": "12"
-  },
-  {
-    "type": "header",
-    "content": "Collection Sorting"
-  },
-  {
-    "type": "checkbox",
-    "id": "tab_bar_enable",
-    "label": "Show Grid/List View",
-    "default": true
-  },
-  {
-    "type": "checkbox",
-    "id": "short_by_enable",
-    "label": "Show Short By",
-    "default": true
-  },
-  {
-    "type": "checkbox",
-    "id": "showing_product_counter_enable",
-    "label": "Show Product Counter",
-    "default": true
-  },
-  {
-    "type": "text",
-    "id": "showing_title_handle",
-    "label": "Showing Title",
-    "default": "Showing | of | result"
-  },
-  {
-    "type": "header",
-    "content": "Collection Sidebar"
-  },
-  {
-    "type": "radio",
-    "id": "sidebar_handle",
-    "label": "Sidebar Position",
-    "options": [
-    {
-      "label": "Left Sidebar",
-      "value": "left_sidebar_handle"
-    },
-    {
-      "label": "Right Sidebar",
-      "value": "right_sidebar_handle"
-    },
-    {
-      "label": "Without Sidebar",
-      "value": "without_sidebar"
-    }
-    ],
-    "default": "left_sidebar_handle"
-  },
-  {
-    "type": "paragraph",
-    "content": "Collection Sidebar List"
-  },
-  {
-    "type": "checkbox",
-    "id": "categories_enable",
-    "label": "Show Categories",
-    "default": true
-  },
-  {
-    "type": "checkbox",
-    "id": "vendors_enable",
-    "label": "Show Vendors",
-    "default": true
-  },
-  {
-    "type": "checkbox",
-    "id": "types_enable",
-    "label": "Show Types",
-    "default": true
-  },
-  {
-    "type": "checkbox",
-    "id": "color_enable",
-    "label": "Show Color",
-    "default": true
-  },
-  {
-    "type": "checkbox",
-    "id": "size_enable",
-    "label": "Show Size",
-    "default": true
-  },
-  {
-    "type": "checkbox",
-    "id": "tags_enable",
-    "label": "Show Tags",
-    "default": true
-  },
-  {
-    "type": "checkbox",
-    "id": "best_product_enable",
-    "label": "Show Best Product",
-    "default": true
-  }
-  ]
+	"name": "Collection List Template",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Product Options"
+		},
+		{
+			"type": "text",
+			"id": "products_limit_handle",
+			"label": "Product Limit",
+			"default": "12"
+		},
+		{
+			"type": "header",
+			"content": "Collection Sorting"
+		},
+		{
+			"type": "checkbox",
+			"id": "tab_bar_enable",
+			"label": "Show Grid/List View",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "short_by_enable",
+			"label": "Show Short By",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "showing_product_counter_enable",
+			"label": "Show Product Counter",
+			"default": true
+		},
+		{
+			"type": "text",
+			"id": "showing_title_handle",
+			"label": "Showing Title",
+			"default": "Showing | of | result"
+		},
+		{
+			"type": "header",
+			"content": "Collection Sidebar"
+		},
+		{
+			"type": "radio",
+			"id": "sidebar_handle",
+			"label": "Sidebar Position",
+			"options": [
+				{
+					"label": "Left Sidebar",
+					"value": "left_sidebar_handle"
+				},
+				{
+					"label": "Right Sidebar",
+					"value": "right_sidebar_handle"
+				},
+				{
+					"label": "Without Sidebar",
+					"value": "without_sidebar"
+				}
+			],
+			"default": "left_sidebar_handle"
+		},
+		{
+			"type": "paragraph",
+			"content": "Collection Sidebar List"
+		},
+		{
+			"type": "checkbox",
+			"id": "categories_enable",
+			"label": "Show Categories",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "vendors_enable",
+			"label": "Show Vendors",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "types_enable",
+			"label": "Show Types",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "color_enable",
+			"label": "Show Color",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "size_enable",
+			"label": "Show Size",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "tags_enable",
+			"label": "Show Tags",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "best_product_enable",
+			"label": "Show Best Product",
+			"default": true
+		}
+	]
 }
 {% endschema %}
