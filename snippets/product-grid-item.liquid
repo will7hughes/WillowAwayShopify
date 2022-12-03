@@ -15,9 +15,9 @@
     <div class="{% if product.available %}product-image{% else %}product-image stock-out{% endif %}">
         <a class="pro-img" href="{{ product.url | within: collection }}">
           {% if product.media.size == 1 %}
-              {% render 'media-grid-item', media: product.media[0] %}
+              {% render 'media-grid-item', media: product.media[0], product: product %}
           {% elsif product.media.size >= 1 %}
-              {% render 'media-grid-item-cycle', media: product.media[0] %}
+              {% render 'media-grid-item-cycle', media: product.media[0], product: product %}
           {% else %}
             <p>There is no media (image or video) attached to this product</p>
           {% endif %}
